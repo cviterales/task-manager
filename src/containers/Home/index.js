@@ -12,7 +12,7 @@ import Modal from "../../components/Modal/index";
 import TaskStateModal from "./TaskStateModal/TaskStateModal";
 
 const Home = () => {
-  const id_user = useSelector((state) => state.auth.user.id);
+  //const id_user = useSelector((state) => state.auth.user.id);
 
   const [chartsData, setChartsData] = useState();
   const [currentTasks, setCurrentTasks] = useState([]);

@@ -9,6 +9,7 @@ import Message from "../../Message/index";
 import Spinner from "../../Spinner/index";
 
 import { updateCalendarTask, getTeams } from "../../../api/index";
+import withPermission from "../../../hoc/withPermission/withPermission";
 
 const AssignTask = ({ task, onClose }) => {
   const [operatorList, setOperatorList] = useState([]);
@@ -36,6 +37,7 @@ const AssignTask = ({ task, onClose }) => {
     });
     setOperatorList(arrOperators);
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -119,4 +121,4 @@ const AssignTask = ({ task, onClose }) => {
   );
 };
 
-export default AssignTask;
+export default withPermission(AssignTask);

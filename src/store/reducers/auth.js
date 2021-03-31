@@ -7,14 +7,15 @@ const initialState = {
   logged: isUserAuthenticated ? true : false,
   socket: null,
   isSocketConnected: false,
-  isSocketRefresh: 0
+  isSocketRefresh: 0,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_LOGGED:
       let newUser = action.payload;
-      newUser["id_service"] = 1;
+      newUser["id_service"] = 1; //asigna por defecto el servicio Ecolan
+      newUser["isAdmin"] = newUser.permissions.filter((el) => el.id_permission.toString() === "2" || "1").length > 0
       sessionStorage.setItem("user", JSON.stringify(newUser));
       return {
         ...state,

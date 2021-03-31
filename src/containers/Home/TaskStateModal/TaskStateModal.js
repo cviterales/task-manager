@@ -41,8 +41,6 @@ const TaskStateModal = ({ onClose, task }) => {
     });
   };
 
-  console.log(task);
-
   useEffect(() => {
     const filterStates = async () => {
       const allStates = await getStatus();
