@@ -9,9 +9,8 @@ import "moment/locale/es";
 
 import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
-import Status from "./Status/index";
 import AssignTask from "./AssignTask/index";
-
+import TaskStateModal from "../../containers/Home/TaskStateModal/TaskStateModal";
 const Calendar = ({ calendar, week, teams }) => {
   const [task, setTask] = useState({});
   const [show, setShow] = useState(false);
@@ -33,10 +32,10 @@ const Calendar = ({ calendar, week, teams }) => {
   }
 
   if (task.action_type && task.action_type === "status") {
-    renderContent = <Status task={task} onClose={closeModalHandler} />;
+    renderContent = <TaskStateModal task={task} onClose={closeModalHandler} />;
   }
 
-/*   const renderCalendar = () => {
+  /*   const renderCalendar = () => {
     // var Week is index weeks on month selected
     return calendar[week].map((day, index) => {
       return (
@@ -64,14 +63,7 @@ const Calendar = ({ calendar, week, teams }) => {
             <p>Team {team.id_team}</p>
           </div>
           {calendar[week].map((day, index) => {
-            return (
-              <CalendarRow
-                key={index}
-                team={team}
-                day={day}
-                editHandler={editHandler}
-              />
-            );
+            return <CalendarRow key={index} team={team} day={day} editHandler={editHandler} />;
           })}
         </div>
       );
@@ -111,11 +103,7 @@ const Calendar = ({ calendar, week, teams }) => {
     <div>
       {show && (
         <Modal
-          title={
-            task.action_type && task.action_type === "assign"
-              ? "Editar Asignación"
-              : "Nuevo Estado"
-          }
+          title={task.action_type && task.action_type === "assign" ? "Editar Asignación" : "Nuevo Estado"}
           onClose={() => {
             setShow(false);
           }}

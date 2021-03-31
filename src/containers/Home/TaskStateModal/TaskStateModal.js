@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
+import Spinner from "../../../components/Spinner/index";
 import Status from "../../../components/Status/index";
 import Button from "../../../components/Button/index";
 import DropDown from "../../../components/DropDown/index";
@@ -12,10 +13,13 @@ const TaskStateModal = ({ onClose, task }) => {
   const [statusTask, setStatusTask] = useState([]);
   const [newState, setNewState] = useState();
   const [message, setMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const onSaveHandler = async () => {
     if (newState) {
+      setLoading(true);
       const res = await createStatusTask(task.id_calendar, newState);
+      setLoading(false);
       setMessage(res);
     } else {
       setMessage({ error: true, message: "Seleccione Estado" });
@@ -27,10 +31,10 @@ const TaskStateModal = ({ onClose, task }) => {
 
   const renderStatus = () => {
     return statusTask.map((el, i) => {
-      const formatedDate = new Date(el.date).toLocaleDateString();
+      const formatedDate = new Date(el.date).toLocaleString();
       const date = el.status + " " + formatedDate;
       return (
-        <div className={styles.m_v} key={el.description + i}>
+        <div className={styles.m_v} key={i + el.id_task}>
           <Status name={date} description={el.description} />
         </div>
       );
@@ -40,10 +44,13 @@ const TaskStateModal = ({ onClose, task }) => {
   useEffect(() => {
     const filterStates = async () => {
       const allStates = await getStatus();
-      const taskStates = await getStatusTask(task.id);
+      const taskStates = await getStatusTask(task.id_task);
       setStatusTask(taskStates);
       const filteredState = allStates.filter((e) => !taskStates.find(({ status }) => e.name === status));
       setStates(filteredState);
+      if (task.last_state_description === "Finalizado") {
+        setStates([]);
+      }
     };
     filterStates();
   }, [task, message]);
@@ -57,9 +64,13 @@ const TaskStateModal = ({ onClose, task }) => {
       </div>
       <div className={styles.bottom}>
         <div>
-          <Button type="button" variant="blue" onClick={() => onSaveHandler()}>
-            Guardar
-          </Button>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <Button type="button" variant="blue" onClick={() => onSaveHandler()}>
+              Guardar
+            </Button>
+          )}
         </div>
         <div>
           <Button type="button" variant="outline" onClick={onClose}>

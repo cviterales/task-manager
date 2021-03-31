@@ -12,14 +12,15 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
   const [pos, setPost] = useState();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const elementRef = useRef(null);
-
+  console.log(task);
+  const styledCard = task.priority ? style.task_priority : style.task;
   useEffect(() => {
     setPost(elementRef.current.getBoundingClientRect());
   }, [task]);
   return (
     <div className={style.card_container} ref={elementRef}>
       <Card style={task.last_state}>
-        <div className={style.task}>
+        <div className={styledCard}>
           <div className={style.task_content}>
             <p>
               #{task.id_account ? task.id_account : ""} -{" "}

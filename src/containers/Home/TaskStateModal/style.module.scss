@@ -18,8 +18,9 @@
 
 .bottom {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   background-color: white;
   margin: $m-mbY;

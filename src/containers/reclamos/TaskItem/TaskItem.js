@@ -12,10 +12,11 @@ const TaskItem = ({ reclamo, handlerTask }) => {
     history.push("/reclamo", { id_task: reclamo.id, id_account: reclamo.id_account });
   };
   let date = new Date(reclamo.created_at).toLocaleString();
+  const styledCard = reclamo.priority ? styles.card_priority : styles.card;
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <div className={styles.card}>
+        <div className={styledCard}>
           <div className={styles.card_container} onClick={() => toTask(reclamo)}>
             <div className={styles.card_content}>
               <h4>{reclamo.account_name}</h4>
@@ -25,7 +26,7 @@ const TaskItem = ({ reclamo, handlerTask }) => {
             </div>
             <div className={styles.card_content}>
               <div className={styles.card_item}>
-                <p>
+                <p style={{marginRight: '0.5rem'}}>
                   <span className={styles.boldText}># {reclamo.number} </span>
                 </p>
                 <div style={{ display: "flex", alignItems: "center" }}>

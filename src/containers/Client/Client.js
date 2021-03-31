@@ -9,6 +9,7 @@ import ClientAccordion from "./ClientAccordion/ClientAccordion";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import { faAddressCard, faListOl, faPhone, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { getClients } from "../../api/index";
+import { isBrowser } from "react-device-detect";
 
 const Client = (props) => {
   let timeout;
@@ -70,9 +71,13 @@ const Client = (props) => {
 
   return (
     <div>
-      <h3>
-        <span className={style.boldText}>Buscar cliente</span>
-      </h3>
+      {isBrowser && (
+        <div className={style.header}>
+          <h3 style={{ marginBottom: "1rem" }}>
+            <span className={style.boldText}>Buscar cliente</span>
+          </h3>
+        </div>
+      )}
       <div className={style.client}>
         <div className={style.input_wrapper}>
           <div className={style.input_container}>

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0rem;
+  margin: 1rem 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -18,5 +18,11 @@
 .modal_open {
   width: 40%;
   transition: width 1s;
+  margin-left: 0.5rem;
+}
+
+.boldText {
+  font-family: "Roboto Bold";
+  color: var(--blue);
   margin-left: 0.5rem;
 }

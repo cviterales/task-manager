@@ -5,18 +5,11 @@ import { useSelector } from "react-redux";
 import WorkTeam from "../../components/WorkTeam";
 import Button from "../../components/Button";
 import ListTeams from "./ListTeams/ListTeams";
-
-import {
-  getTeams,
-  getOperators,
-  getVehicles,
-  createTeam,
-  updateTeam,
-  closeTeam,
-} from "../../api/index";
+import { getTeams, getOperators, getVehicles, createTeam, updateTeam, closeTeam } from "../../api/index";
+import withPermission from "../../hoc/withPermission/withPermission";
 
 const Cuadrillas = () => {
-  const id_service = useSelector((state) => state.auth.user.id_service);
+  const user = useSelector((state) => state.auth.user);
 
   const [teams, setTeams] = useState([]);
   const [open, setOpen] = useState(false);
@@ -31,9 +24,9 @@ const Cuadrillas = () => {
   });
 
   const handlerCloseData = async () => {
-    return closeTeam(id_service, selectedTeam.id_team)
+    return closeTeam(user.id_service, selectedTeam.id_team)
       .then((res) => {
-        getTeams(id_service).then((res) => {
+        getTeams(user.id_service).then((res) => {
           setTeams(res);
         });
         setSelectedTeam({
@@ -50,14 +43,9 @@ const Cuadrillas = () => {
 
   const handleSendData = async (selectedVehicle, selectedOperators) => {
     if (selectedTeam.id_team) {
-      return updateTeam(
-        id_service,
-        selectedTeam.id_team,
-        selectedVehicle,
-        selectedOperators
-      )
+      return updateTeam(user.id_service, selectedTeam.id_team, selectedVehicle, selectedOperators)
         .then((res) => {
-          getTeams(id_service).then((res) => {
+          getTeams(user.id_service).then((res) => {
             setTeams(res);
           });
           return res;
@@ -66,9 +54,9 @@ const Cuadrillas = () => {
           return res;
         });
     } else {
-      return createTeam(id_service, selectedVehicle, selectedOperators)
+      return createTeam(user.id_service, selectedVehicle, selectedOperators)
         .then((res) => {
-          getTeams(id_service).then((res) => {
+          getTeams(user.id_service).then((res) => {
             setTeams(res);
           });
           return res;
@@ -80,8 +68,8 @@ const Cuadrillas = () => {
   };
 
   const setDataHandler = async (id_team) => {
-    let operators = await getOperators(id_service, id_team);
-    let vehicles = await getVehicles(id_service, id_team);
+    let operators = await getOperators(user.id_service, id_team);
+    let vehicles = await getVehicles(user.id_service, id_team);
     setTeamData({
       vehicles: vehicles,
       operators: operators,
@@ -113,23 +101,18 @@ const Cuadrillas = () => {
   };
 
   useEffect(() => {
-    getTeams(id_service).then((res) => {
+    getTeams(user.id_service).then((res) => {
       setTeams(res);
     });
-  }, [id_service]);
+  }, [user]);
 
   return (
     <>
       <div className={styles.header}>
-        <h3 style={{ margin: "1rem" }}>
-          <b>Cuadrillas</b>
+        <h3 style={{ marginBottom: "1rem" }}>
+          <span className={styles.boldText}>Cuadrillas</span>
         </h3>
-        <Button
-          variant="outline"
-          disabled={false}
-          type="submit"
-          onClick={handlerCreateTeam}
-        >
+        <Button variant="outline" disabled={false} type="submit" onClick={handlerCreateTeam}>
           <p style={{ fontSize: "16px" }}>Crear</p>
         </Button>
       </div>
@@ -155,4 +138,4 @@ const Cuadrillas = () => {
   );
 };
 
-export default Cuadrillas;
+export default withPermission(Cuadrillas);

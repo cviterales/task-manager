@@ -9,6 +9,11 @@
   padding: 0.5rem;
 }
 
+.card_priority {
+  @extend .card;
+  border-left: 2px solid red;
+}
+
 .card_container {
   margin: 1rem;
   width: 95%;
@@ -31,6 +36,7 @@
   @include mq("phone", "max") {
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
   }
 }
 

@@ -121,8 +121,8 @@ const Reclamos = ({ history }) => {
   return (
     <>
       <div className={styles.header}>
-        <h3 style={{ margin: "1rem" }}>
-          <b>Reclamos</b>
+        <h3 style={{ marginBottom: "1rem" }}>
+          <span className={styles.boldText}>Reclamos</span>
         </h3>
       </div>
       <main className={styles.main}>
