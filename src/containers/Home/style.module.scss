@@ -20,3 +20,13 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+.boldText {
+  font-family: "Roboto Bold";
+  color: var(--blue);
+  margin-left: 0.5rem;
+}
+
+.header {
+  margin: 1rem 0.5rem;
+}

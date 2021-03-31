@@ -3,11 +3,7 @@ import style from "./style.module.scss";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-  faQuestionCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 import CalendarButton from "../CalendarButton/index";
 import Button from "../../Button/index";
@@ -25,10 +21,7 @@ const HeaderCalendar = ({ month, year, dateHandler, nextWeek, prevWeek }) => {
     return states.map((state, index) => {
       return (
         <div key={index} className={style.info}>
-          <div
-            className={[style.status_color, state.description].join(" ")}
-          ></div>{" "}
-          {state.name}
+          <div className={[style.status_color, state.description].join(" ")}></div> {state.name}
         </div>
       );
     });
@@ -36,8 +29,8 @@ const HeaderCalendar = ({ month, year, dateHandler, nextWeek, prevWeek }) => {
 
   return (
     <div className={style.header_options}>
-      <h3 style={{ margin: "1rem" }}>
-        <b>Calendario</b>
+      <h3 style={{ marginBottom: "1rem" }}>
+        <span className={style.boldText}>Calendario</span>
       </h3>
       <div className={style.header_buttons}>
         <div className={style.wrapperCalendarButton}>
@@ -65,10 +58,7 @@ const HeaderCalendar = ({ month, year, dateHandler, nextWeek, prevWeek }) => {
           variant="outline"
           type=""
         >
-          <FontAwesomeIcon
-            icon={faQuestionCircle}
-            style={{ fontSize: "20px", color: "#2d3748" }}
-          />
+          <FontAwesomeIcon icon={faQuestionCircle} style={{ fontSize: "20px", color: "#2d3748" }} />
         </Button>
         {statusInfo && (
           <div className={style.info_option}>

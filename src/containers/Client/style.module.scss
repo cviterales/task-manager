@@ -12,10 +12,6 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 2rem 0rem;
-  @include mq("phone", "max") {
-    margin: $m-mbY;
-  }
 }
 
 .input_container {
@@ -36,4 +32,9 @@
 .boldText {
   font-family: "Roboto Bold";
   color: var(--blue);
+  margin-left: 0.5rem;
+}
+
+.header {
+  margin: 1rem 0.5rem;
 }

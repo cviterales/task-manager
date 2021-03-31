@@ -16,7 +16,7 @@ import { faExchangeAlt, faHdd, faWifi } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux";
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem";
 import ConnectionsModal from "./Modals/ConnectionsModal/ConnectionsModal";
-import { isBrowser, isMobile } from "react-device-detect";
+import { isBrowser } from "react-device-detect";
 
 const ClientSubAccount = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service);

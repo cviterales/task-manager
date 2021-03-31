@@ -33,7 +33,7 @@ const Home = () => {
 
   const renderTasks = () => {
     return currentTasks.map((e, i) => (
-      <AnimatedListItem key={e.id + i}>
+      <AnimatedListItem key={i + e.id_task}>
         <TaskItem reclamo={e} handlerTask={handlerTask} />
       </AnimatedListItem>
     ));
@@ -94,51 +94,52 @@ const Home = () => {
   return (
     <>
       <BrowserView>
-        <div>
-          <h3 style={{ margin: "1rem" }}>
-            <b>Dashboard</b>
+        <div className={styles.header}>
+          <h3 style={{ marginBottom: "1rem" }}>
+            <span className={styles.boldText}>Home</span>
           </h3>
-          <div className={styles.wrapper}>
-            <div className={styles.content}>
-              <Card>
-                <div className={styles.graphContainer}>
-                  <div className={styles.graph}>
-                    <Pie
-                      data={pieDataServices}
-                      options={{
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        title: {
-                          display: true,
-                          text: "Reclamos por servicio",
-                          fontSize: 20,
-                        },
-                        legend: {
-                          display: true,
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className={styles.graph}>
-                    <Pie
-                      data={pieDataTasks}
-                      options={{
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        title: {
-                          display: true,
-                          text: "Tareas pendientes",
-                          fontSize: 20,
-                        },
-                        legend: {
-                          display: true,
-                        },
-                      }}
-                    />
-                  </div>
+        </div>
+
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <Card>
+              <div className={styles.graphContainer}>
+                <div className={styles.graph}>
+                  <Pie
+                    data={pieDataServices}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: true,
+                      title: {
+                        display: true,
+                        text: "Reclamos por servicio",
+                        fontSize: 20,
+                      },
+                      legend: {
+                        display: true,
+                      },
+                    }}
+                  />
                 </div>
-              </Card>
-            </div>
+                <div className={styles.graph}>
+                  <Pie
+                    data={pieDataTasks}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: true,
+                      title: {
+                        display: true,
+                        text: "Tareas pendientes",
+                        fontSize: 20,
+                      },
+                      legend: {
+                        display: true,
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </BrowserView>
