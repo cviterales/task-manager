@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./style.module.scss";
 
-import Incident from "../../../../Reclamos/Reclamo/Incident/Incident";
-import Status from "../../../../../components/Status/index";
+import Incident from "../../Incident/Incident";
+import Status from "../../Status/index";
 const TaskItem = ({ task }) => {
-
   const renderIncidents = (incidents) => {
     return (
       <li style={{ listStyleType: "none" }}>

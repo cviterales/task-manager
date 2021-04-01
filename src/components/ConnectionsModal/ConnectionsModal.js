@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
-import ConnectionsTable from "../../Tables/ConnectionsTable/ConnectionsTable";
-import Spinner from "../../../../../components/Spinner/index";
-import Button from "../../../../../components/Button/index";
-import CalendarButton from "../../../../../components/Calendar/CalendarButton/index";
-import { getSubAccountConnections } from "../../../../../api/index";
+import ConnectionsTable from "../ConnectionsTable/ConnectionsTable";
+import Spinner from "../Spinner/index";
+import Button from "../Button/index";
+import CalendarButton from "../Calendar/CalendarButton/index";
+import { getSubAccountConnections } from "../../api/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,7 +20,7 @@ const ConnectionsModal = ({ connectSubAcc, onClose, login }) => {
 
   useEffect(() => {
     getSubAccountConnections(login, dateFrom, dateTo).then((res) => setTableData(res));
-  }, []);
+  }, [login, dateFrom, dateTo]);
 
   return (
     <div className={styles.contentWrapper}>
@@ -68,7 +68,7 @@ const ConnectionsModal = ({ connectSubAcc, onClose, login }) => {
       </div>
       <div className={styles.bottom}>
         <Button type="button" variant="outline" onClick={onClose}>
-          Cerrar
+          <p>Cerrar</p>
         </Button>
       </div>
     </div>

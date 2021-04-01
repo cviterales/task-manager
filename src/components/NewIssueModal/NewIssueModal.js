@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
 
-import Button from "../../../../components/Button/index";
-import Message from "../../../../components/Message/index";
+import Button from "../Button/index";
+import Message from "../Message/index";
 
 const NewIssueModal = ({ onClose, onSave }) => {
   const [description, setDescription] = useState("");
@@ -33,12 +33,12 @@ const NewIssueModal = ({ onClose, onSave }) => {
       <div className={styles.bottom}>
         <div style={{ marginInline: "1rem" }}>
           <Button type="button" variant="blue" onClick={() => onSaveHandler(description)}>
-            Guardar
+            <p> Guardar</p>
           </Button>
         </div>
         <div style={{ marginInline: "1rem" }}>
           <Button type="button" variant="outline" onClick={onClose}>
-            Cancelar
+            <p>Cancelar</p>
           </Button>
         </div>
       </div>

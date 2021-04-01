@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import PropTypes from "prop-types";
 
-import InputText from "../../../../components/InputText/index";
-import DropDown from "../../../../components/DropDown/index";
-import Button from "../../../../components/Button/index";
-import Message from "../../../../components/Message/index";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import Card from "../../../../components/Card";
-import Signature from "../../../../components/Signature/Signature";
+//import InputText from "../InputText/index";
+//import DropDown from "../DropDown/index";
+import Button from "../Button/index";
+import Message from "../Message/index";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Card from "../../../../components/Card"; */
+import Signature from "../Signature/Signature";
 import { isMobile } from "react-device-detect";
 
-const teamMaterials = [
+/* const teamMaterials = [
   {
     id: 1,
     name: "Nano M5",
@@ -25,13 +25,13 @@ const teamMaterials = [
     id: 3,
     name: "Cable FTP",
   },
-];
+]; */
 
 const CloseTask = ({ onClose, onSave }) => {
   const [response, setResponse] = useState();
-  const [selectedMaterials, setSelectedMaterials] = useState([]);
-  const [selectedMaterial, setSelectedMaterial] = useState(1);
-  const [selectedQuantity, setSelectedQuantity] = useState("");
+  //const [selectedMaterials, setSelectedMaterials] = useState([]);
+  //const [selectedMaterial, setSelectedMaterial] = useState(1);
+  //const [selectedQuantity, setSelectedQuantity] = useState("");
   const [description, setDescription] = useState("");
 
   const onSaveHandler = () => {
@@ -67,12 +67,12 @@ const CloseTask = ({ onClose, onSave }) => {
     }
   }; */
 
-  const removeItemHandler = (el) => {
+  /*  const removeItemHandler = (el) => {
     const newArray = selectedMaterials.filter((item) => item !== el);
     setSelectedMaterials(newArray);
-  };
+  }; */
 
-  const renderMaterialList = () => {
+  /* const renderMaterialList = () => {
     return selectedMaterials.map((el, i) => (
       <li style={{ listStyleType: "none" }} key={i}>
         <Card>
@@ -91,7 +91,7 @@ const CloseTask = ({ onClose, onSave }) => {
         </Card>
       </li>
     ));
-  };
+  }; */
 
   return (
     <div className={styles.modal_wrapper}>
@@ -144,10 +144,10 @@ const CloseTask = ({ onClose, onSave }) => {
       </div>
       <div className={styles.bottom}>
         <Button type="button" variant="blue" onClick={() => onSaveHandler()}>
-          Guardar
+          <p>Guardar</p>
         </Button>
         <Button type="button" variant="outline" onClick={onClose}>
-          Cancelar
+          <p>Cancelar</p>
         </Button>
       </div>
       {response && <Message type={response.error ? "error" : "success"} message={response.message} />}

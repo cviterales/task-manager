@@ -58,7 +58,7 @@ const Client = (props) => {
       clientList.map((el, index) => {
         return (
           <AnimatedListItem index={index} key={index}>
-            <ClientAccordion service={id_service} client={el} {...props} />
+            <ClientAccordion client={el} {...props} />
           </AnimatedListItem>
         );
       })

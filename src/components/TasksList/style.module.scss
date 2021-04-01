@@ -1,4 +1,4 @@
-@import "../../../../styles/index.scss";
+@import "../../styles/index.scss";
 
 .list_content {
   margin: 0.5rem;
@@ -8,10 +8,10 @@
 }
 
 .card_content {
-  margin: 0.5rem;
+  padding: 1rem;
   cursor: pointer;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   @include mq("phone", "max") {
     margin: 0.25rem;
   }

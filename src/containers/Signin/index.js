@@ -117,7 +117,7 @@ const Signin = (props) => {
           </div>
           <div className={styles.content_button}>
             <Button variant="blue" type="submit" onClick={() => {}}>
-              {loading ? <Spinner /> : "Ingresar"}
+              <p>{loading ? <Spinner /> : "Ingresar"}</p>
             </Button>
             <Button variant="outline" type="" onClick={() => {}}>
               <p>Olvido su contraseña?</p>

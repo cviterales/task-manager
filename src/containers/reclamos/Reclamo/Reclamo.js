@@ -4,11 +4,11 @@ import style from "./reclamo.module.scss";
 import Card from "../../../components/Card/index";
 import Status from "../../../components/Status/index";
 import Spinner from "../../../components/Spinner/index";
-import Incident from "./Incident/Incident";
+import Incident from "../../../components/Incident/Incident";
 import Button from "../../../components/Button/index";
 import Modal from "../../../components/Modal/index";
-import NewIssueModal from "./NewIssueModal/NewIssueModal";
-import CloseTaskModal from "./CloseTaskModal/CloseTaskModal";
+import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal";
+import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal";
 import {
   faAddressCard,
   faClipboardCheck,
@@ -112,7 +112,7 @@ const Reclamo = (props) => {
           </div>
           {task.is_active ? (
             <Button onClick={() => setShowShowModal(true)} variant="outline">
-              Cerrar reclamo
+              <p>Cerrar reclamo</p>
             </Button>
           ) : null}
         </div>
@@ -263,7 +263,7 @@ const Reclamo = (props) => {
                         }}
                         variant="outline"
                       >
-                        Nuevo Incidente
+                        <p>Nuevo Incidente</p>
                       </Button>
                     </div>
                   ) : null}

@@ -70,7 +70,7 @@ const Status = ({ task, onClose }) => {
         </div>
         <div className={style.buttom}>
           <Button variant="dark" type="submit" onClick={(e) => updateStateHandler(e)}>
-            {loading ? <Spinner /> : "Guardar"}
+            <p>{loading ? <Spinner /> : "Guardar"}</p>
           </Button>
           <Button
             variant="outline"
@@ -79,7 +79,7 @@ const Status = ({ task, onClose }) => {
               onClose();
             }}
           >
-            Cancelar
+            <p>Cancelar</p>
           </Button>
         </div>
       </div>

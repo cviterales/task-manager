@@ -25,10 +25,10 @@ const Signature = () => {
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button type="button" variant="outline" onClick={() => handleClear()}>
-          Borrar
+          <p>Borrar</p>
         </Button>
         <Button type="button" variant="outline" onClick={() => handleConfirm()}>
-          Confirmar
+          <p>Confirmar</p>
         </Button>
       </div>
     </div>

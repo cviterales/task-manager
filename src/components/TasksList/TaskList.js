@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./style.module.scss";
 
-import Card from "../../../../components/Card/index";
-import Status from "../../../../components/Status/index";
+import Card from "../Card/index";
+import Status from "../Status/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarMinus } from "@fortawesome/free-solid-svg-icons";
 

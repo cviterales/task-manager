@@ -11,17 +11,17 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 import useVisible from "../../hooks/useVisible";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import * as actions from "../../store/actions/index";
 import { getServices, updatedUserProfile } from "../../api/index";
 
 const Header = () => {
   const userStorage = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,6 @@ const Header = () => {
   const [image, setImage] = useState();
   const [user, setUser] = useState();
   const [headerTitle, setHeaderTitle] = useState("");
-
 
   const getData = async () => {
     const servicesData = await getServices();
@@ -92,6 +91,7 @@ const Header = () => {
   const updateService = (id_service) => {
     const serviceSelected = parseInt(id_service);
     dispatch(actions.updatedService(serviceSelected));
+    history.push("/home");
   };
 
   const uploadImageHandler = (e) => {

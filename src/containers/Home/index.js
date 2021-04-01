@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
 import Card from "../../components/Card/index";
-import { useSelector } from "react-redux";
 import { Pie } from "react-chartjs-2";
 import { getTasksStatics, getTasksTeam } from "../../api/index";
 import { BrowserView, MobileView } from "react-device-detect";

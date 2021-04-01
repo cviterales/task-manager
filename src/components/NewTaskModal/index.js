@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
-import DropDown from "../../../../../components/DropDown/index";
-import Button from "../../../../../components/Button";
-import Message from "../../../../../components/Message/index";
+import DropDown from "../DropDown/index";
+import Button from "../Button";
+import Message from "../Message/index";
 import { useSelector } from "react-redux";
-import { getProblems, getTaskTypes } from "../../../../../api/index";
+import { getProblems, getTaskTypes } from "../../api/index";
 
 const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   const id_service = useSelector((state) => state.auth.user.id_service);
@@ -80,10 +80,10 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       </div>
       <div className={styles.bottom}>
         <Button type="button" variant="blue" onClick={() => saveHandler()}>
-          Guardar
+          <p>Guardar</p>
         </Button>
         <Button type="button" variant="outline" onClick={onClose}>
-          Cancelar
+          <p>Cancelar</p>
         </Button>
       </div>
       {message && <Message type={error ? "error" : "success"} message={message} />}

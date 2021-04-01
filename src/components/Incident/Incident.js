@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../../../components/Card/index";
+import Card from "../Card/index";
 import styles from "./style.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarMinus } from "@fortawesome/free-solid-svg-icons";

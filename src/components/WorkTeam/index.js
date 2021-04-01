@@ -12,13 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../Spinner";
 
-const WorkTeam = ({
-  selectedTeam,
-  teamData,
-  sendData,
-  onClose,
-  deleteData,
-}) => {
+const WorkTeam = ({ selectedTeam, teamData, sendData, onClose, deleteData }) => {
   const [selectedVehicle, setSelectedVehicle] = useState(0);
   const [selectedOperators, setSelectedOperators] = useState([]);
   const [error, setError] = useState({ error: false, message: "" });
@@ -32,13 +26,9 @@ const WorkTeam = ({
   const handlerOperators = (e) => {
     let found;
     if (selectedOperators) {
-      found = selectedOperators.find(
-        (operator) => operator.id === +e.target.value
-      );
+      found = selectedOperators.find((operator) => operator.id === +e.target.value);
       if (!found) {
-        let operator = teamData.operators.find(
-          (operator) => operator.id === +e.target.value
-        );
+        let operator = teamData.operators.find((operator) => operator.id === +e.target.value);
         setSelectedOperators([...selectedOperators, operator]);
       }
     }
@@ -55,9 +45,7 @@ const WorkTeam = ({
   const deleteOperator = (e, operator) => {
     let found = selectedOperators.findIndex((op) => op.id === operator.id);
     if (found !== -1) {
-      let newOperators = selectedOperators.filter(
-        (op) => op.id !== operator.id
-      );
+      let newOperators = selectedOperators.filter((op) => op.id !== operator.id);
       setSelectedOperators(newOperators);
     }
     e.preventDefault();
@@ -71,10 +59,10 @@ const WorkTeam = ({
         setLoading(false);
       });
     } else {
-      setError({ error: true, message: "No hay datos seleccionados!" })
+      setError({ error: true, message: "No hay datos seleccionados!" });
       setTimeout(() => {
-        setError({error: false, message: ""})
-      }, 5000)
+        setError({ error: false, message: "" });
+      }, 5000);
     }
 
     e.preventDefault();
@@ -92,19 +80,12 @@ const WorkTeam = ({
   const List = (values) => {
     return values.map((value, index) => {
       return (
-        <li
-          key={index}
-          className={style.operator_selected}
-          style={{ listStyleType: "none" }}
-        >
+        <li key={index} className={style.operator_selected} style={{ listStyleType: "none" }}>
           <Card>
             <div className={style.operator}>
               <span>{value.id}</span>
               <span>{value.name}</span>
-              <button
-                onClick={(e) => deleteOperator(e, value)}
-                style={{ backgroundColor: "transparent" }}
-              >
+              <button onClick={(e) => deleteOperator(e, value)} style={{ backgroundColor: "transparent" }}>
                 <FontAwesomeIcon icon={faTrashAlt} color="red" />
               </button>
             </div>
@@ -118,19 +99,10 @@ const WorkTeam = ({
       <div className={style.wrapper}>
         <div className={style.container}>
           <div className={style.header}>
-            <h3>
-              {selectedTeam.id_team
-                ? `Editar Cuadrilla # ${selectedTeam.id_team}`
-                : "Nueva Cuadrilla"}
-            </h3>
+            <h3>{selectedTeam.id_team ? `Editar Cuadrilla # ${selectedTeam.id_team}` : "Nueva Cuadrilla"}</h3>
             {selectedTeam.id_team && (
-              <Button
-                disabled={false}
-                variant="outline"
-                type="submit"
-                onClick={(e) => closeDataHandler(e)}
-              >
-                Eliminar
+              <Button disabled={false} variant="outline" type="submit" onClick={(e) => closeDataHandler(e)}>
+                <p>Eliminar</p>
               </Button>
             )}
           </div>
@@ -177,29 +149,15 @@ const WorkTeam = ({
             </div>
             <div className={style.content_center}>
               <div className={style.content_buttons}>
-                <Button
-                  variant="dark"
-                  type="submit"
-                  onClick={(e) => sendDataHandler(e)}
-                >
-                  {loading ? <Spinner /> : "Guardar"}
+                <Button variant="dark" type="submit" onClick={(e) => sendDataHandler(e)}>
+                  <p>{loading ? <Spinner /> : "Guardar"}</p>
                 </Button>
-                <Button
-                  disabled={false}
-                  variant="outline"
-                  type="submit"
-                  onClick={onClose}
-                >
-                  Cancelar
+                <Button disabled={false} variant="outline" type="submit" onClick={onClose}>
+                  <p>Cancelar</p>
                 </Button>
               </div>
             </div>
-            {error.error && (
-              <Message
-                message={error.message}
-                type={error.error ? "error" : "success"}
-              />
-            )}
+            {error.error && <Message message={error.message} type={error.error ? "error" : "success"} />}
           </form>
         </div>
       </div>

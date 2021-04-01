@@ -68,13 +68,13 @@ const TaskStateModal = ({ onClose, task }) => {
             <Spinner />
           ) : (
             <Button type="button" variant="blue" onClick={() => onSaveHandler()}>
-              Guardar
+              <p>Guardar</p>
             </Button>
           )}
         </div>
         <div>
           <Button type="button" variant="outline" onClick={onClose}>
-            Cancelar
+            <p>Cancelar</p>
           </Button>
         </div>
       </div>
