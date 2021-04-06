@@ -20,6 +20,8 @@ const Calendario = () => {
   const [teams, setTeams] = useState();
   const [calendar, setCalendar] = useState();
 
+  console.log(socket_refresh)
+
   useEffect(() => {
     getTeams(id_service).then((res) => setTeams(res));
     const dateSelected = year + "-" + month;
@@ -38,9 +40,7 @@ const Calendario = () => {
     let dayData = {};
     let daysOfMonth = moment(`${year}-${month}`).daysInMonth();
     while (date.getMonth() === monthIndex) {
-      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format(
-        "DD/MM/YYYY"
-      );
+      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format("DD/MM/YYYY");
       let tasksOfDay = tasks.filter((task) => {
         return task.date === dayDate;
       });
@@ -99,13 +99,7 @@ const Calendario = () => {
 
   return (
     <div className={style.wrapper}>
-      <HeaderCalendar
-        month={month}
-        year={year}
-        dateHandler={dateHandler}
-        prevWeek={prevWeek}
-        nextWeek={nextWeek}
-      />
+      <HeaderCalendar month={month} year={year} dateHandler={dateHandler} prevWeek={prevWeek} nextWeek={nextWeek} />
       {teams && calendar ? <Calendar calendar={calendar} teams={teams} week={week} /> : null}
     </div>
   );

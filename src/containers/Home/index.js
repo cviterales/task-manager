@@ -9,12 +9,13 @@ import TaskItem from "../Reclamos/TaskItem/TaskItem";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import Modal from "../../components/Modal/index";
 import TaskStateModal from "./TaskStateModal/TaskStateModal";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  //const id_user = useSelector((state) => state.auth.user.id);
+  const id_user = useSelector((state) => state?.auth?.user?.id);
 
   const [chartsData, setChartsData] = useState();
-  const [currentTasks, setCurrentTasks] = useState([]);
+  const [currentTasks, setCurrentTasks] = useState();
   const [open, setOpen] = useState(false);
   const [selectedReclamo, setSelectedReclamo] = useState({});
 
@@ -31,18 +32,20 @@ const Home = () => {
   };
 
   const renderTasks = () => {
-    return currentTasks.map((e, i) => (
-      <AnimatedListItem key={i + e.id_task}>
-        <TaskItem reclamo={e} handlerTask={handlerTask} />
-      </AnimatedListItem>
-    ));
+    if (Array.isArray(currentTasks)) {
+      return currentTasks.map((e, i) => (
+        <AnimatedListItem key={i + e.id_task}>
+          <TaskItem reclamo={e} handlerTask={handlerTask} />
+        </AnimatedListItem>
+      ));
+    }
   };
 
   useEffect(() => {
     //chartDataByService();
-    getTasksTeam(51).then((res) => setCurrentTasks(res));
+    getTasksTeam(id_user).then((res) => setCurrentTasks(res));
     getTasksStatics().then((res) => setChartsData(res));
-  }, []);
+  }, [id_user]);
 
   const pieDataTasks = {
     datasets: [
@@ -111,7 +114,7 @@ const Home = () => {
                       maintainAspectRatio: true,
                       title: {
                         display: true,
-                        text: "Reclamos por servicio",
+                        text: "Tareas por servicio",
                         fontSize: 20,
                       },
                       legend: {
@@ -143,7 +146,7 @@ const Home = () => {
         </div>
       </BrowserView>
       <MobileView>
-        {renderTasks()}
+        {currentTasks && renderTasks()}
         {open && (
           <Modal title={`Historial de estados tarea: #${selectedReclamo.id}`} onClose={() => setOpen(false)}>
             <TaskStateModal onClose={() => setOpen(false)} task={selectedReclamo} />

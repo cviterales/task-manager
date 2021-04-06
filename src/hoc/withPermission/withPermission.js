@@ -5,9 +5,9 @@ import NoPermission from "../../components/NoPermission/NoPermission";
 
 const withPermission = (WrappedComponent) => {
   const RequiresPermissions = (props) => {
-    const user = useSelector((state) => state.user);
-    let returnComponent = <WrappedComponent {...props} />;
 
+    const user = useSelector((state) => state.auth.user);
+    let returnComponent = <WrappedComponent {...props} />;
     if (!user?.isAdmin) {
       returnComponent = <NoPermission />;
     }

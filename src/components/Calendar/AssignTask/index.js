@@ -111,7 +111,7 @@ const AssignTask = ({ task, onClose }) => {
       </div>
       <div className={style.buttom}>
         <Button variant="dark" type="submit" onClick={(e) => onSave(e)}>
-          <p>{loading ? <Spinner /> : "Guardar"}</p>
+          {loading ? <Spinner /> : <p>Guardar</p>}
         </Button>
         <Button variant="outline" type="submit" onClick={() => onClose()}>
           <p>Cancelar</p>

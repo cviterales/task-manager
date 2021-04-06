@@ -74,7 +74,7 @@ const Selector = ({ nameKey, onSelected, icons, data }) => {
             <FontAwesomeIcon icon={icons[i].icon} color={icons[i].color} />
           </div>
         )}
-        <div>{el.name}</div>
+        <p>{el.name}</p>
       </div>
     ));
   };

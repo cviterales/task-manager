@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
+import PropTypes from "prop-types";
 
 import Spinner from "../../../components/Spinner/index";
 import Status from "../../../components/Status/index";
@@ -73,18 +74,23 @@ const TaskStateModal = ({ onClose, task }) => {
           )}
         </div>
         <div>
-          <Button type="button" variant="outline" onClick={onClose}>
+          <Button type="button" variant="outline" onClick={() => onClose()}>
             <p>Cancelar</p>
           </Button>
         </div>
       </div>
       {message && (
         <div className={styles.m_v}>
-          <Message type={message.error ? "error" : "success"} message={message.message} />{" "}
+          <Message type={message.error ? "error" : "success"} message={message.message} />
         </div>
       )}
     </div>
   );
+};
+
+TaskStateModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  task: PropTypes.object.isRequired,
 };
 
 export default TaskStateModal;

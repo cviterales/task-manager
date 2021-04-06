@@ -14,6 +14,7 @@ const Tasks = ({ subAccTasks, taskHandler }) => {
       </AnimatedListItem>
     ));
   };
+  console.log(subAccTasks)
   return (
     <div className={styles.card_wrapper}>
       <Card>

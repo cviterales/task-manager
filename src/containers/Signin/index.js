@@ -10,7 +10,7 @@ import { getLoginUser } from "../../api/index";
 
 import * as actions from "../../store/actions/auth";
 import { useDispatch } from "react-redux";
-import {connectSocket} from '../../webSocket/webSocket'
+import { connectSocket } from "../../webSocket/webSocket";
 
 const Signin = (props) => {
   const [user, setUser] = useState("");
@@ -48,7 +48,7 @@ const Signin = (props) => {
             setLoading(false);
           } else {
             dispatch(actions.authLogged(response));
-            connectSocket(response.id)
+            connectSocket(response.id);
           }
         })
         .catch((err) => {
@@ -117,15 +117,13 @@ const Signin = (props) => {
           </div>
           <div className={styles.content_button}>
             <Button variant="blue" type="submit" onClick={() => {}}>
-              <p>{loading ? <Spinner /> : "Ingresar"}</p>
+              {loading ? <Spinner /> : <p>Ingresar</p>}
             </Button>
             <Button variant="outline" type="" onClick={() => {}}>
               <p>Olvido su contraseña?</p>
             </Button>
           </div>
-          {error && (
-              <p style={{ color: "red" }}>Usuario y/o contraseña incorrecto.</p>
-            )}
+          {error && <p style={{ color: "red" }}>Usuario y/o contraseña incorrecto.</p>}
         </form>
       </div>
     </div>

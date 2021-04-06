@@ -31,6 +31,7 @@ const Client = (props) => {
       setLoading(false);
     });
   };
+  console.log('render')
 
   const InputsHandler = (e) => {
     const value = e.target.value;
@@ -52,6 +53,8 @@ const Client = (props) => {
       }, 500);
     }
   };
+
+  console.log(clientList);
 
   const renderClientList = () => {
     return clientList.length > 0 && !loading ? (

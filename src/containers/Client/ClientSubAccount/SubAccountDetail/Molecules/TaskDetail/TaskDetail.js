@@ -29,7 +29,7 @@ const TaskDetail = ({ selectedTask, toTask }) => {
             {selectedTask?.id ? (
               <TaskItem task={selectedTask} />
             ) : (
-              <h4 className={styles.boldText}>Seleccione reclamo a visualizar</h4>
+              <h4 className={styles.boldText}>Seleccione tarea a visualizar</h4>
             )}
           </div>
         </div>

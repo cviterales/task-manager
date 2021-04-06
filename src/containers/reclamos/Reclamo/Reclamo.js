@@ -90,11 +90,11 @@ const Reclamo = (props) => {
       getSubAccountData(id_service, id_account).then((res) => {
         setTask(resultTaks);
         setSubAccount(res);
-        console.log(res);
       });
     });
   }, [id_service, id_task, id_account]);
 
+  console.log(task);
   let loaded = (
     <div className={style.contentCentered}>
       <Spinner color="#4299e1" size="4rem" />

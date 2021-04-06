@@ -42,7 +42,7 @@ const Header = () => {
   useEffect(() => {
     getData();
     setUser(userStorage);
-    setEmail(userStorage.email_address);
+    setEmail(userStorage?.email_address);
   }, [userStorage]);
 
   const pathname = window.location.pathname;
