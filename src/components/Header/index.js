@@ -186,7 +186,7 @@ const Header = () => {
                           borderRadius: "50%",
                           border: "2px solid #2c5282",
                         }}
-                        src={user?.photo ? user.photo : "/images/notfound.png"}
+                        src={image ? URL.createObjectURL(image[0]) : user?.photo ? user.photo : "/images/notfound.png"}
                         alt=""
                       />
                     </div>
