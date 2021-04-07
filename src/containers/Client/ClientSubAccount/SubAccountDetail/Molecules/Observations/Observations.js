@@ -23,8 +23,6 @@ const Observations = ({ subAccData }) => {
       </AnimatedListItem>
     ));
   };
-
-  console.log(subAccData);
   return (
     <div className={styles.card_wrapper}>
       <Card>

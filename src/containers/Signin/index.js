@@ -12,7 +12,7 @@ import * as actions from "../../store/actions/auth";
 import { useDispatch } from "react-redux";
 import { connectSocket } from "../../webSocket/webSocket";
 
-const Signin = (props) => {
+const Signin = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ const Signin = (props) => {
             connectSocket(response.id);
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setError(true);
           setLoading(false);
         });
@@ -98,7 +98,6 @@ const Signin = (props) => {
               placeHolder="Usuario"
               icon={faUser}
               iconColor="#4299e1"
-              //value={""}
               onChange={(e) => {
                 userHandler(e.target.value);
               }}

@@ -12,7 +12,6 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
   const [pos, setPost] = useState();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const elementRef = useRef(null);
-  console.log(task);
   const styledCard = task.priority ? style.task_priority : style.task;
   useEffect(() => {
     setPost(elementRef.current.getBoundingClientRect());

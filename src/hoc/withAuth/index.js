@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {connectSocket} from "../../webSocket/webSocket"
+import { connectSocket } from "../../webSocket/webSocket";
 
 const withAuth = (WrappedComponent) => {
   const RequiresAuthentication = (props) => {
@@ -12,21 +12,16 @@ const withAuth = (WrappedComponent) => {
       (state) => state.auth.isSocketConnected
     );
     const user = JSON.parse(sessionStorage.getItem("user"));
-    console.log('render')
 
     useEffect(() => {
-      console.log(user)
       if (!isUserAuthenticated) {
         history.push("/");
       } else {
         if (!isSocketConnected) {
-          connectSocket(user.id)
+          connectSocket(user.id);
         }
       }
-    },[history, isSocketConnected, isUserAuthenticated, user ]);
-
-    // if there's a loggedInUser, show the wrapped page, otherwise show a loading indicator
-    //return role && role !== "guest" ? <WrappedComponent {...props} /> : <div>Loading...</div>;
+    }, [history, isSocketConnected, isUserAuthenticated, user]);
     return <WrappedComponent {...props} />;
   };
 

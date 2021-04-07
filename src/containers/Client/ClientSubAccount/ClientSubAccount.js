@@ -29,7 +29,6 @@ const ClientSubAccount = (props) => {
       });
     } else {
       getTasks(id_service, "", props.location.state.client_id, "", "", "", "", "").then((res) => {
-        console.log(res);
         setSubAccTasks(res);
       });
       getSubAccountData(id_service, props.location.state.client_id).then((res) => {
