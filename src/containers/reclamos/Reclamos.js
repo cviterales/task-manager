@@ -145,10 +145,11 @@ const Reclamos = ({ history }) => {
                 <p className={styles.boldText}>Tipo</p>
                 <Selector nameKey="taskTypeSelected" data={filtersData.task_type} onSelected={filterHandler} />
               </div>
-              <div className={styles.input_container}>
-                <p className={styles.boldText}>Servicio</p>
-                <Selector nameKey="serviceTypesSelected" data={filtersData.service_types} onSelected={filterHandler} />
-              </div>
+              {filtersData.service_types &&
+                < div className={styles.input_container}>
+                  <p className={styles.boldText}>Servicio</p>
+                  <Selector nameKey="serviceTypesSelected" data={filtersData.service_types} onSelected={filterHandler} />
+                </div>}
               <div className={styles.input_container}>
                 <p className={styles.boldText}>Region</p>
                 <Selector nameKey="regionSelected" data={filtersData.regions} onSelected={filterHandler} />

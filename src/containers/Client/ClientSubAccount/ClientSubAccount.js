@@ -61,7 +61,7 @@ const ClientSubAccount = (props) => {
           <NewTaskModal
             id={props.location.state.client_id}
             sid={props.location.state.client_sub_account}
-            serviceType={subAccData?.service[0].id_service_type}
+            serviceType={subAccData?.service[0]?.id_service_type ?? ''}
             onClose={() => setShowTaskModal(false)}
             onSave={(id_service, sid, taskType, idProblem, description) =>
               createTask(id_service, sid, taskType, idProblem, description)

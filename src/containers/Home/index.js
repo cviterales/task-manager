@@ -148,7 +148,7 @@ const Home = () => {
       <MobileView>
         {currentTasks && renderTasks()}
         {open && (
-          <Modal title={`Historial de estados tarea: #${selectedReclamo.id}`} onClose={() => setOpen(false)}>
+          <Modal title={`Nuevo Estado`} onClose={() => setOpen(false)}>
             <TaskStateModal onClose={() => setOpen(false)} task={selectedReclamo} />
           </Modal>
         )}
