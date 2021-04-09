@@ -19,11 +19,6 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [selectedReclamo, setSelectedReclamo] = useState({});
 
-  /*   const chartDataByService = () => {
-    const result = chartsData?.amount_service?.map((el) => el.description_service);
-    return result;
-  };
- */
   const handlerTask = (reclamo) => {
     setSelectedReclamo(reclamo);
     if (!open) {
@@ -42,7 +37,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    //chartDataByService();
     getTasksTeam(id_user).then((res) => setCurrentTasks(res));
     getTasksStatics().then((res) => setChartsData(res));
   }, [id_user]);

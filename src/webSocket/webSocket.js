@@ -3,7 +3,7 @@ import store from "../store/store";
 import * as actions from "../store/actions/index";
 
 export const connectSocket = (customClientID) => {
-  const socket = io("http://181.41.240.26:4000", {
+  const socket = io(process.env.REACT_APP_API_URL, {
     autoConnect: true,
   });
   socket.emit("storeClient", { customId: customClientID });

@@ -20,8 +20,6 @@ const Calendario = () => {
   const [teams, setTeams] = useState();
   const [calendar, setCalendar] = useState();
 
-  console.log(socket_refresh)
-
   useEffect(() => {
     getTeams(id_service).then((res) => setTeams(res));
     const dateSelected = year + "-" + month;

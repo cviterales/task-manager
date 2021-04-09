@@ -5,7 +5,7 @@ import store from "../store/store";
 //baseURL: 'http://192.168.77.244:4000',
 
 const instance = axios.create({
-  baseURL: "http://181.41.240.26:4000",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -29,7 +29,6 @@ instance.interceptors.response.use(
   },
   function (error) {
     if (error) {
-      console.log(error);
       store.dispatch({ type: AUTH_LOGOUT });
       window.location.href = "/";
     }

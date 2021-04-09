@@ -42,7 +42,6 @@ const CloseTask = ({ onClose, onSave }) => {
       }, 6000);
     } else {
       onSave(description).then((res) => {
-        console.log(res);
         setResponse(res);
         setTimeout(() => {
           setResponse();

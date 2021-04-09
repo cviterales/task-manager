@@ -14,6 +14,7 @@ const DropDown = ({ data, form, name, id, onChange, selectedValue = 0 }) => {
   };
   return (
     <select
+      data-testid={name}
       className={style.select}
       name={name}
       form={form}

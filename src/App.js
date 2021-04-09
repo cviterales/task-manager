@@ -1,16 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-/* import Home from "./containers/Home/index";
-import Calendario from "./containers/Calendario/index";
-import Reclamos from "./containers/reclamos/index";
-import Reclamo from "./containers/reclamos/reclamo"; 
-import Layout from "./containers/Layout/index";
-import Client from "./containers/Client/Client";
-import ClientSubAccount from "./containers/Client/ClientSubAccount/ClientSubAccount";
-*/
-
-//import Calendario from "./containers/Calendario/index";
 import Signin from "./containers/Signin/index";
 import Spinner from "./components/Spinner/index";
 import withAuth from "./hoc/withAuth";
@@ -21,7 +11,9 @@ const Reclamos = lazy(() => import("./containers/Reclamos/Reclamos"));
 const Reclamo = lazy(() => import("./containers/Reclamos/Reclamo/Reclamo"));
 const Layout = lazy(() => import("./containers/Layout/index"));
 const Client = lazy(() => import("./containers/Client/Client"));
-const ClientSubAccount = lazy(() => import("./containers/Client/ClientSubAccount/ClientSubAccount"));
+const ClientSubAccount = lazy(() =>
+  import("./containers/Client/ClientSubAccount/ClientSubAccount")
+);
 const Cuadrillas = lazy(() => import("./containers/Cuadrillas/Cuadrillas"));
 
 function App() {
@@ -29,13 +21,6 @@ function App() {
 
   return (
     <div>
-      <Route
-        exact
-        path="/"
-        render={() => {
-          return isUserAuthenticated ? <Redirect to="/home" /> : <Redirect to="/" />;
-        }}
-      />
       <Suspense
         fallback={
           <div style={{ position: "absolute", left: "50%", top: "50%" }}>
@@ -43,6 +28,17 @@ function App() {
           </div>
         }
       >
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return isUserAuthenticated ? (
+              <Redirect to="/home" />
+            ) : (
+              <Redirect to="/" />
+            );
+          }}
+        />
         <Switch>
           <Route path="/" exact component={Signin} />
           <Layout>

@@ -10,8 +10,12 @@ import Spinner from "../Spinner/index";
 import Message from "../Message/index";
 
 const AssignTeam = ({ onClose, data, operators, onSave }) => {
-  const [teamDate, setTeamDate] = useState(new Date().toISOString().slice(0, 10));
-  const [priority, setPriority] = useState(data.priority ? data.priority : false);
+  const [teamDate, setTeamDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
+  const [priority, setPriority] = useState(
+    data.priority ? data.priority : false
+  );
   const [team, setTeam] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -25,7 +29,11 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
       setLoading(false);
-    });
+    })
+    .catch((err) => {
+      setError(true)
+      setLoading(false);
+    })
     setTimeout(() => {
       setMessage();
       setError(false);
@@ -55,24 +63,29 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
         <div className={style.container}>
           <div className={style.header}>
             <h3>
-              <span className={style.boldText}>{"Reclamo #" + data.number}</span>
+              <span className={style.boldText}>
+                {"Reclamo #" + data.number}
+              </span>
               <p>{date}</p>
             </h3>
           </div>
           <div className={style.content}>
             <h4>
-              <span className={style.boldText}>Subcuenta:</span> #{data.id_account} - {data.account_name}
+              <span className={style.boldText}>Subcuenta:</span> #
+              {data.id_account} - {data.account_name}
             </h4>
           </div>
           <div className={style.content}>
             <h4>
-              <span className={style.boldText}>Region:</span> {data.region ? data.region : "Sin Region"}
+              <span className={style.boldText}>Region:</span>{" "}
+              {data.region ? data.region : "Sin Region"}
             </h4>
           </div>
           {data.task_description && (
             <div className={style.content}>
               <h4>
-                <span className={style.boldText}>Descripcion:</span> {data.task_description}
+                <span className={style.boldText}>Descripcion:</span>{" "}
+                {data.task_description}
               </h4>
             </div>
           )}
@@ -85,6 +98,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
             </div>
           )}
           <form
+            data-testid="form"
             onSubmit={(e) => {
               sendData(e);
             }}
@@ -131,7 +145,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
             </div>
             <div className={style.bottom}>
               <Button variant="dark" type="submit" onClick={() => {}}>
-                <p>{loading ? <Spinner /> : "Guardar"}</p>
+                {loading ? <Spinner /> : <p> "Guardar"</p>}
               </Button>
               <Button
                 variant="outline"
@@ -145,7 +159,9 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
               </Button>
             </div>
             <div className={style.contentCenter}>
-              {message && <Message type={error ? "error" : "info"} message={message} />}
+              {message && (
+                <Message type={error ? "error" : "info"} message={message} />
+              )}
             </div>
           </form>
         </div>
