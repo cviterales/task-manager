@@ -7,6 +7,7 @@ const Checkbox = ({ label, name, onChange, check, disabled }) => {
     <label className={styles.container}>
       {label}
       <input
+        data-testid={name}
         name={name}
         type="checkbox"
         defaultChecked={check}

@@ -14,6 +14,7 @@ const Cuadrillas = () => {
   const [teams, setTeams] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState({
+    amount_task: 0,
     id_team: null,
     id_vehicle: null,
     operators: [],
@@ -30,6 +31,7 @@ const Cuadrillas = () => {
           setTeams(res);
         });
         setSelectedTeam({
+          amount_task: 0,
           id_team: null,
           id_vehicle: null,
           operators: [],
@@ -78,16 +80,13 @@ const Cuadrillas = () => {
   };
 
   const handleEditTeam = async (val) => {
-    setSelectedTeam({
-      id_team: val.id_team,
-      id_vehicle: val.id_vehicle,
-      operators: val.operators,
-    });
+    setSelectedTeam(val);
     setDataHandler(val.id_team);
   };
-
+  
   const handlerCreateTeam = async () => {
     setSelectedTeam({
+      amount_task: 0,
       id_team: null,
       id_vehicle: null,
       operators: [],

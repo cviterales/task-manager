@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 
-//import Notification from "../Notification/Notification";
 import UserProfile from "./UserProfile/UserProfile";
 import Modal from "../Modal";
 import Button from "../Button/index";
