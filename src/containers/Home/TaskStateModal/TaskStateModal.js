@@ -15,7 +15,6 @@ const TaskStateModal = ({ onClose, task }) => {
   const [newState, setNewState] = useState();
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
-console.log(task)
   const onSaveHandler = async () => {
     if (newState) {
       setLoading(true);

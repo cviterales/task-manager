@@ -31,7 +31,6 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
     let state = {
       id_task: selectedTask.id,
       id_account: subAccData.info[0].id_sub_account,
-      id_service: id_service,
       task: selectedTask,
     };
     history.push("/reclamo", state);
@@ -68,7 +67,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
 
       {/* Conexiones y Observaciones */}
       <div className={styles.ctnr_lg}>
-        {location.state.client_sub_account && (
+        {connectSubAcc && (
           <Connections connectSubAcc={connectSubAcc} setShowCoonectModal={setShowCoonectModal} />
         )}
         <Observations subAccData={subAccData} />

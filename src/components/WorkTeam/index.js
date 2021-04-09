@@ -85,7 +85,7 @@ const WorkTeam = ({ selectedTeam, teamData, sendData, onClose, deleteData }) => 
             <div className={style.operator}>
               <span>{value.id}</span>
               <span>{value.name}</span>
-              <button onClick={(e) => deleteOperator(e, value)} style={{ backgroundColor: "transparent" }} disabled={selectedTeam.amount_task > 0 ? true : false} data-testid={"deleteOperartor"+index}>
+              <button onClick={(e) => deleteOperator(e, value)} style={{ backgroundColor: "transparent" }} disabled={selectedTeam.amount_task > 0 ? true : false} data-testid={"deleteOperartor" + index}>
                 <FontAwesomeIcon icon={faTrashAlt} color={selectedTeam.amount_task > 0 ? "gray" : "red"} />
               </button>
             </div>
@@ -130,6 +130,7 @@ const WorkTeam = ({ selectedTeam, teamData, sendData, onClose, deleteData }) => 
                 name="operarios"
                 form="crear"
                 id="operarios"
+                disabled={selectedTeam.amount_task > 0 ? true : false}
                 onChange={(e) => handlerOperators(e)}
               />
             </div>
@@ -144,7 +145,7 @@ const WorkTeam = ({ selectedTeam, teamData, sendData, onClose, deleteData }) => 
                       <p>No tiene operarios seleccionados.</p>
                     </div>
                   )}
-                  {selectedTeam.amount_task > 0 && <p style={{textAlign: "center", color: "red"}}>No puede editar una cuadrilla con tareas asignadas.</p>}
+                  {selectedTeam.amount_task > 0 && <p style={{ textAlign: "center", color: "red" }}>No puede editar una cuadrilla con tareas asignadas.</p>}
                 </ul>
               </div>
             </div>

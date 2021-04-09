@@ -39,9 +39,10 @@ const ClientAccordion = ({ client, history }) => {
     }
   };
 
+
   const toSubAcc = (item) => {
     let state = {
-      client_sub_account: item?.sub_account_id,
+      client_sub_account: item?.sub_account_id ?? client.id_account,
       client_id: client.id_account,
     };
     history.push("/client_sub_account", state);

@@ -20,7 +20,8 @@ const ClientSubAccount = (props) => {
     if (props.location.state.client_sub_account) {
       getSubAccountData(id_service, props.location.state.client_sub_account).then((res) => {
         setSubAccData(res);
-        getSubAccountConnections(res.info[0].radius_login, "", "").then((res) => {
+
+        id_service === 1 && getSubAccountConnections(res.info[0].radius_login, "", "").then((res) => {
           setConnecSubAcc(res);
         });
       });

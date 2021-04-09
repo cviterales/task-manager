@@ -133,7 +133,7 @@ const Header = () => {
       <BrowserView>
         <div ref={ref} className={style.container}>
           <div className={style.container_services}>
-            {user && (
+            {user?.id_service && (
               <DropDown
                 selectedValue={user.id_service}
                 data={services}

@@ -29,6 +29,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   useEffect(() => {
     getTaskTypes().then((res) => setTaskTypes(res));
     getProblems(id_service, "", serviceType, "").then((res) => setTaskProblems(res));
+
   }, [id_service, serviceType]);
 
   const saveHandler = async () => {
@@ -52,9 +53,9 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
         <h3>
           <span className={styles.boldText}>Cliente</span> #{id}
         </h3>
-        <h4>
+        {sid && <h4>
           <span className={styles.boldText}>Subcuenta</span> #{sid}
-        </h4>
+        </h4>}
       </div>
 
       <textarea className={styles.description} placeholder="Descripcion.." onChange={(e) => textHandler(e)}></textarea>
