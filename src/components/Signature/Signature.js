@@ -9,7 +9,6 @@ const Signature = () => {
     signatureRef.current.clear();
   };
   const handleConfirm = () => {
-    //console.log(signatureRef.current.toDataURL().length);
   };
 
   return (

@@ -27,11 +27,11 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
     setSelectedTask(res);
   };
 
+
   const toTask = () => {
     let state = {
       id_task: selectedTask.id,
-      id_account: subAccData.info[0].id_sub_account,
-      task: selectedTask,
+      id_account: subAccData.info[0].id_sub_account.lenght > 0 ? subAccData.info[0].id_sub_account.lenght : subAccData.info[0].id_account,
     };
     history.push("/reclamo", state);
   };

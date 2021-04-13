@@ -35,10 +35,9 @@ const ClientAccordion = ({ client, history }) => {
     }
   };
 
-
   const toSubAcc = (item) => {
     let state = {
-      client_sub_account: item?.sub_account_id ?? client.id_account,
+      client_sub_account: item?.id_sub_account ?? client.id_account,
       client_id: client.id_account,
     };
     history.push("/client_sub_account", state);
@@ -90,7 +89,7 @@ const ClientAccordion = ({ client, history }) => {
                   >
                     <div className={style.client_content_childs}>
                       <div className={style.id} style={{ opacity: item.inactive ? "0.6" : "1" }}>
-                        <p># {item.sub_account_id}</p>
+                        <p># {item.id_sub_account}</p>
                       </div>
                       <div className={style.childs}>
                         <div className={style.content_child_info}>

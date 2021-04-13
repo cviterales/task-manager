@@ -98,7 +98,6 @@ const Reclamo = (props) => {
   useEffect(() => {
     getTask(id_service, id_task).then((res) => {
       const resultTaks = res;
-      console.log(res);
       getSubAccountData(id_service, id_account).then((res) => {
         setTask(resultTaks);
         setSubAccount(res);
