@@ -119,6 +119,7 @@ const WorkTeam = ({ selectedTeam, teamData, sendData, onClose, deleteData }) => 
                 onChange={(e) => {
                   handlerVehicles(e);
                 }}
+                selectedValue={selectedTeam.id_vehicle}
               />
             </div>
             <div className={style.content}>

@@ -16,7 +16,7 @@ const Services = ({ subAccData }) => {
           {subAccData?.service?.map((e, i) => (
             <p key={i}>
               <span className={styles.boldText}>Servicio: </span>
-              {e.service} desde {new Date(e.date_from).toLocaleDateString().toString()}
+              {e.service_name} desde {new Date(e.date_from).toLocaleDateString().toString()}
             </p>
           ))}
         </div>

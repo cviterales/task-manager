@@ -6,7 +6,7 @@ const DropDown = ({ data, form, name, id, onChange, selectedValue = 0, disabled 
   const displayOptions = (data) => {
     return data.map((el, index) => {
       return (
-        <option value={el.id} key={el.name + el.id} disabled={index === 0 ? true : false} selected={selectedValue === index ? true : false}>
+        <option value={el.id} key={el.name + el.id} disabled={index === 0 ? true : false}>
           {el.name ? el.name : "No hay datos"}
         </option>
       );
@@ -23,6 +23,7 @@ const DropDown = ({ data, form, name, id, onChange, selectedValue = 0, disabled 
       id={id}
       onChange={onChange}
       required
+      value={selectedValue}
     >
       {displayOptions(newData)}
     </select>

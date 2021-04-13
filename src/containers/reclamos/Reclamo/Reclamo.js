@@ -22,9 +22,15 @@ import {
 import { faUserCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem";
-import { getTask, getSubAccountData, createIncident, closeTask } from "../../../api/index";
+import {
+  getTask,
+  getSubAccountData,
+  createIncident,
+  closeTask,
+} from "../../../api/index";
 import { useSelector } from "react-redux";
 import { isBrowser } from "react-device-detect";
+import Services from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Services/Services";
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service);
@@ -61,7 +67,12 @@ const Reclamo = (props) => {
     return teams.map((team, index) => {
       return (
         <div key={index}>
-          <img className={style.img} src={`${team.photo}`} alt="" title={team.operator_name} />
+          <img
+            className={style.img}
+            src={`${team.photo}`}
+            alt=""
+            title={team.operator_name}
+          />
         </div>
       );
     });
@@ -87,6 +98,7 @@ const Reclamo = (props) => {
   useEffect(() => {
     getTask(id_service, id_task).then((res) => {
       const resultTaks = res;
+      console.log(res);
       getSubAccountData(id_service, id_account).then((res) => {
         setTask(resultTaks);
         setSubAccount(res);
@@ -94,6 +106,18 @@ const Reclamo = (props) => {
     });
   }, [id_service, id_task, id_account]);
 
+  const renderServices = (services) => {
+    return services.map((service, i) => {
+      return (
+        <li key={i}>
+          <p>
+            {service.service_name} desde{" "}
+            {new Date(service.date_from).toLocaleDateString().toString()}
+          </p>
+        </li>
+      );
+    });
+  };
   let loaded = (
     <div className={style.contentCentered}>
       <Spinner color="#4299e1" size="4rem" />
@@ -107,7 +131,14 @@ const Reclamo = (props) => {
             <h3 style={{ marginRight: "1rem" }}>
               <b>{"Reclamo #" + task.number + " - " + task.created_at}</b>
             </h3>
-            {task.last_state ? <Status description={task.last_state_description} name={task.last_state} /> : ""}
+            {task.last_state ? (
+              <Status
+                description={task.last_state_description}
+                name={task.last_state}
+              />
+            ) : (
+              ""
+            )}
           </div>
           {task.is_active ? (
             <Button onClick={() => setShowShowModal(true)} variant="outline">
@@ -120,12 +151,20 @@ const Reclamo = (props) => {
             <Card>
               <div className={style.card_content_title}>
                 <div className={style.card_content_icon}>
-                  <FontAwesomeIcon icon={faExclamationCircle} size="1x" color="#c30000" />
+                  <FontAwesomeIcon
+                    icon={faExclamationCircle}
+                    size="1x"
+                    color="#c30000"
+                  />
                 </div>
                 <h4 className={style.card_title}>Descripcion</h4>
               </div>
               <div className={style.card_content}>
-                {task.description ? <p> {task.description}</p> : <p>Sin descripcion</p>}
+                {task.description ? (
+                  <p> {task.description}</p>
+                ) : (
+                  <p>Sin descripcion</p>
+                )}
               </div>
             </Card>
           </div>
@@ -146,15 +185,27 @@ const Reclamo = (props) => {
                   ) : (
                     <>
                       <p>
-                        {subAccount?.dslam[0]?.dslam && <span className={style.boldText}>DSLAM: </span>}
-                        {subAccount?.node[0]?.node && <span className={style.boldText}>Nodo: </span>}
-                        <a href={subAccount?.dslam[0]?.nas_ip ?? subAccount?.node[0]?.ip}>
-                          {subAccount?.dslam[0]?.dslam ?? subAccount?.node[0]?.node}
+                        {subAccount?.dslam[0]?.dslam && (
+                          <span className={style.boldText}>DSLAM: </span>
+                        )}
+                        {subAccount?.node[0]?.node && (
+                          <span className={style.boldText}>Nodo: </span>
+                        )}
+                        <a
+                          href={
+                            subAccount?.dslam[0]?.nas_ip ??
+                            subAccount?.node[0]?.ip
+                          }
+                        >
+                          {subAccount?.dslam[0]?.dslam ??
+                            subAccount?.node[0]?.node}
                         </a>
                       </p>
-                      {subAccount?.dslam[0]?.dslam || subAccount?.node[0]?.node ? null : (
+                      {subAccount?.dslam[0]?.dslam ||
+                      subAccount?.node[0]?.node ? null : (
                         <p>
-                          <span className={style.boldText}>DSLAM/Nodo: </span> Sin datos
+                          <span className={style.boldText}>DSLAM/Nodo: </span>{" "}
+                          Sin datos
                         </p>
                       )}
                       <p>
@@ -179,7 +230,7 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Equipamiento</h4>
                 </div>
                 <div className={style.card_content}>
-                  {task?.equipment ? (
+                  {task?.equipment.length > 0 ? (
                     <>
                       <div className={style.info_content}>
                         <p>
@@ -224,17 +275,16 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Servicios</h4>
                 </div>
                 <div className={style.card_content}>
-                  {task.error ? (
+                  {task.error || task.service.length === 0 ? (
                     <div className={style.error_message_content}>
                       <h4 className={style.boldText}>No existen datos.</h4>
                     </div>
                   ) : (
                     <div className={style.wrapper_info_content}>
                       <div className={style.info_content}>
-                        <p>
-                          <span className={style.boldText}>Servicio: </span>
-                          {task.service_type_name} / {task.service_name}
-                        </p>
+                        <ul className={style.list}>
+                          {renderServices(task.service)}
+                        </ul>
                       </div>
                     </div>
                   )}
@@ -250,7 +300,11 @@ const Reclamo = (props) => {
                 <div className={style.wrapper_info_content}>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon icon={faClipboardCheck} size="1x" color="#a91ec1" />
+                      <FontAwesomeIcon
+                        icon={faClipboardCheck}
+                        size="1x"
+                        color="#a91ec1"
+                      />
                     </div>
                     <h4 className={style.card_title}>Incidentes</h4>
                   </div>
@@ -268,7 +322,7 @@ const Reclamo = (props) => {
                   ) : null}
                 </div>
                 <div className={style.card_content}>
-                  {task.incidents[0] ? (
+                  {task.incidents.length > 0 ? (
                     <ul>{renderIncidents(task.incidents)}</ul>
                   ) : (
                     <div className={style.error_message_content}>
@@ -286,9 +340,15 @@ const Reclamo = (props) => {
                 <Card>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon icon={faUserCircle} size="1x" color="#ffca75" />
+                      <FontAwesomeIcon
+                        icon={faUserCircle}
+                        size="1x"
+                        color="#ffca75"
+                      />
                     </div>
-                    <h4 className={style.card_title}>Cuenta # {task.id_account}</h4>
+                    <h4 className={style.card_title}>
+                      Cuenta # {task.id_account}
+                    </h4>
                   </div>
                   <div className={style.card_content}>
                     {task.error ? (
@@ -305,9 +365,15 @@ const Reclamo = (props) => {
                             </p>
                           </div>
                           <div className={style.info_content}>
-                            <FontAwesomeIcon icon={faAddressCard} size="1x" color="#17c3b2" />
+                            <FontAwesomeIcon
+                              icon={faAddressCard}
+                              size="1x"
+                              color="#17c3b2"
+                            />
                             <p>
-                              <span className={style.boldText}>N° Documento:</span>
+                              <span className={style.boldText}>
+                                N° Documento:
+                              </span>
                               {task.doc_number}
                             </p>
                           </div>
@@ -316,21 +382,31 @@ const Reclamo = (props) => {
                           <div>
                             <div className={style.info_content}>
                               <div className={style.card_content_icon}>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" color="#fe6d73" />
+                                <FontAwesomeIcon
+                                  icon={faMapMarkerAlt}
+                                  size="1x"
+                                  color="#fe6d73"
+                                />
                               </div>
                               <p>
-                                <span className={style.boldText}>Ubicación</span>
+                                <span className={style.boldText}>
+                                  Ubicación
+                                </span>
                               </p>
                             </div>
                             <div className={style.info_content}>
                               <p>
-                                <span className={style.boldText}>Domicilio: </span>
+                                <span className={style.boldText}>
+                                  Domicilio:{" "}
+                                </span>
                                 {task.address}
                               </p>
                             </div>
                             <div className={style.info_content}>
                               <p>
-                                <span className={style.boldText}>Localidad: </span>
+                                <span className={style.boldText}>
+                                  Localidad:{" "}
+                                </span>
                                 {task.region_name}
                               </p>
                             </div>
@@ -354,7 +430,11 @@ const Reclamo = (props) => {
                 <Card>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon icon={faHardHat} size="1x" color="#ff791a" />
+                      <FontAwesomeIcon
+                        icon={faHardHat}
+                        size="1x"
+                        color="#ff791a"
+                      />
                     </div>
                     <h4 className={style.card_title}>Cuadrilla</h4>
                   </div>
@@ -365,7 +445,9 @@ const Reclamo = (props) => {
                           <div className={style.team_content}>
                             <p> #{task.team[0].id_team}</p>
                             <p> {task.team[0].vehicle_name}</p>
-                            <div className={style.img_content}>{renderTeam(task.team)}</div>
+                            <div className={style.img_content}>
+                              {renderTeam(task.team)}
+                            </div>
                           </div>
                         </Card>
                       </div>
@@ -381,7 +463,10 @@ const Reclamo = (props) => {
           </div>
         </div>
         {showIssueModal && (
-          <Modal title="Nuevo Incidente" onClose={() => setShowIssueModal(false)}>
+          <Modal
+            title="Nuevo Incidente"
+            onClose={() => setShowIssueModal(false)}
+          >
             <NewIssueModal
               onClose={() => setShowIssueModal(false)}
               onSave={(description) => incidentHandler(description)}
@@ -390,7 +475,10 @@ const Reclamo = (props) => {
         )}
         {showCloseModal && (
           <Modal title="Cerrar reclamo" onClose={() => setShowShowModal(false)}>
-            <CloseTaskModal onClose={() => setShowShowModal(false)} onSave={closeTaskHandler} />
+            <CloseTaskModal
+              onClose={() => setShowShowModal(false)}
+              onSave={closeTaskHandler}
+            />
           </Modal>
         )}
       </div>

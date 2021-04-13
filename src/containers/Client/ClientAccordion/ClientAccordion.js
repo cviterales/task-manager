@@ -20,12 +20,8 @@ import Button from "../../../components/Button";
 
 const ClientAccordion = ({ client, history }) => {
   const [showAccount, setShowAccount] = useState(false);
-  const [subAccounts, setSubAccounts] = useState();
+  const [subAccounts, setSubAccounts] = useState(false);
   const id_service = useSelector((state) => state.auth.user.id_service);
-
-  useEffect(() => {
-    setShowAccount(false);
-  }, [client]);
 
   const showSubAccountHandler = async (id_service, client) => {
     if (id_service === 1) {
