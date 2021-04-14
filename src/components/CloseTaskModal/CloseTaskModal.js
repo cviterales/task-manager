@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import PropTypes from "prop-types";
 
@@ -28,28 +28,33 @@ import { isMobile } from "react-device-detect";
 ]; */
 
 const CloseTask = ({ onClose, onSave }) => {
-  const [response, setResponse] = useState();
   //const [selectedMaterials, setSelectedMaterials] = useState([]);
   //const [selectedMaterial, setSelectedMaterial] = useState(1);
   //const [selectedQuantity, setSelectedQuantity] = useState("");
   const [description, setDescription] = useState("");
-
-  const onSaveHandler = () => {
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState();
+  let time;
+  const onSaveHandler = async () => {
     if (description.length < 4) {
-      setResponse({ error: true, message: "Caracteres insuficientes en descripcion" });
-      setTimeout(() => {
-        setResponse();
-      }, 6000);
+      setError(true);
+      setMessage("Caracteres insuficientes");
     } else {
-      onSave(description).then((res) => {
-        setResponse(res);
-        setTimeout(() => {
-          setResponse();
-          onClose();
-        }, 6000);
-      });
+      const res = await onSave(description);
+      res.error ? setError(true) : setError(false);
+      setMessage(res.message);
     }
+    time = setTimeout(() => {
+      setMessage();
+      setError(false);
+    }, 3000);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(time)
+    }
+  }, [])
 
   /*   const materialHandler = () => {
     if (selectedQuantity.length > 0) {
@@ -149,7 +154,9 @@ const CloseTask = ({ onClose, onSave }) => {
           <p>Cancelar</p>
         </Button>
       </div>
-      {response && <Message type={response.error ? "error" : "success"} message={response.message} />}
+      {message && (
+        <Message type={error ? "error" : "success"} message={message} />
+      )}
     </div>
   );
 };

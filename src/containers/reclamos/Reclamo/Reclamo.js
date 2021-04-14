@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import style from "./reclamo.module.scss";
 
 import Card from "../../../components/Card/index";
@@ -30,7 +30,6 @@ import {
 } from "../../../api/index";
 import { useSelector } from "react-redux";
 import { isBrowser } from "react-device-detect";
-import Services from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Services/Services";
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service);
@@ -78,22 +77,13 @@ const Reclamo = (props) => {
     });
   };
 
-  const incidentHandler = (description) => {
-    return createIncident(id_task, description, user_id).then((res) => {
-      getTask(id_service, id_task).then((res) => {
-        setTask(res);
-      });
-      return res;
-    });
-  };
+  const incidentHandler = useCallback((description) => {
+    return createIncident(id_task, description, user_id)
+  }, [id_task, user_id]);
 
-  const closeTaskHandler = (description) => {
-    getTask(id_service, id_task).then((res) => {
-      const resultTaks = res;
-      setTask(resultTaks);
-    });
+  const closeTaskHandler = useCallback((description) => {
     return closeTask(id_task, user_id, task.id_calendar, description);
-  };
+  }, [id_task, user_id, task]);
 
   useEffect(() => {
     getTask(id_service, id_task).then((res) => {
@@ -103,7 +93,7 @@ const Reclamo = (props) => {
         setSubAccount(res);
       });
     });
-  }, [id_service, id_task, id_account]);
+  }, [id_service, id_task, id_account, closeTaskHandler, incidentHandler]);
 
   const renderServices = (services) => {
     return services.map((service, i) => {
@@ -209,11 +199,11 @@ const Reclamo = (props) => {
                       )}
                       <p>
                         <span className={style.boldText}>Login: </span>
-                        {subAccount.info[0].radius_login}
+                        {subAccount.info[0]?.radius_login}
                       </p>
                       <p>
                         <span className={style.boldText}>Password: </span>
-                        {subAccount.info[0].radius_passwd}
+                        {subAccount.info[0]?.radius_passwd}
                       </p>
                     </>
                   )}

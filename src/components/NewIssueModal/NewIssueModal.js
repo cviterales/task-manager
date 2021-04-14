@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
 import Button from "../Button/index";
@@ -8,7 +8,7 @@ const NewIssueModal = ({ onClose, onSave }) => {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [message, setMessage] = useState();
-
+  let time;
   const onSaveHandler = async (description) => {
     if (description.length < 4) {
       setError(true);
@@ -17,11 +17,17 @@ const NewIssueModal = ({ onClose, onSave }) => {
       const res = await onSave(description);
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
-      setTimeout(() => {
-        setMessage();
-      }, 5000);
     }
+    time = setTimeout(() => {
+      setMessage();
+    }, 3000);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(time)
+    }
+  }, [])
 
   return (
     <div className={styles.modal_wrapper}>

@@ -84,7 +84,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
           <ConnectionsModal
             onClose={() => setShowCoonectModal(false)}
             connectSubAcc={connectSubAcc}
-            login={subAccData.info[0].radius_login}
+            login={subAccData?.info[0]?.radius_login}
           />
         </Modal>
       )}
