@@ -26,8 +26,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
     const res = await getTask(id_service, id);
     setSelectedTask(res);
   };
-
-
+  
   const toTask = () => {
     let state = {
       id_task: selectedTask.id,

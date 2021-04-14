@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss";
 import PropTypes from "prop-types";
 
@@ -11,6 +11,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Card from "../../../../components/Card"; */
 import Signature from "../Signature/Signature";
 import { isMobile } from "react-device-detect";
+import Spinner from "../Spinner";
 
 /* const teamMaterials = [
   {
@@ -34,28 +35,20 @@ const CloseTask = ({ onClose, onSave }) => {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [message, setMessage] = useState();
-  let time;
+  const [loading, setLoading] = useState(false);
+
   const onSaveHandler = async () => {
     if (description.length < 4) {
       setError(true);
       setMessage("Caracteres insuficientes");
     } else {
+      setLoading(true);
       const res = await onSave(description);
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
+      setLoading(false);
     }
-    time = setTimeout(() => {
-      setMessage();
-      setError(false);
-    }, 3000);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(time)
-    }
-  }, [])
-
   /*   const materialHandler = () => {
     if (selectedQuantity.length > 0) {
       const newOb = {
@@ -148,7 +141,7 @@ const CloseTask = ({ onClose, onSave }) => {
       </div>
       <div className={styles.bottom}>
         <Button type="button" variant="blue" onClick={() => onSaveHandler()}>
-          <p>Guardar</p>
+          {loading ? <Spinner /> : <p>Guardar</p>}
         </Button>
         <Button type="button" variant="outline" onClick={onClose}>
           <p>Cancelar</p>

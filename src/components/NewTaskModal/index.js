@@ -6,18 +6,19 @@ import Button from "../Button";
 import Message from "../Message/index";
 import { useSelector } from "react-redux";
 import { getProblems, getTaskTypes } from "../../api/index";
+import Spinner from "../Spinner";
 
 const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   const id_service = useSelector((state) => state.auth.user.id_service);
   let timeout;
-
   const [taskType, setTaskType] = useState(0);
-  const [idProblem, setIdProblem] = useState(1);
+  const [idProblem, setIdProblem] = useState(0);
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [taskProblems, setTaskProblems] = useState([]);
   const [taskTypes, setTaskTypes] = useState([]);
   const [message, setMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const textHandler = (e) => {
     if (timeout) clearTimeout(timeout);
@@ -25,7 +26,6 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       setDescription(e.target.value);
     }, 500);
   };
-
   useEffect(() => {
     getTaskTypes().then((res) => setTaskTypes(res));
     getProblems(id_service, "", serviceType, "").then((res) =>
@@ -34,6 +34,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   }, [id_service, serviceType]);
 
   const saveHandler = async () => {
+    setLoading(true)
     try {
       const res = await onSave(
         id_service,
@@ -44,14 +45,22 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       );
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
+      setLoading(false)
     } catch (err) {
       setMessage(err.message);
       setError(true);
     }
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       setMessage();
-    }, 6000);
+      setLoading(false)
+    }, 5000);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [timeout])
 
   return (
     <div className={styles.modal_wrapper}>
@@ -95,7 +104,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       </div>
       <div className={styles.bottom}>
         <Button type="button" variant="blue" onClick={() => saveHandler()}>
-          <p>Guardar</p>
+          {loading ? <Spinner /> : <p>Guardar</p>}
         </Button>
         <Button type="button" variant="outline" onClick={onClose}>
           <p>Cancelar</p>

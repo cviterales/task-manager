@@ -16,7 +16,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
   const [priority, setPriority] = useState(
     data.priority ? data.priority : false
   );
-  const [team, setTeam] = useState(false);
+  const [team, setTeam] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
@@ -110,7 +110,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
                 </h4>
               </label>
               <DropDown
-                selectedValue={data.id_team}
+                selectedValue={team}
                 data={arrOperators}
                 name="cuadrilla"
                 form="asignar"
@@ -145,7 +145,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
             </div>
             <div className={style.bottom}>
               <Button variant="dark" type="submit" onClick={() => {}}>
-                {loading ? <Spinner /> : <p> "Guardar"</p>}
+                {loading ? <Spinner /> : <p>Guardar</p>}
               </Button>
               <Button
                 variant="outline"
@@ -160,7 +160,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
             </div>
             <div className={style.contentCenter}>
               {message && (
-                <Message type={error ? "error" : "info"} message={message} />
+                <Message type={error ? "error" : "success"} message={message} />
               )}
             </div>
           </form>

@@ -1,33 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.scss";
 
 import Button from "../Button/index";
 import Message from "../Message/index";
+import Spinner from "../Spinner";
 
 const NewIssueModal = ({ onClose, onSave }) => {
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState();
-  let time;
+
   const onSaveHandler = async (description) => {
     if (description.length < 4) {
       setError(true);
       setMessage("Caracteres insuficientes");
     } else {
+      setLoading(true);
       const res = await onSave(description);
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
+      setLoading(false);
     }
-    time = setTimeout(() => {
-      setMessage();
-    }, 3000);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(time)
-    }
-  }, [])
 
   return (
     <div className={styles.modal_wrapper}>
@@ -38,8 +33,12 @@ const NewIssueModal = ({ onClose, onSave }) => {
       ></textarea>
       <div className={styles.bottom}>
         <div style={{ marginInline: "1rem" }}>
-          <Button type="button" variant="blue" onClick={() => onSaveHandler(description)}>
-            <p> Guardar</p>
+          <Button
+            type="button"
+            variant="blue"
+            onClick={() => onSaveHandler(description)}
+          >
+            {loading ? <Spinner /> : <p>Guardar</p>}
           </Button>
         </div>
         <div style={{ marginInline: "1rem" }}>
@@ -48,7 +47,9 @@ const NewIssueModal = ({ onClose, onSave }) => {
           </Button>
         </div>
       </div>
-      {message && <Message type={error ? "error" : "success"} message={message} />}
+      {message && (
+        <Message type={error ? "error" : "success"} message={message} />
+      )}
     </div>
   );
 };

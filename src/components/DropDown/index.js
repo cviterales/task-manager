@@ -1,4 +1,4 @@
-import style from "./style.module.css";
+import style from "./style.module.scss";
 import PropTypes from "prop-types";
 
 const DropDown = ({ data, form, name, id, onChange, selectedValue = 0, disabled = false }) => {
@@ -34,7 +34,7 @@ DropDown.propTypes = {
   form: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
-  selectedValue: PropTypes.number,
+  //selectedValue: PropTypes.isRequired,
   data: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired
