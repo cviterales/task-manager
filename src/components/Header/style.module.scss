@@ -52,10 +52,16 @@
   }
 }
 
-.img_selector_content {
+.selector_content {
   text-align: center;
   margin: 1rem 0rem;
-  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.selector_content_img {
+  position: relative;
 }
 
 .form_content {
@@ -82,7 +88,9 @@
 .form_content_button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  width: 50%;
+  margin: 0 auto;
 }
 
 input[type="file"] {
@@ -109,8 +117,8 @@ input[type="file"] {
   min-height: 20px;
   font-size: 1.4rem;
   position: absolute;
-  top: 200px;
-  right: 70px;
+  top: 100px;
+  right: 0px;
   cursor: pointer;
   &:hover {
     background-color: #bdbdbd;
