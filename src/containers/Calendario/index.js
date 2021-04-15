@@ -59,6 +59,8 @@ const Calendario = () => {
         result.push(week);
       }
     }
+    const currenWeek = result.findIndex((el) => el.find(e => e.day === moment().format("DD/MM/YYYY")))
+    if (currenWeek >= 0) setWeek(currenWeek)
     return result;
   };
 
