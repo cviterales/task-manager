@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import style from "./style.module.scss";
 
 import Card from "../../../components/Card/index";
@@ -22,17 +22,28 @@ const ClientAccordion = ({ client, history }) => {
   const [showAccount, setShowAccount] = useState(false);
   const [subAccounts, setSubAccounts] = useState(false);
   const id_service = useSelector((state) => state.auth.user.id_service);
+  const isMounted = useRef(true)
 
   const showSubAccountHandler = async (id_service, client) => {
     if (id_service === 1) {
       const res = await getClientSubAccounts(id_service, client.id_account)
-      setShowAccount((showAccount) => !showAccount);
-      setSubAccounts(res);
+      if (isMounted.current) {
+        setShowAccount((showAccount) => !showAccount);
+        setSubAccounts(res);
+      }
     } else {
-      setShowAccount((showAccount) => !showAccount);
-      setSubAccounts();
+      if (isMounted.current) {
+        setShowAccount((showAccount) => !showAccount);
+        setSubAccounts();
+      }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   const toSubAcc = (item) => {
     let state = {

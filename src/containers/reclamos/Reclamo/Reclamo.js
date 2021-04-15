@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import style from "./reclamo.module.scss";
 
 import Card from "../../../components/Card/index";
@@ -40,6 +40,7 @@ const Reclamo = (props) => {
   const [subAccount, setSubAccount] = useState();
   const [showIssueModal, setShowIssueModal] = useState(false);
   const [showCloseModal, setShowShowModal] = useState(false);
+  const isMounted = useRef(true)
 
   const renderPhones = (phones) => {
     return phones.map((phone, index) => (
@@ -86,13 +87,22 @@ const Reclamo = (props) => {
   }, [id_task, user_id, task]);
 
   useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  useEffect(() => {
     getTask(id_service, id_task).then((res) => {
       const resultTaks = res;
       getSubAccountData(id_service, id_account).then((res) => {
-        setTask(resultTaks);
-        setSubAccount(res);
+        if (isMounted.current) {
+          setTask(resultTaks);
+          setSubAccount(res);
+        }
       });
     });
+
   }, [id_service, id_task, id_account, closeTaskHandler, incidentHandler]);
 
   const renderServices = (services) => {
@@ -191,7 +201,7 @@ const Reclamo = (props) => {
                         </a>
                       </p>
                       {subAccount?.dslam[0]?.dslam ||
-                      subAccount?.node[0]?.node ? null : (
+                        subAccount?.node[0]?.node ? null : (
                         <p>
                           <span className={style.boldText}>DSLAM/Nodo: </span>{" "}
                           Sin datos

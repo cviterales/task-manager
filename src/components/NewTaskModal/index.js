@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./style.module.scss";
 
 import DropDown from "../DropDown/index";
@@ -19,6 +19,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   const [taskTypes, setTaskTypes] = useState([]);
   const [message, setMessage] = useState();
   const [loading, setLoading] = useState(false);
+  const isMounted = useRef(true)
 
   const textHandler = (e) => {
     if (timeout) clearTimeout(timeout);
@@ -28,10 +29,17 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
   };
   useEffect(() => {
     getTaskTypes().then((res) => setTaskTypes(res));
-    getProblems(id_service, "", serviceType, "").then((res) =>
-      setTaskProblems(res)
+    getProblems(id_service, "", serviceType, "").then((res) => {
+      if (isMounted.current) setTaskProblems(res)
+    }
     );
   }, [id_service, serviceType]);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   const saveHandler = async () => {
     setLoading(true)
@@ -43,6 +51,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
         idProblem,
         description
       );
+      console.log(res)
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
       setLoading(false)

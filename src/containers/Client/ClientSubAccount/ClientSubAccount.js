@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
 import Modal from "../../../components/Modal";
@@ -15,6 +15,11 @@ const ClientSubAccount = (props) => {
   const [subAccData, setSubAccData] = useState([]);
   const [connectSubAcc, setConnecSubAcc] = useState();
   const [subAccTasks, setSubAccTasks] = useState([]);
+
+
+  const newTaskHandler = useCallback(((id_service, sid, taskType, idProblem, description) => {
+    return createTask(id_service, sid, taskType, idProblem, description)
+  }), [])
 
   useEffect(() => {
     if (props.location.state.client_sub_account) {
@@ -34,10 +39,11 @@ const ClientSubAccount = (props) => {
       getSubAccountData(id_service, props.location.state.client_id).then((res) => {
         setSubAccData(res);
       });
-
       //props.history.goBack();
     }
-  }, [id_service, props.location.state.client_sub_account, props.location.state.client_id]);
+    console.log('loaded')
+
+  }, [id_service, props.location.state.client_sub_account, props.location.state.client_id, showTaskModal]);
 
   return (
     <>
@@ -62,9 +68,7 @@ const ClientSubAccount = (props) => {
             sid={props.location.state.client_sub_account}
             serviceType={subAccData?.service[0]?.id_service_type ?? ''}
             onClose={() => setShowTaskModal(false)}
-            onSave={(id_service, sid, taskType, idProblem, description) =>
-              createTask(id_service, sid, taskType, idProblem, description)
-            }
+            onSave={newTaskHandler}
           />
         </Modal>
       )}
