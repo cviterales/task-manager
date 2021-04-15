@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./style.module.scss";
 
 import Card from "../../../components/Card/index";
@@ -25,10 +25,9 @@ const ClientAccordion = ({ client, history }) => {
 
   const showSubAccountHandler = async (id_service, client) => {
     if (id_service === 1) {
-      getClientSubAccounts(id_service, client.id_account).then((res) => {
-        setShowAccount((showAccount) => !showAccount);
-        setSubAccounts(res);
-      });
+      const res = await getClientSubAccounts(id_service, client.id_account)
+      setShowAccount((showAccount) => !showAccount);
+      setSubAccounts(res);
     } else {
       setShowAccount((showAccount) => !showAccount);
       setSubAccounts();
