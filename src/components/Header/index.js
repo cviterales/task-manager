@@ -162,7 +162,11 @@ const Header = () => {
                 menuHablder();
               }}
             >
-              <img className={style.img} src={user?.photo ? user.photo : "/images/notfound.png"} alt="" />
+              <img
+                className={style.img}
+                src={user?.photo ? user.photo : "/images/notfound.png"}
+                alt=""
+              />
             </button>
           </div>
           {isVisible && <UserProfile onEdit={userProfileHandler} />}
@@ -175,8 +179,8 @@ const Header = () => {
                     <p>Nombre: {user.first_name + " " + user.last_name}</p>
                     <p>Nombre de usuario: {user.username}</p>
                   </div>
-                  <div className={style.img_selector_content}>
-                    <div>
+                  <div className={style.selector_content}>
+                    <div className={style.selector_content_img}>
                       <img
                         style={{
                           height: "9rem",
@@ -184,26 +188,30 @@ const Header = () => {
                           objectFit: "cover",
                           borderRadius: "50%",
                           border: "2px solid #2c5282",
+                          position: "relative"
                         }}
-                        src={image ? URL.createObjectURL(image[0]) : user?.photo ? user.photo : "/images/notfound.png"}
+                        src={
+                          image
+                            ? URL.createObjectURL(image[0])
+                            : user?.photo
+                            ? user.photo
+                            : "/images/notfound.png"
+                        }
                         alt=""
                       />
+                    <label htmlFor="file_upload" className={style.option}>
+                      <FontAwesomeIcon icon={faCamera} />
+                    </label>
                     </div>
-                    <div>
-                      <label htmlFor="file_upload" className={style.option}>
-                        <FontAwesomeIcon icon={faCamera} />
-                      </label>
-
-                      <input
-                        id="file_upload"
-                        style={{ display: "none" }}
-                        type="file"
-                        name="imagen"
-                        onChange={(e) => {
-                          uploadImageHandler(e);
-                        }}
-                      />
-                    </div>
+                    <input
+                      id="file_upload"
+                      style={{ display: "none" }}
+                      type="file"
+                      name="imagen"
+                      onChange={(e) => {
+                        uploadImageHandler(e);
+                      }}
+                    />
                   </div>
                 </div>
                 <div className={style.form_content}>
@@ -224,7 +232,9 @@ const Header = () => {
                     <p>{disabled ? "Editar" : "Confirmar"}</p>
                   </Button>
                 </div>
-                {errorValidation && <p style={{ color: "red" }}>El email es incorrecto!.</p>}
+                {errorValidation && (
+                  <p style={{ color: "red" }}>El email es incorrecto!.</p>
+                )}
                 <div className={style.form_content_button}>
                   <Button variant="blue" type="submit" onClick={() => {}}>
                     {loading ? <Spinner size={"1.2rem"} /> : "Guardar"}
@@ -238,7 +248,11 @@ const Header = () => {
                   >
                     <p>Cancelar</p>
                   </Button>
-                  {error && <p style={{ color: "red" }}>Ocurrio un error, vuelva intentar!.</p>}
+                  {error && (
+                    <p style={{ color: "red" }}>
+                      Ocurrio un error, vuelva intentar!.
+                    </p>
+                  )}
                 </div>
               </form>
             </Modal>
