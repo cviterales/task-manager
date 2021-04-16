@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import style from "./style.module.scss";
 
 import { useSelector } from "react-redux";
@@ -19,22 +19,13 @@ const Calendario = () => {
   const [week, setWeek] = useState(0);
   const [teams, setTeams] = useState();
   const [calendar, setCalendar] = useState();
+  const [dayNow, setDayNow] = useState(false);
 
-  useEffect(() => {
-    getTeams(id_service).then((res) => setTeams(res));
-    const dateSelected = year + "-" + month;
-    getCalendar(id_service, dateSelected).then((res) => {
-      const tasks = res;
-      const calendar = getDaysArray(tasks, year, month);
-      setCalendar(calendar);
-    });
-  }, [year, month, socket_refresh, id_service]);
-
-  const getDaysArray = (tasks, year, month) => {
+  const getDaysArray = useCallback((tasks, year, month) => {
     let monthIndex = month - 1; // 0..11 instead of 1..12
     let date = new Date(year, monthIndex, 1);
     let result = [];
-    let week = [];
+    let weekData = [];
     let dayData = {};
     let daysOfMonth = moment(`${year}-${month}`).daysInMonth();
     while (date.getMonth() === monthIndex) {
@@ -49,30 +40,45 @@ const Calendario = () => {
         isMonth: true,
         tasks: tasksOfDay,
       };
-      if (week.length <= 6) {
-        week.push(dayData);
+      if (weekData.length <= 6) {
+        weekData.push(dayData);
       } else {
-        result.push(week);
-        week = [];
-        week.push(dayData);
+        result.push(weekData);
+        weekData = [];
+        weekData.push(dayData);
       }
       date.setDate(date.getDate() + 1);
       if (date.getDate() === daysOfMonth) {
-        result.push(week);
+        result.push(weekData);
       }
     }
     const currenWeek = result.findIndex((el) =>
       el.find((e) => e.day === moment().format("DD/MM/YYYY"))
     );
-    if (currenWeek >= 0) setWeek(currenWeek);
+    if (currenWeek >= 0 && !dayNow) {
+      setWeek(currenWeek)
+      setDayNow(true)
+    }
     return result;
-  };
+  }, [dayNow]);
+
+  useEffect(() => {
+    getTeams(id_service).then((res) => setTeams(res));
+    const dateSelected = year + "-" + month;
+    getCalendar(id_service, dateSelected).then((res) => {
+      const tasks = res;
+      const calendar = getDaysArray(tasks, year, month);
+      setCalendar(calendar);
+    });
+  }, [year, month, socket_refresh, id_service, getDaysArray]);
+
+
 
   const updateCalendar = (updateDay, updateTask, updateTeam) => {
     let day = updateDay.day.substring(0, 2);
-    let month = updateDay.day.substring(3,5)
-    let year = updateDay.day.substring(6)
-    const date = moment(year+"-"+month+"-"+day).format("YYYY-MM-DD");
+    let month = updateDay.day.substring(3, 5);
+    let year = updateDay.day.substring(6);
+    const date = moment(year + "-" + month + "-" + day).format("YYYY-MM-DD");
     const newTeam = updateTeam ? updateTeam.id_team : updateTask.id_team;
     updateCalendarTask(
       updateTask.id_calendar,
@@ -80,15 +86,14 @@ const Calendario = () => {
       date,
       newTeam,
       updateTask.priority
-    )
-      .then(() => {
-        const dateSelected = year + "-" + month;
-        getCalendar(id_service, dateSelected).then((res) => {
-          const tasks = res;
-          const calendar = getDaysArray(tasks, year, month);
-          setCalendar(calendar);
-        });
-      })
+    ).then(() => {
+      const dateSelected = year + "-" + month;
+      getCalendar(id_service, dateSelected).then((res) => {
+        const tasks = res;
+        const calendar = getDaysArray(tasks, year, month);
+        setCalendar(calendar);
+      });
+    });
   };
 
   const dateHandler = (e) => {
