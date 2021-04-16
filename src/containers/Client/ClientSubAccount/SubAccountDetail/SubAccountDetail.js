@@ -34,7 +34,6 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
     };
     history.push("/reclamo", state);
   };
-
   return (
     <div className={styles.client_sub}>
       <div className={styles.header}>
@@ -66,7 +65,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
 
       {/* Conexiones y Observaciones */}
       <div className={styles.ctnr_lg}>
-        {connectSubAcc && (
+        {id_service === 1 && (
           <Connections connectSubAcc={connectSubAcc} setShowCoonectModal={setShowCoonectModal} />
         )}
         <Observations subAccData={subAccData} />

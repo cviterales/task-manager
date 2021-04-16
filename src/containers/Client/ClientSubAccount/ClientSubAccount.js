@@ -41,8 +41,6 @@ const ClientSubAccount = (props) => {
       });
       //props.history.goBack();
     }
-    console.log('loaded')
-
   }, [id_service, props.location.state.client_sub_account, props.location.state.client_id, showTaskModal]);
 
   return (
