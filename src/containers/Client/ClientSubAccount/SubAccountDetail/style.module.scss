@@ -126,8 +126,10 @@
   align-items: center;
   margin-top: 1rem;
   margin-left: 1rem;
+  margin-right: 1rem;
   @include mq("phone", "max") {
     margin-left: 0.25rem;
     margin-top: 0.25rem;
+    margin-right: 0.25rem;
   }
 }

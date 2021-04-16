@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import style from "./style.module.scss";
 
 import { useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import Calendar from "../../components/Calendar/index";
 import HeaderCalendar from "../../components/Calendar/HeaderCalendar/HeaderCalendar";
 
 import moment from "moment";
-import { getCalendar, getTeams } from "../../api/index";
+import { getCalendar, getTeams, updateCalendarTask } from "../../api/index";
 
 const Calendario = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
@@ -19,6 +19,48 @@ const Calendario = () => {
   const [week, setWeek] = useState(0);
   const [teams, setTeams] = useState();
   const [calendar, setCalendar] = useState();
+  const [dayNow, setDayNow] = useState(false);
+
+  const getDaysArray = useCallback((tasks, year, month) => {
+    let monthIndex = month - 1; // 0..11 instead of 1..12
+    let date = new Date(year, monthIndex, 1);
+    let result = [];
+    let weekData = [];
+    let dayData = {};
+    let daysOfMonth = moment(`${year}-${month}`).daysInMonth();
+    while (date.getMonth() === monthIndex) {
+      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format(
+        "DD/MM/YYYY"
+      );
+      let tasksOfDay = tasks.filter((task) => {
+        return task.date === dayDate;
+      });
+      dayData = {
+        day: dayDate,
+        isMonth: true,
+        tasks: tasksOfDay,
+      };
+      if (weekData.length <= 6) {
+        weekData.push(dayData);
+      } else {
+        result.push(weekData);
+        weekData = [];
+        weekData.push(dayData);
+      }
+      date.setDate(date.getDate() + 1);
+      if (date.getDate() === daysOfMonth) {
+        result.push(weekData);
+      }
+    }
+    const currenWeek = result.findIndex((el) =>
+      el.find((e) => e.day === moment().format("DD/MM/YYYY"))
+    );
+    if (currenWeek >= 0 && !dayNow) {
+      setWeek(currenWeek)
+      setDayNow(true)
+    }
+    return result;
+  }, [dayNow]);
 
   useEffect(() => {
     getTeams(id_service).then((res) => setTeams(res));
@@ -28,40 +70,30 @@ const Calendario = () => {
       const calendar = getDaysArray(tasks, year, month);
       setCalendar(calendar);
     });
-  }, [year, month, socket_refresh, id_service]);
+  }, [year, month, socket_refresh, id_service, getDaysArray]);
 
-  const getDaysArray = (tasks, year, month) => {
-    let monthIndex = month - 1; // 0..11 instead of 1..12
-    let date = new Date(year, monthIndex, 1);
-    let result = [];
-    let week = [];
-    let dayData = {};
-    let daysOfMonth = moment(`${year}-${month}`).daysInMonth();
-    while (date.getMonth() === monthIndex) {
-      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format("DD/MM/YYYY");
-      let tasksOfDay = tasks.filter((task) => {
-        return task.date === dayDate;
+
+
+  const updateCalendar = (updateDay, updateTask, updateTeam) => {
+    let day = updateDay.day.substring(0, 2);
+    let month = updateDay.day.substring(3, 5);
+    let year = updateDay.day.substring(6);
+    const date = moment(year + "-" + month + "-" + day).format("YYYY-MM-DD");
+    const newTeam = updateTeam ? updateTeam.id_team : updateTask.id_team;
+    updateCalendarTask(
+      updateTask.id_calendar,
+      updateTask.id_task,
+      date,
+      newTeam,
+      updateTask.priority
+    ).then(() => {
+      const dateSelected = year + "-" + month;
+      getCalendar(id_service, dateSelected).then((res) => {
+        const tasks = res;
+        const calendar = getDaysArray(tasks, year, month);
+        setCalendar(calendar);
       });
-      dayData = {
-        day: dayDate,
-        isMonth: true,
-        tasks: tasksOfDay,
-      };
-      if (week.length <= 6) {
-        week.push(dayData);
-      } else {
-        result.push(week);
-        week = [];
-        week.push(dayData);
-      }
-      date.setDate(date.getDate() + 1);
-      if (date.getDate() === daysOfMonth) {
-        result.push(week);
-      }
-    }
-    const currenWeek = result.findIndex((el) => el.find(e => e.day === moment().format("DD/MM/YYYY")))
-    if (currenWeek >= 0) setWeek(currenWeek)
-    return result;
+    });
   };
 
   const dateHandler = (e) => {
@@ -99,8 +131,21 @@ const Calendario = () => {
 
   return (
     <div className={style.wrapper}>
-      <HeaderCalendar month={month} year={year} dateHandler={dateHandler} prevWeek={prevWeek} nextWeek={nextWeek} />
-      {teams && calendar ? <Calendar calendar={calendar} teams={teams} week={week} /> : null}
+      <HeaderCalendar
+        month={month}
+        year={year}
+        dateHandler={dateHandler}
+        prevWeek={prevWeek}
+        nextWeek={nextWeek}
+      />
+      {teams && calendar ? (
+        <Calendar
+          calendar={calendar}
+          teams={teams}
+          week={week}
+          updateCalendar={updateCalendar}
+        />
+      ) : null}
     </div>
   );
 };
