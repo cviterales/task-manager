@@ -11,9 +11,10 @@ import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
 import AssignTask from "./AssignTask/index";
 import TaskStateModal from "../../containers/Home/TaskStateModal/TaskStateModal";
-const Calendar = ({ calendar, week, teams }) => {
+const Calendar = ({ calendar, week, teams, updateCalendar }) => {
   const [task, setTask] = useState({});
   const [show, setShow] = useState(false);
+  const [drag, setDrag] = useState();
 
   const editHandler = (task, type) => {
     setShow(true);
@@ -35,25 +36,13 @@ const Calendar = ({ calendar, week, teams }) => {
     renderContent = <TaskStateModal task={task} onClose={closeModalHandler} />;
   }
 
-  /*   const renderCalendar = () => {
-    // var Week is index weeks on month selected
-    return calendar[week].map((day, index) => {
-      return (
-        <div key={index} style={column}>
-          {teams.map((team, i) => {
-            return (
-              <CalendarRow
-                key={i}
-                team={team}
-                day={day}
-                editHandler={editHandler}
-              />
-            );
-          })}
-        </div>
-      );
-    });
-  }; */
+  const handleDrag = (task) => {
+    setDrag(task);
+  };
+
+  const handleDrop = (day, team) => {
+    updateCalendar(day, drag, team);
+  };
 
   const renderCalendar = (teams, calendar) => {
     return teams.map((team, index) => {
@@ -63,7 +52,16 @@ const Calendar = ({ calendar, week, teams }) => {
             <p>Team {team.id_team}</p>
           </div>
           {calendar[week].map((day, index) => {
-            return <CalendarRow key={index} team={team} day={day} editHandler={editHandler} />;
+            return (
+              <CalendarRow
+                key={index}
+                team={team}
+                day={day}
+                editHandler={editHandler}
+                handleDrag={handleDrag}
+                handleDrop={handleDrop}
+              />
+            );
           })}
         </div>
       );
@@ -93,7 +91,9 @@ const Calendar = ({ calendar, week, teams }) => {
           <div className={style.calendar}>{renderCalendarHeader()}</div>
         </div>
         <div className={style.container}>
-          <div className={style.grid_content}>{renderCalendar(teams, calendar)}</div>
+          <div className={style.grid_content}>
+            {renderCalendar(teams, calendar)}
+          </div>
         </div>
       </>
     );
@@ -103,7 +103,11 @@ const Calendar = ({ calendar, week, teams }) => {
     <div>
       {show && (
         <Modal
-          title={task.action_type && task.action_type === "assign" ? "Editar Asignación" : "Nuevo Estado"}
+          title={
+            task.action_type && task.action_type === "assign"
+              ? "Editar Asignación"
+              : "Nuevo Estado"
+          }
           onClose={() => {
             setShow(false);
           }}

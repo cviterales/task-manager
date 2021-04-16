@@ -6,7 +6,7 @@ import Calendar from "../../components/Calendar/index";
 import HeaderCalendar from "../../components/Calendar/HeaderCalendar/HeaderCalendar";
 
 import moment from "moment";
-import { getCalendar, getTeams } from "../../api/index";
+import { getCalendar, getTeams, updateCalendarTask } from "../../api/index";
 
 const Calendario = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
@@ -38,7 +38,9 @@ const Calendario = () => {
     let dayData = {};
     let daysOfMonth = moment(`${year}-${month}`).daysInMonth();
     while (date.getMonth() === monthIndex) {
-      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format("DD/MM/YYYY");
+      let dayDate = moment(`${month}/${date.getDate()}/${year}`).format(
+        "DD/MM/YYYY"
+      );
       let tasksOfDay = tasks.filter((task) => {
         return task.date === dayDate;
       });
@@ -59,9 +61,34 @@ const Calendario = () => {
         result.push(week);
       }
     }
-    const currenWeek = result.findIndex((el) => el.find(e => e.day === moment().format("DD/MM/YYYY")))
-    if (currenWeek >= 0) setWeek(currenWeek)
+    const currenWeek = result.findIndex((el) =>
+      el.find((e) => e.day === moment().format("DD/MM/YYYY"))
+    );
+    if (currenWeek >= 0) setWeek(currenWeek);
     return result;
+  };
+
+  const updateCalendar = (updateDay, updateTask, updateTeam) => {
+    let day = updateDay.day.substring(0, 2);
+    let month = updateDay.day.substring(3,5)
+    let year = updateDay.day.substring(6)
+    const date = moment(year+"-"+month+"-"+day).format("YYYY-MM-DD");
+    const newTeam = updateTeam ? updateTeam.id_team : updateTask.id_team;
+    updateCalendarTask(
+      updateTask.id_calendar,
+      updateTask.id_task,
+      date,
+      newTeam,
+      updateTask.priority
+    )
+      .then(() => {
+        const dateSelected = year + "-" + month;
+        getCalendar(id_service, dateSelected).then((res) => {
+          const tasks = res;
+          const calendar = getDaysArray(tasks, year, month);
+          setCalendar(calendar);
+        });
+      })
   };
 
   const dateHandler = (e) => {
@@ -99,8 +126,21 @@ const Calendario = () => {
 
   return (
     <div className={style.wrapper}>
-      <HeaderCalendar month={month} year={year} dateHandler={dateHandler} prevWeek={prevWeek} nextWeek={nextWeek} />
-      {teams && calendar ? <Calendar calendar={calendar} teams={teams} week={week} /> : null}
+      <HeaderCalendar
+        month={month}
+        year={year}
+        dateHandler={dateHandler}
+        prevWeek={prevWeek}
+        nextWeek={nextWeek}
+      />
+      {teams && calendar ? (
+        <Calendar
+          calendar={calendar}
+          teams={teams}
+          week={week}
+          updateCalendar={updateCalendar}
+        />
+      ) : null}
     </div>
   );
 };
