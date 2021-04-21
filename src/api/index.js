@@ -269,6 +269,17 @@ export async function updateCalendarTask(id_calendar, id_task, date, id_team, pr
   return data;
 }
 
+export async function createObservation(id_service, id_account, description, is_important ) {
+  let json_data = { id_service, id_account, description, is_important  };
+  let result = await instance.post("/observations", json_data);
+  return result.data;
+}
+
+export async function getObservations(id_service, id_account) {
+  let result = await instance.get(`/observations/${id_service}/${id_account}`);
+  return result.data;
+}
+
 /*
 export async function getInconvenientes(service) {
   const res = await fetch(`http://181.41.240.18:4000/Inconvenientes/${service}`);

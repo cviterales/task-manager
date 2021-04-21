@@ -5,10 +5,16 @@ import style from "./style.module.scss";
 import useVisible from "../../../hooks/useVisible";
 import { Link } from "react-router-dom";
 
-import { faEllipsisV, faEye, faMapMarkerAlt, faTasks, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faEye,
+  faMapMarkerAlt,
+  faTasks,
+  faCalendarAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CalendarTask = ({ task, onEdit, parentPos }) => {
+const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
   const [pos, setPost] = useState();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const elementRef = useRef(null);
@@ -17,7 +23,13 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
     setPost(elementRef.current.getBoundingClientRect());
   }, [task]);
   return (
-    <div className={style.card_container} ref={elementRef}>
+    <div
+      className={style.card_container}
+      ref={elementRef}
+      draggable={true}
+      onDragOver={(ev) => ev.preventDefault()}
+      onDragStart={() => handleDrag(task)}
+    >
       <Card style={task.last_state}>
         <div className={styledCard}>
           <div className={style.task_content}>
@@ -30,7 +42,11 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
                 : "Sin Titular"}
             </p>
             <div className={style.content_icon}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" className={style.icon} />
+              <FontAwesomeIcon
+                icon={faMapMarkerAlt}
+                size="1x"
+                className={style.icon}
+              />
               <p>{task.region ? task.region : "Sin Region"}</p>
             </div>
           </div>
@@ -58,8 +74,16 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
                         },
                       }}
                     >
-                      <button className={style.option} /* onClick={() => {nextHandler(task)}} */>
-                        <FontAwesomeIcon icon={faEye} size="1x" className={style.icon} />
+                      <button
+                        className={
+                          style.option
+                        } /* onClick={() => {nextHandler(task)}} */
+                      >
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          size="1x"
+                          className={style.icon}
+                        />
                         <p>Ver</p>
                       </button>
                     </Link>
@@ -71,7 +95,11 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
                           setIsVisible(false);
                         }}
                       >
-                        <FontAwesomeIcon icon={faCalendarAlt} size="1x" className={style.icon} />
+                        <FontAwesomeIcon
+                          icon={faCalendarAlt}
+                          size="1x"
+                          className={style.icon}
+                        />
                         <p>Editar Asignación</p>
                       </button>
                     </div>
@@ -82,16 +110,26 @@ const CalendarTask = ({ task, onEdit, parentPos }) => {
                         setIsVisible(false);
                       }}
                     >
-                      <FontAwesomeIcon icon={faTasks} size="1x" className={style.icon} />
+                      <FontAwesomeIcon
+                        icon={faTasks}
+                        size="1x"
+                        className={style.icon}
+                      />
                       <p>Nuevo estado</p>
                     </button>
                   </div>
                 </Card>
               </div>
             )}
-            <button className={style.options_button} onClick={() => setIsVisible(!isVisible)}>
-              <FontAwesomeIcon icon={faEllipsisV} size="1x" />
-            </button>
+            <div className={style.task_content_header}>
+              <p className={style.operator_name}>{task.user_last_name}</p>
+              <button
+                className={style.options_button}
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                <FontAwesomeIcon icon={faEllipsisV} size="1x" />
+              </button>
+            </div>
           </div>
         </div>
       </Card>

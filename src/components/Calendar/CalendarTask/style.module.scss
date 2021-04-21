@@ -41,6 +41,20 @@ $breakpoint-lg: 1360px;
   font-size: 12px;
 }
 
+.task_content_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.operator_name {
+ font-size: 10px; 
+ padding: 0.1rem;
+ border-radius: 4px;
+ background-color: var(--light);
+ color: var(--dark-blue)
+}
+
 .task_priority {
   @extend .task;
   border-left: 2px solid red;

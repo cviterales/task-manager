@@ -12,17 +12,22 @@ const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
   }, []);
 
   return (
-    <div ref={rowRef} className={day.isMonth ? styles.rows : styles.rows_false} onDrop={() => handleDrop(day, team)} onDragOver={(ev) => ev.preventDefault()}>
+    <div
+      ref={rowRef}
+      className={day.isMonth ? styles.rows : styles.rows_false}
+      onDrop={() => handleDrop(day, team)}
+      onDragOver={(ev) => ev.preventDefault()}
+    >
       {day.tasks.map((task, index) => {
         return team.id_team === task.id_team && task.date === day.day ? (
-          <div
-            key={index}
-            draggable={true}
-            onDragOver={(ev) => ev.preventDefault()}
-            onDragStart={() => handleDrag(task)}
-          >
-            <AnimatedListItem index={index}  delay={0.15}>
-              <CalendarTask task={task} onEdit={editHandler} parentPos={pos} />
+          <div key={index}>
+            <AnimatedListItem index={index} delay={0.15}>
+              <CalendarTask
+                task={task}
+                onEdit={editHandler}
+                parentPos={pos}
+                handleDrag={handleDrag}
+              />
             </AnimatedListItem>
           </div>
         ) : (

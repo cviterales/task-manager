@@ -16,7 +16,6 @@ const ClientSubAccount = (props) => {
   const [connectSubAcc, setConnecSubAcc] = useState();
   const [subAccTasks, setSubAccTasks] = useState([]);
 
-
   const newTaskHandler = useCallback(((id_service, sid, taskType, idProblem, description) => {
     return createTask(id_service, sid, taskType, idProblem, description)
   }), [])
@@ -39,7 +38,6 @@ const ClientSubAccount = (props) => {
       getSubAccountData(id_service, props.location.state.client_id).then((res) => {
         setSubAccData(res);
       });
-      //props.history.goBack();
     }
   }, [id_service, props.location.state.client_sub_account, props.location.state.client_id, showTaskModal]);
 

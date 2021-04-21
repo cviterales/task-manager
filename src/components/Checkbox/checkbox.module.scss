@@ -30,6 +30,8 @@
   background-color: var(--light);
   border: 1px solid var(--dark-blue);
   border-radius: 5px;
+  opacity: 1;
+  transition: opacity 12s linear;
 }
 
 /* On mouse-over, add a grey background color */
