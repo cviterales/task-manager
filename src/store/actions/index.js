@@ -1,7 +1,7 @@
 export {
   authLogged,
   authLogout,
-  connectSocket,
+  //connectSocket,
   setSocketInstance,
   updatedService,
   eventSocketRefresh

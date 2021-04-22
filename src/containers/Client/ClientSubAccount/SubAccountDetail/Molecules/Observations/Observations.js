@@ -10,12 +10,13 @@ import Button from "../../../../../../components/Button";
 const Observations = ({ obsAccount, setShowObsModal }) => {
 
   const renderObservations = () => {
-    return obsAccount.map((e, i) => (
-      <AnimatedListItem index={i} key={i}>
-        <li style={{ listStyleType: "none" }}>
-          <div style={{ marginBottom: "0.5rem" }}>
+    return obsAccount.map((e, i) => {
+      console.log(e)
+     return  <AnimatedListItem index={i} key={i}>
+        <li style={{ listStyleType: "none"}}>
+          <div className={styles.ObservationsItem} data-important={e.important}>
             <Card>
-              <div className={styles.observationsContent}>
+              <div className={styles.observationsContent} >
                 <p>{e.text}</p>
                 <h5 className={styles.boldText}>
                   {new Date(e.obs_date).toLocaleDateString().toString()}
@@ -25,7 +26,7 @@ const Observations = ({ obsAccount, setShowObsModal }) => {
           </div>
         </li>
       </AnimatedListItem>
-    ));
+    });
   };
   return (
     <div className={styles.card_wrapper}>

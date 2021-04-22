@@ -63,6 +63,25 @@
   @include mq("phone", "max") {
     margin: 0.25rem 0.5rem;
   }
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--dark-blue);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--light-blue);
+  }
 }
 
 .cardTitle {
@@ -82,11 +101,20 @@
   align-items: center;
 }
 
+.ObservationsItem {
+  margin: 0.5rem;
+  &[data-important="1"] {
+    border-left: 2px solid red;
+    border-radius: 10px;
+  }
+}
+
 .observationsContent {
   display: flex;
   margin: 1rem;
   justify-content: space-around;
   align-items: center;
+
 }
 
 .boldText {

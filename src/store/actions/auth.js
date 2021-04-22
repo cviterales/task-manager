@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import { io } from 'socket.io-client'
+//import { io } from 'socket.io-client'
 
 export const authLogged = (user) => {
   return {
@@ -21,7 +21,7 @@ export const setSocketInstance = (socket) => {
   }
 }
 
-export const connectSocket = (customClientID) => {
+/* export const connectSocket = (customClientID) => {
   return dispatch => {
     const socket = io('http://localhost:4000')
     socket.on('connect', () => {
@@ -31,7 +31,7 @@ export const connectSocket = (customClientID) => {
       //}
     })
   }
-}
+} */
 
 const refreshMessage = (value) => {
   return {
