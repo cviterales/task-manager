@@ -27,10 +27,11 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       setDescription(e.target.value);
     }, 500);
   };
+
   useEffect(() => {
-    getTaskTypes().then((res) => setTaskTypes(res));
+    getTaskTypes().then((res) => isMounted.current && setTaskTypes(res));
     getProblems(id_service, "", serviceType, "").then((res) => {
-      if (isMounted.current) setTaskProblems(res)
+      isMounted.current && setTaskProblems(res)
     }
     );
   }, [id_service, serviceType]);
@@ -51,7 +52,6 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
         idProblem,
         description
       );
-      console.log(res)
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
       setLoading(false)
@@ -59,17 +59,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
       setMessage(err.message);
       setError(true);
     }
-    timeout = setTimeout(() => {
-      setMessage();
-      setLoading(false)
-    }, 5000);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [timeout])
 
   return (
     <div className={styles.modal_wrapper}>

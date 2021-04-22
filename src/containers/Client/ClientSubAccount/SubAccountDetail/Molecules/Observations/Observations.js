@@ -10,10 +10,9 @@ import Button from "../../../../../../components/Button";
 const Observations = ({ obsAccount, setShowObsModal }) => {
 
   const renderObservations = () => {
-    return obsAccount.map((e, i) => {
-      console.log(e)
-     return  <AnimatedListItem index={i} key={i}>
-        <li style={{ listStyleType: "none"}}>
+    return obsAccount.map((e, i) =>
+      <AnimatedListItem index={i} key={i}>
+        <li style={{ listStyleType: "none" }}>
           <div className={styles.ObservationsItem} data-important={e.important}>
             <Card>
               <div className={styles.observationsContent} >
@@ -26,7 +25,7 @@ const Observations = ({ obsAccount, setShowObsModal }) => {
           </div>
         </li>
       </AnimatedListItem>
-    });
+    );
   };
   return (
     <div className={styles.card_wrapper}>
@@ -41,7 +40,7 @@ const Observations = ({ obsAccount, setShowObsModal }) => {
             Observaciones
           </h4>
           <Button
-            onClick={() => {setShowObsModal(true)}}
+            onClick={() => { setShowObsModal(true) }}
             type="button"
             variant="outline"
           >

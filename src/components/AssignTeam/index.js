@@ -8,8 +8,10 @@ import CalendarButton from "../../components/Calendar/CalendarButton/index";
 import CheckBox from "../Checkbox/index";
 import Spinner from "../Spinner/index";
 import Message from "../Message/index";
-
+import { useSelector } from 'react-redux'
 const AssignTeam = ({ onClose, data, operators, onSave }) => {
+  const id_user = useSelector((state) => state.auth.user.id);
+
   const [teamDate, setTeamDate] = useState(
     new Date().toISOString().slice(0, 10)
   );
@@ -25,15 +27,15 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
   const sendData = async (e) => {
     e.preventDefault();
     setLoading(true);
-    onSave(data.id, teamDate, team, priority).then((res) => {
+    onSave(data.id, teamDate, team, priority, id_user).then((res) => {
       res.error ? setError(true) : setError(false);
       setMessage(res.message);
       setLoading(false);
     })
-    .catch((err) => {
-      setError(true)
-      setLoading(false);
-    })
+      .catch((err) => {
+        setError(true)
+        setLoading(false);
+      })
     setTimeout(() => {
       setMessage();
       setError(false);
@@ -144,7 +146,7 @@ const AssignTeam = ({ onClose, data, operators, onSave }) => {
               />
             </div>
             <div className={style.bottom}>
-              <Button variant="dark" type="submit" onClick={() => {}}>
+              <Button variant="dark" type="submit" onClick={() => { }}>
                 {loading ? <Spinner /> : <p>Guardar</p>}
               </Button>
               <Button

@@ -7,11 +7,13 @@ import CalendarButton from "../CalendarButton/index";
 import CheckBox from "../../Checkbox/index";
 import Message from "../../Message/index";
 import Spinner from "../../Spinner/index";
-
+import { useSelector } from 'react-redux'
 import { updateCalendarTask, getTeams } from "../../../api/index";
 import withPermission from "../../../hoc/withPermission/withPermission";
 
 const AssignTask = ({ task, onClose }) => {
+  const id_user = useSelector((state) => state.auth.user.id);
+
   const [operatorList, setOperatorList] = useState([]);
   const [teamDate, setTeamDate] = useState(new Date().toISOString().slice(0, 10));
   const [priority, setPriority] = useState(false);
@@ -46,7 +48,7 @@ const AssignTask = ({ task, onClose }) => {
     e.preventDefault();
     setLoading(true);
     const teamEdit = !team ? task.id_team : team;
-    updateCalendarTask(task.id_calendar, task.id_task, teamDate, teamEdit, priority)
+    updateCalendarTask(task.id_calendar, task.id_task, teamDate, teamEdit, priority, id_user)
       .then((res) => {
         setMessage(res.message);
         setError(false);

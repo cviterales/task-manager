@@ -8,18 +8,12 @@ $break-large: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 14px;
   padding: 0.2rem 0rem;
   @media (max-width: $break-small) {
     width: 200px;
   }
-  -webkit-animation: seconds 1.0s forwards;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-delay: 5s;
-  animation: seconds 1.0s forwards;
-  animation-iteration-count: 1;
-  animation-delay: 5s;
 }
 
 .success {
@@ -28,7 +22,6 @@ $break-large: 1200px;
   border: 2px solid var(--success-medium);
   background-color: var(--success-light);
 }
-
 
 .danger {
   @extend %container;
@@ -53,23 +46,4 @@ $break-large: 1200px;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-
-@-webkit-keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }

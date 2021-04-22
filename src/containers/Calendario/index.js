@@ -10,6 +10,7 @@ import { getCalendar, getTeams, updateCalendarTask } from "../../api/index";
 
 const Calendario = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
+  const id_user = useSelector((state) => state.auth.user.id);
   const socket_refresh = useSelector((state) => state.auth.isSocketRefresh);
 
   const monthNow = moment().format("MM");
@@ -80,12 +81,14 @@ const Calendario = () => {
     let year = updateDay.day.substring(6);
     const date = moment(year + "-" + month + "-" + day).format("YYYY-MM-DD");
     const newTeam = updateTeam ? updateTeam.id_team : updateTask.id_team;
+    console.log(id_user)
     updateCalendarTask(
       updateTask.id_calendar,
       updateTask.id_task,
       date,
       newTeam,
-      updateTask.priority
+      updateTask.priority,
+      id_user
     ).then(() => {
       const dateSelected = year + "-" + month;
       getCalendar(id_service, dateSelected).then((res) => {

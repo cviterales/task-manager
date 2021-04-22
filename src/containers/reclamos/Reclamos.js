@@ -13,6 +13,7 @@ import { createCalendar, getTasks, getTeams, getFilters } from "../../api/index"
 
 const Reclamos = ({ history }) => {
   let timeout = null;
+  const id_user = useSelector((state) => state?.auth?.user?.id);
 
   const id_service = useSelector((state) => state.auth.user.id_service);
   const [reclamos, setReclamos] = useState([]);
@@ -72,7 +73,7 @@ const Reclamos = ({ history }) => {
   }, [id_service, valuesSelected]);
 
   const onSave = async (test, teamDate, team, priority) => {
-    return createCalendar(test, teamDate, team, priority).then((res) => {
+    return createCalendar(test, teamDate, team, priority, id_user).then((res) => {
       getTasks(
         id_service,
         valuesSelected.numberTaskSelected,

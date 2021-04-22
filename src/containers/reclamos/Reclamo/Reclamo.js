@@ -148,15 +148,20 @@ const Reclamo = (props) => {
         <div className={style.wrapper_content_header}>
           <div className={style.card_container}>
             <Card>
-              <div className={style.card_content_title}>
-                <div className={style.card_content_icon}>
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="1x"
-                    color="#c30000"
-                  />
+              <div className={style.wrapper_info_content}>
+                <div className={style.card_content_title}>
+                  <div className={style.card_content_icon}>
+                    <FontAwesomeIcon
+                      icon={faExclamationCircle}
+                      size="1x"
+                      color="#c30000"
+                    />
+                  </div>
+                  <h4 className={style.card_title}>Descripcion</h4>
                 </div>
-                <h4 className={style.card_title}>Descripcion</h4>
+                <div className={style.card_content_icon}>
+                  <p>Ultima modificacion: {task.user_last_name}</p>
+                </div>
               </div>
               <div className={style.card_content}>
                 {task.description ? (
@@ -270,7 +275,6 @@ const Reclamo = (props) => {
                   <div className={style.card_content_icon}>
                     <FontAwesomeIcon icon={faEdit} size="1x" color="#5DCE68" />
                   </div>
-
                   <h4 className={style.card_title}>Servicios</h4>
                 </div>
                 <div className={style.card_content}>

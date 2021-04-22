@@ -21,13 +21,14 @@ export async function getProblems(id_service, id, id_account_type_service, searc
   return result.data;
 }
 
-export async function createTask(id_service, id_account, id_task_type, id_problem, description) {
+export async function createTask(id_service, id_account, id_task_type, id_problem, description, id_user) {
   let json_data = {
-    id_service: id_service,
-    id_account: id_account,
-    id_task_type: id_task_type,
-    id_problem: id_problem,
-    description: description,
+    id_service,
+    id_account,
+    id_task_type,
+    id_problem,
+    description,
+    id_user
   };
   let result = await instance.post("/task", json_data);
   return result.data;
@@ -203,12 +204,13 @@ export async function getTeams(id_service) {
   return data;
 }
 
-export async function createCalendar(id_task, date, id_team, priority) {
+export async function createCalendar(id_task, date, id_team, priority, id_user) {
   const json_data = {
-    id_task: id_task,
-    date: date,
-    id_team: id_team,
-    priority: priority,
+    id_task,
+    date,
+    id_team,
+    priority,
+    id_user
   };
   const res = await instance.post("/task/calendar", JSON.stringify(json_data));
   const data = res.data;
@@ -256,13 +258,14 @@ export async function closeTeam(id_service, id_team) {
   return data;
 }
 
-export async function updateCalendarTask(id_calendar, id_task, date, id_team, priority) {
+export async function updateCalendarTask(id_calendar, id_task, date, id_team, priority, id_user) {
   const json_data = {
     id_calendar: id_calendar,
     id_task: id_task,
     date: date,
     id_team: id_team,
     priority: priority,
+    id_user
   };
   let res = await instance.put("/task/calendar", JSON.stringify(json_data));
   const data = await res.data;

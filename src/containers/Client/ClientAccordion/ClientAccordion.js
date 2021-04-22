@@ -46,7 +46,6 @@ const ClientAccordion = ({ client, history }) => {
   }, [])
 
   const toSubAcc = (item) => {
-    console.log(item)
     let state = {
       client_sub_account: item?.id_sub_account ?? client.id_account,
       client_id: client.id_account,

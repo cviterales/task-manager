@@ -10,6 +10,7 @@ import SubAccountDetail from "./SubAccountDetail/SubAccountDetail";
 
 const ClientSubAccount = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service);
+  const id_user = useSelector((state) => state.auth.user.id);
 
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [subAccData, setSubAccData] = useState([]);
@@ -17,8 +18,8 @@ const ClientSubAccount = (props) => {
   const [subAccTasks, setSubAccTasks] = useState([]);
 
   const newTaskHandler = useCallback(((id_service, sid, taskType, idProblem, description) => {
-    return createTask(id_service, sid, taskType, idProblem, description)
-  }), [])
+    return createTask(id_service, sid, taskType, idProblem, description, id_user)
+  }), [id_user])
 
   useEffect(() => {
     if (props.location.state.client_sub_account) {

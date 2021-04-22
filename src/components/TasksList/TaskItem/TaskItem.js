@@ -30,6 +30,9 @@ const TaskItem = ({ task }) => {
       </div>
       <div>
         <p>
+          <span className={styles.boldText}>Ultima modificacion:</span> {task.user_last_name}
+        </p>
+        <p>
           <span className={styles.boldText}>Fecha:</span> {task.created_at}
         </p>
         {task.description && (

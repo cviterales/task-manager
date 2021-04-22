@@ -8,6 +8,7 @@ import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import TaskItem from "../../../../../../components/TasksList/TaskItem/TaskItem";
 
 const TaskDetail = ({ selectedTask, toTask }) => {
+  console.log(selectedTask)
   return (
     <div className={styles.card_wrapper}>
       <Card>
