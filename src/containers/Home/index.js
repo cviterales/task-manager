@@ -8,7 +8,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import TaskItem from "../Reclamos/TaskItem/TaskItem";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import Modal from "../../components/Modal/index";
-import TaskStateModal from "./TaskStateModal/TaskStateModal";
+import TaskStateModal from "../../components/TaskStateModal/TaskStateModal";
 import { useSelector } from "react-redux";
 
 const Home = () => {

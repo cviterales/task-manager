@@ -1,4 +1,4 @@
-@import "../../../styles/index.scss";
+@import "../../styles/index.scss";
 
 .container {
   display: flex;
@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   margin: $m-mbY;
+  list-style: none;
 }
 
 .bottom {
@@ -28,4 +29,11 @@
 
 .m_v {
   margin: $m-mbY;
+}
+
+.message {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -10,7 +10,7 @@ import "moment/locale/es";
 import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
 import AssignTask from "./AssignTask/index";
-import TaskStateModal from "../../containers/Home/TaskStateModal/TaskStateModal";
+import TaskStateModal from "../TaskStateModal/TaskStateModal";
 const Calendar = ({ calendar, week, teams, updateCalendar }) => {
   const [task, setTask] = useState({});
   const [show, setShow] = useState(false);

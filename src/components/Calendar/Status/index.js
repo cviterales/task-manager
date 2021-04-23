@@ -39,10 +39,6 @@ const Status = ({ task, onClose }) => {
         setMessage(error.message);
         setLoading(false);
       });
-
-    /* setTimeout(() => {
-      setMessage('')
-    }, 5000)*/
   };
   let render = null;
   if (states) {
