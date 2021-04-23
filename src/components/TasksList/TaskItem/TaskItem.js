@@ -16,28 +16,38 @@ const TaskItem = ({ task }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h4>
-          <span className={styles.boldText}>Tipo de inconveniente:</span> {task.name}
+          <span className={styles.boldText}>Tipo de inconveniente:</span>{" "}
+          {task.name}
         </h4>
-        <Status description={task.last_state_description} name={task.last_state} />
+        <Status
+          description={task.last_state_description}
+          name={task.last_state}
+        />
       </div>
       <div>
         <h4>
           <span className={styles.boldText}>Cuadrilla asignada: </span>
           {task.team[0]?.id_team
-            ? task.team[0].id_team + ". " + task.team.map((e) => e.operator_name + " - ")
+            ? task.team[0].id_team +
+              ". " +
+              task.team.map((e) => e.operator_name + " - ")
             : "Sin operarios asignados"}
         </h4>
       </div>
       <div>
-        <p>
-          <span className={styles.boldText}>Ultima modificacion:</span> {task.user_last_name}
-        </p>
+        {task.user_last_name && (
+          <p>
+            <span className={styles.boldText}>Ultima modificacion:</span>
+            {task.user_last_name}
+          </p>
+        )}
         <p>
           <span className={styles.boldText}>Fecha:</span> {task.created_at}
         </p>
         {task.description && (
           <p>
-            <span className={styles.boldText}>Descripcion:</span> {task.description}
+            <span className={styles.boldText}>Descripcion:</span>
+            {task.description}
           </p>
         )}
       </div>
