@@ -81,7 +81,6 @@ const Calendario = () => {
     let year = updateDay.day.substring(6);
     const date = moment(year + "-" + month + "-" + day).format("YYYY-MM-DD");
     const newTeam = updateTeam ? updateTeam.id_team : updateTask.id_team;
-    console.log(id_user)
     updateCalendarTask(
       updateTask.id_calendar,
       updateTask.id_task,
