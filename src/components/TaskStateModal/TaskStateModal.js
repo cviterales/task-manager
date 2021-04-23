@@ -64,7 +64,7 @@ const TaskStateModal = ({ onClose, task }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.status_container}>
-        {statusTask.length > 0 && renderStatus()}
+        {statusTask.length > 0 ? renderStatus() : <Spinner />}
       </ul>
       <div className={styles.m_v}>
         <h5 className={styles.m_v}>Nuevo</h5>
