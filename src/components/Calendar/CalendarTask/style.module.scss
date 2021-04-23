@@ -81,6 +81,7 @@ $breakpoint-lg: 1360px;
   color: var(--dark-blue);
   padding: 0.2rem 0.4rem;
   background-color: transparent;
+  cursor: pointer;
   &:hover {
     background-color: rgba(231, 231, 231, 0.644);
     border-radius: 50%;

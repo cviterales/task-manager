@@ -160,7 +160,7 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Descripcion</h4>
                 </div>
                 <div className={style.card_content_icon}>
-                  {task.user_last_name && <p>Ultima modificacion: {task.user_last_name}</p>}
+                  {task.user_last_name !== "0" && <p>Ultima modificacion: {task.user_last_name}</p>}
                 </div>
               </div>
               <div className={style.card_content}>

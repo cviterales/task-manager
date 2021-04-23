@@ -35,7 +35,7 @@ const TaskItem = ({ task }) => {
         </h4>
       </div>
       <div>
-        {task.user_last_name && (
+        {task.user_last_name !== "0"  && (
           <p>
             <span className={styles.boldText}>Ultima modificacion:</span>
             {task.user_last_name}

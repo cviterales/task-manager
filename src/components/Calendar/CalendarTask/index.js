@@ -123,7 +123,7 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
               </div>
             )}
             <div className={style.task_content_header}>
-              {task.user_last_name && <p className={style.operator_name}>{task.user_last_name}</p>}
+              {task.user_last_name !== "0" && <p className={style.operator_name}>{task.user_last_name}</p>}
               <button
                 className={style.options_button}
                 onClick={() => {
