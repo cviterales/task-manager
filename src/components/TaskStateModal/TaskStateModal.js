@@ -51,12 +51,13 @@ const TaskStateModal = ({ onClose, task }) => {
       const allStates = await getStatus();
       const taskStates = await getStatusTask(task.id_task);
       setStatusTask(taskStates);
-      setStates(allStates);
-      /*       const filteredState = allStates.filter((e) => !taskStates.find(({ status }) => e.name === status));
-      setStates(filteredState); */
-      /*       if (task.last_state_description === "Finalizado") {
+      const filteredState = allStates.filter((e) => !taskStates.find(({ status }) => e.name === status));
+      const finish = taskStates.find((status) => status.status === "Finalizado")
+      setStates(filteredState);
+      if (finish) {
         setStates([]);
-      } */
+        setNewState(0)
+      }
     };
     filterStates();
   }, [task, message]);
