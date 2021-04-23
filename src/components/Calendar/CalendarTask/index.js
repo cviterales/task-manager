@@ -21,7 +21,8 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
   const styledCard = task.priority ? style.task_priority : style.task;
   useEffect(() => {
     setPost(elementRef.current.getBoundingClientRect());
-  }, [task]);
+  }, []);
+  
   return (
     <div
       className={style.card_container}
@@ -57,7 +58,7 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
                 style={{
                   display: "flex",
                   position: "absolute",
-                  top: pos.top - parentPos.top + pos.height - 100, //-100 for AnimatedListItem Component
+                  top: pos.top - parentPos.top + 50, //-100 for AnimatedListItem Component
                   left: pos.left,
                   zIndex: "1",
                 }}
@@ -125,7 +126,9 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
               <p className={style.operator_name}>{task.user_last_name}</p>
               <button
                 className={style.options_button}
-                onClick={() => setIsVisible(!isVisible)}
+                onClick={() => {
+                  setPost(elementRef.current.getBoundingClientRect());
+                  setIsVisible(!isVisible)}}
               >
                 <FontAwesomeIcon icon={faEllipsisV} size="1x" />
               </button>
