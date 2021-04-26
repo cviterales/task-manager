@@ -46,7 +46,12 @@ const SubAccountDetail = ({
   };
 
   const observationHandler = async (description, important) => {
-    const result = await createObservation(id_service, id_account, description, important);
+    const result = await createObservation(
+      id_service,
+      id_account,
+      description,
+      important
+    );
     getObservations(id_service, id_account).then((res) => {
       setObsAccount(res);
     });
@@ -65,7 +70,7 @@ const SubAccountDetail = ({
     getObservations(id_service, id_account).then((res) => {
       setObsAccount(res);
     });
-  }, [id_service, id_account])
+  }, [id_service, id_account]);
 
   return (
     <div className={styles.client_sub}>
@@ -75,15 +80,6 @@ const SubAccountDetail = ({
             <b>Cliente # {location.state.client_id}</b>
           </h3>
         </div>
-        <div className={styles.child}>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => setShowTaskModal(true)}
-          >
-            <p>Nuevo Reclamo</p>
-          </Button>
-        </div>
       </div>
 
       <div className={styles.ctnr_sm}>
@@ -91,7 +87,7 @@ const SubAccountDetail = ({
           <Info
             subAccData={subAccData}
             title={
-              location.state.client_sub_account
+              id_service === 1
                 ? "Subcuenta: #"
                 : `Cuenta: #${location.state.client_id}`
             }
@@ -122,7 +118,7 @@ const SubAccountDetail = ({
 
       {/* Reclamos y Detalle */}
       <div className={styles.ctnr_lg}>
-        <Tasks subAccTasks={subAccTasks} taskHandler={taskHandler} />
+        <Tasks subAccTasks={subAccTasks} taskHandler={taskHandler} setShowTaskModal={setShowTaskModal}/>
         <TaskDetail selectedTask={selectedTask} toTask={toTask} />
       </div>
 

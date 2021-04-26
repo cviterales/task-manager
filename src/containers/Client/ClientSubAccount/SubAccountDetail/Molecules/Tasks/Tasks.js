@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnimatedListItem from "../../../../../../components/Animations/AnimatedListItem/AnimatedListItem";
 import TaskList from "../../../../../../components/TasksList/TaskList";
 import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
+import Button from "../../../../../../components/Button";
 
-const Tasks = ({ subAccTasks, taskHandler }) => {
+const Tasks = ({ subAccTasks, taskHandler, setShowTaskModal }) => {
   const renderTasks = () => {
     return subAccTasks.map((e, i) => (
       <AnimatedListItem key={i} index={i}>
@@ -17,10 +18,23 @@ const Tasks = ({ subAccTasks, taskHandler }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <h4 className={styles.cardTitle}>
-          <FontAwesomeIcon icon={faNewspaper} color="#2B4E93" style={{ marginRight: "0.5rem" }} />
-          Reclamos
-        </h4>
+        <div className={styles.innerHeader}>
+          <h4 className={styles.cardTitle}>
+            <FontAwesomeIcon
+              icon={faNewspaper}
+              color="#2B4E93"
+              style={{ marginRight: "0.5rem" }}
+            />
+            Reclamos
+          </h4>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setShowTaskModal(true)}
+          >
+            <p>Nuevo Reclamo</p>
+          </Button>
+        </div>
         <div className={styles.cardContent}>
           {!subAccTasks.error ? (
             <div className={styles.tbody}>{renderTasks()}</div>

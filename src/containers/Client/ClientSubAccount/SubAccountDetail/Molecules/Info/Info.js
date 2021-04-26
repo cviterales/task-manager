@@ -8,10 +8,15 @@ const Info = ({ subAccData, title }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <h4 className={styles.cardTitle}>
-          <FontAwesomeIcon icon={faUserCircle} color="#D7B644" style={{ marginRight: "0.5rem" }} /> {title}
-          {subAccData.info[0].id_sub_account}
-        </h4>
+        <div className={styles.innerHeader}>
+          <h4>
+            <FontAwesomeIcon icon={faUserCircle} color="#D7B644" style={{ marginRight: "0.5rem" }} /> {title}
+            {subAccData.info[0].id_sub_account}
+          </h4>
+          <h5 className={subAccData.balance === 0 ? styles.balance_false : styles.balance_true}>
+            {subAccData.balance ? "Deuda: "+ subAccData.balance : "Sin Deuda"}
+          </h5>
+        </div>
         <div className={styles.cardContent}>
           <p>
             <span className={styles.boldText}>Razon social:</span> {subAccData.info[0].account_name}

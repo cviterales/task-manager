@@ -114,7 +114,6 @@
   margin: 1rem;
   justify-content: space-around;
   align-items: center;
-
 }
 
 .boldText {
@@ -160,4 +159,20 @@
     margin-top: 0.25rem;
     margin-right: 0.25rem;
   }
+}
+
+.balance {
+  padding: 0.25rem;
+  border-radius: 5px;
+}
+
+.balance_true {
+  @extend .balance;
+  border: 1px solid #ff000047;
+  color: red;
+}
+.balance_false {
+  @extend .balance;
+  border: 1px solid #0d551647;
+  color: green;
 }

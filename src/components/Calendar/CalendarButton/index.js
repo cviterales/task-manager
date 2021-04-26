@@ -1,4 +1,4 @@
-import style from './calendarbutton.module.css'
+import style from './style.module.scss'
 
 const CalendarButton = ({ id, type, value, name, onChange }) => {
   return (

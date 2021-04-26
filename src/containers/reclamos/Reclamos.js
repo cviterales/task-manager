@@ -58,6 +58,7 @@ const Reclamos = ({ history }) => {
   }, [id_service]);
 
   useEffect(() => {
+    console.log(valuesSelected)
     getTasks(
       id_service,
       valuesSelected.numberTaskSelected,
