@@ -23,7 +23,6 @@
 .wrapper_content_header {
   display: flex;
   width: 100%;
-  height: 30%;
   @include mq("phone", "max") {
     flex-direction: column;
     height: 100%;

@@ -60,6 +60,8 @@
   height: 100%;
   margin: 0.5rem 1rem;
   overflow: auto;
+  scrollbar-color: #2c5282e8 white;
+  scrollbar-width: thin;
   @include mq("phone", "max") {
     margin: 0.25rem 0.5rem;
   }
@@ -125,7 +127,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: auto;
+  scrollbar-color: #2c5282e8 #f1f1f1;
   &::-webkit-scrollbar {
     width: 8px;
   }

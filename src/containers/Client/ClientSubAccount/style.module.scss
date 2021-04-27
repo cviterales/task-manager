@@ -99,7 +99,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: auto;
+  scrollbar-color: #2c5282e8 #f1f1f1;
   &::-webkit-scrollbar {
     width: 8px;
   }
