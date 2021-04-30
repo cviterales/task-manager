@@ -4,8 +4,7 @@ import style from "./style.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHardHat } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
-import "moment/locale/es";
+
 
 import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
@@ -70,11 +69,11 @@ const Calendar = ({ calendar, week, teams, updateCalendar }) => {
 
   const renderCalendarHeader = () => {
     return calendar[week].map((day, index) => {
-      let dayName = moment(day.day, "DD/MM/YYYY HH:mm:ss");
       return (
         <div key={index} className={style.calendar_header}>
-          <h2>{dayName.date()}</h2>
-          <h4>{dayName.locale("ES").format("dddd").toUpperCase()}</h4>
+          <h2>{day.dayNumber}</h2>
+          <h4>{day.dayName}</h4>
+          <h6>{day.monthName}</h6>
         </div>
       );
     });

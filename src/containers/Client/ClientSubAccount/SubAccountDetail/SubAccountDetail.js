@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
-import Button from "../../../../components/Button/index";
 import ConnectionsModal from "../../../../components/ConnectionsModal/ConnectionsModal";
 import ObservationsModal from "../../../../components/ObservationsModal/ObservationsModal";
 import Modal from "../../../../components/Modal/index";
