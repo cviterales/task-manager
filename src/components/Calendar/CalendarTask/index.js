@@ -14,20 +14,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
+const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = false }) => {
   const [pos, setPost] = useState();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const elementRef = useRef(null);
   const styledCard = task.priority ? style.task_priority : style.task;
+
   useEffect(() => {
     setPost(elementRef.current.getBoundingClientRect());
   }, []);
-  
+
   return (
     <div
       className={style.card_container}
       ref={elementRef}
-      draggable={true}
+      draggable={draggable}
       onDragOver={(ev) => ev.preventDefault()}
       onDragStart={() => handleDrag(task)}
     >
@@ -123,12 +124,15 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag }) => {
               </div>
             )}
             <div className={style.task_content_header}>
-              {task.user_last_name !== "0" && <p className={style.operator_name}>{task.user_last_name}</p>}
+              {task.user_last_name !== "0" && (
+                <p className={style.operator_name}>{task.user_last_name}</p>
+              )}
               <button
                 className={style.options_button}
                 onClick={() => {
                   setPost(elementRef.current.getBoundingClientRect());
-                  setIsVisible(!isVisible)}}
+                  setIsVisible(!isVisible);
+                }}
               >
                 <FontAwesomeIcon icon={faEllipsisV} size="1x" />
               </button>

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import style from "./style.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHardHat } from "@fortawesome/free-solid-svg-icons";
 
-
+import moment from "moment";
+import "moment/locale/es";
 import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
 import AssignTask from "./AssignTask/index";
@@ -66,12 +67,21 @@ const Calendar = ({ calendar, week, teams, updateCalendar }) => {
       );
     });
   };
+  let dayDate = useMemo(() => moment(
+    `${new Date(Date.now()).getMonth() + 1}/${new Date(
+      Date.now()
+    ).getDate()}/${new Date(Date.now()).getFullYear()}`
+  ).format("DD/MM/YYYY"), [])
 
   const renderCalendarHeader = () => {
     return calendar[week].map((day, index) => {
       return (
         <div key={index} className={style.calendar_header}>
-          <h2>{day.dayNumber}</h2>
+          <div className={style.day_now_content}>
+            <h2 className={day.day === dayDate ? style.day_now : ""}>
+              {day.dayNumber}
+            </h2>
+          </div>
           <h4>{day.dayName}</h4>
           <h6>{day.monthName}</h6>
         </div>

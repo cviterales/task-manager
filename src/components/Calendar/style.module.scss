@@ -96,3 +96,15 @@
   font-family: "Roboto Bold";
   color: var(--blue);
 }
+
+.day_now_content {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem 0rem;
+}
+.day_now {
+  border-radius: 20px;
+  background-color: #fff;
+  color: #4299e1;
+  width: 50px;
+}

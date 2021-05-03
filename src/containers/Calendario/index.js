@@ -37,7 +37,6 @@ const Calendario = () => {
 
       // me fijo si el primer dia del mes no es Lunes, entonces me traigo los dias del mes pasado para completar la primera semana.
       if (indexDay !== 1) {
-        //const {month, year} = DateHelper.getCorrectMonth(monthIndex-1, year);
         let newMonth = month - 1 < 1 ? 12 : month - 1;
         let newYear = month - 1 < 1 ? year - 1 : year;
         daysOfMonth = moment(`${newYear}-${newMonth}`).daysInMonth();
