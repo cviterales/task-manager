@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./style.module.scss";
+import PropTypes from "prop-types";
+
 import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem";
 import CalendarTask from "../CalendarTask/index";
 import moment from "moment";
 import "moment/locale/es";
+
 
 const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
   const [pos, setPost] = useState();
@@ -43,7 +46,7 @@ const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
               <CalendarTask
                 task={task}
                 onEdit={editHandler}
-                draggable={dayDateNow > dayTaskDate ? false : true}
+                //draggable={dayDateNow > dayTaskDate ? false : true}
                 parentPos={pos}
                 handleDrag={handleDrag}
               />
@@ -57,4 +60,11 @@ const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
   );
 };
 
+CalendarRow.propTypes = {
+  day: PropTypes.object, 
+  team: PropTypes.object, 
+  editHandler: PropTypes.func, 
+  handleDrag: PropTypes.func, 
+  handleDrop: PropTypes.func
+}
 export default CalendarRow;

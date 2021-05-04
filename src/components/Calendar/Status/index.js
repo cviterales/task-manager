@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
+import PropTypes from "prop-types";
 
 import DropDown from "../../DropDown/index";
 import Button from "../../Button/index";
@@ -83,5 +84,10 @@ const Status = ({ task, onClose }) => {
   }
   return <div>{render}</div>;
 };
+
+Status.propTypes = {
+  task: PropTypes.object,
+  onClose: PropTypes.func
+}
 
 export default Status;

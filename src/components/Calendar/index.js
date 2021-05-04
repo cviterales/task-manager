@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 
 import style from "./style.module.scss";
+import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHardHat } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +12,7 @@ import Modal from "../Modal/index";
 import CalendarRow from "./CalendarRow/CalendarRow";
 import AssignTask from "./AssignTask/index";
 import TaskStateModal from "../TaskStateModal/TaskStateModal";
+
 const Calendar = ({ calendar, week, teams, updateCalendar }) => {
   const [task, setTask] = useState({});
   const [show, setShow] = useState(false);
@@ -67,11 +69,8 @@ const Calendar = ({ calendar, week, teams, updateCalendar }) => {
       );
     });
   };
-  let dayDate = useMemo(() => moment(
-    `${new Date(Date.now()).getMonth() + 1}/${new Date(
-      Date.now()
-    ).getDate()}/${new Date(Date.now()).getFullYear()}`
-  ).format("DD/MM/YYYY"), [])
+
+  const dayDate = useMemo(() => moment().format("DD/MM/YYYY"), [])
 
   const renderCalendarHeader = () => {
     return calendar[week].map((day, index) => {
@@ -129,5 +128,12 @@ const Calendar = ({ calendar, week, teams, updateCalendar }) => {
     </div>
   );
 };
+
+Calendar.propTypes = {
+  calendar: PropTypes.array,
+  week: PropTypes.number, 
+  teams: PropTypes.array, 
+  updateCalendar: PropTypes.func
+}
 
 export default Calendar;

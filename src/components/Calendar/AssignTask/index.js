@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
+import PropTypes from "prop-types";
 
 import DropDown from "../../DropDown/index";
 import Button from "../../Button/index";
@@ -122,5 +123,10 @@ const AssignTask = ({ task, onClose }) => {
     </div>
   );
 };
+
+AssignTask.propTypes = {
+  task: PropTypes.object, 
+  onClose: PropTypes.func
+}
 
 export default withPermission(AssignTask);

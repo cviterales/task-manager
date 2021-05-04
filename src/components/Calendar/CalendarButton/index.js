@@ -1,4 +1,5 @@
 import style from './style.module.scss'
+import PropTypes from "prop-types";
 
 const CalendarButton = ({ id, type, value, name, onChange }) => {
   return (
@@ -13,4 +14,11 @@ const CalendarButton = ({ id, type, value, name, onChange }) => {
   )
 }
 
+CalendarButton.propTypes = {
+  id: PropTypes.string, 
+  type: PropTypes.string, 
+  value: PropTypes.any, 
+  name: PropTypes.string, 
+  onChange: PropTypes.func
+}
 export default CalendarButton

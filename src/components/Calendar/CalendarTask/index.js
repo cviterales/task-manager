@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import PropTypes from "prop-types";
 import Card from "../../Card/index";
 import style from "./style.module.scss";
 import useVisible from "../../../hooks/useVisible";
@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = false }) => {
+const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = true }) => {
   const [pos, setPost] = useState();
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const elementRef = useRef(null);
@@ -79,7 +79,7 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = false }
                       <button
                         className={
                           style.option
-                        } /* onClick={() => {nextHandler(task)}} */
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faEye}
@@ -144,4 +144,11 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = false }
   );
 };
 
+CalendarTask.propTypes = {
+  task: PropTypes.object, 
+  onEdit: PropTypes.func, 
+  parentPos: PropTypes.number, 
+  handleDrag: PropTypes.func, 
+  draggable: PropTypes.bool 
+}
 export default CalendarTask;
