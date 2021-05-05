@@ -40,7 +40,7 @@ const Reclamo = (props) => {
   const [subAccount, setSubAccount] = useState();
   const [showIssueModal, setShowIssueModal] = useState(false);
   const [showCloseModal, setShowShowModal] = useState(false);
-  const isMounted = useRef(true)
+  const isMounted = useRef(true);
 
   const renderPhones = (phones) => {
     return phones.map((phone, index) => (
@@ -78,19 +78,25 @@ const Reclamo = (props) => {
     });
   };
 
-  const incidentHandler = useCallback((description) => {
-    return createIncident(id_task, description, user_id)
-  }, [id_task, user_id]);
+  const incidentHandler = useCallback(
+    (description) => {
+      return createIncident(id_task, description, user_id);
+    },
+    [id_task, user_id]
+  );
 
-  const closeTaskHandler = useCallback((description) => {
-    return closeTask(id_task, user_id, task.id_calendar, description);
-  }, [id_task, user_id, task]);
+  const closeTaskHandler = useCallback(
+    (description) => {
+      return closeTask(id_task, user_id, task.id_calendar, description);
+    },
+    [id_task, user_id, task]
+  );
 
   useEffect(() => {
     return () => {
-      isMounted.current = false
-    }
-  }, [])
+      isMounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     getTask(id_service, id_task).then((res) => {
@@ -102,7 +108,6 @@ const Reclamo = (props) => {
         }
       });
     });
-
   }, [id_service, id_task, id_account, closeTaskHandler, incidentHandler]);
 
   const renderServices = (services) => {
@@ -160,7 +165,9 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Descripcion</h4>
                 </div>
                 <div className={style.card_content_icon}>
-                  {task.user_last_name !== "0" && <p>Ultima modificacion: {task.user_last_name}</p>}
+                  {task.user_last_name !== "0" && (
+                    <p>Ultima modificacion: {task.user_last_name}</p>
+                  )}
                 </div>
               </div>
               <div className={style.card_content}>
@@ -197,16 +204,17 @@ const Reclamo = (props) => {
                         )}
                         <a
                           href={
-                            subAccount?.dslam[0]?.ip ??
-                            subAccount?.node[0]?.ip
+                            subAccount?.dslam[0]?.ip ?? subAccount?.node[0]?.ip
                           }
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           {subAccount?.dslam[0]?.dslam ??
                             subAccount?.node[0]?.node}
                         </a>
                       </p>
                       {subAccount?.dslam[0]?.dslam ||
-                        subAccount?.node[0]?.node ? null : (
+                      subAccount?.node[0]?.node ? null : (
                         <p>
                           <span className={style.boldText}>DSLAM/Nodo: </span>{" "}
                           Sin datos
