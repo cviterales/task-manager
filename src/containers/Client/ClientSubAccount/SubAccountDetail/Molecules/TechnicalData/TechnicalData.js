@@ -30,7 +30,7 @@ const TechnicalData = ({ subAccData }) => {
               ) : (
                 <span className={styles.boldText}>Nodo: </span>
               )}
-              <a href={subAccData?.dslam[0]?.nas_ip ?? subAccData?.node[0]?.ip}>
+              <a href={subAccData?.dslam[0]?.ip ?? subAccData?.node[0]?.ip}>
                 {subAccData?.dslam[0]?.dslam ?? subAccData?.node[0]?.node}
               </a>
             </p>

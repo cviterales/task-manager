@@ -197,7 +197,7 @@ const Reclamo = (props) => {
                         )}
                         <a
                           href={
-                            subAccount?.dslam[0]?.nas_ip ??
+                            subAccount?.dslam[0]?.ip ??
                             subAccount?.node[0]?.ip
                           }
                         >
