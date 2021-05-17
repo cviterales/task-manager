@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import style from "./reclamo.module.scss";
+import React, { useState, useEffect, useCallback, useRef } from "react"
+import style from "./reclamo.module.scss"
 
-import Card from "../../../components/Card/index";
-import Status from "../../../components/Status/index";
-import Spinner from "../../../components/Spinner/index";
-import Incident from "../../../components/Incident/Incident";
-import Button from "../../../components/Button/index";
-import Modal from "../../../components/Modal/index";
-import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal";
-import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal";
+import Card from "../../../components/Card/index"
+import Status from "../../../components/Status/index"
+import Spinner from "../../../components/Spinner/index"
+import Incident from "../../../components/Incident/Incident"
+import Button from "../../../components/Button/index"
+import Modal from "../../../components/Modal/index"
+import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal"
+import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal"
 import {
   faAddressCard,
   faClipboardCheck,
@@ -18,29 +18,31 @@ import {
   faPhone,
   faHdd,
   faWifi,
-} from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem";
-import {
-  getTask,
-  getSubAccountData,
-  createIncident,
-  closeTask,
-} from "../../../api/index";
-import { useSelector } from "react-redux";
-import { isBrowser } from "react-device-detect";
+} from "@fortawesome/free-solid-svg-icons"
+import { faUserCircle, faEdit } from "@fortawesome/free-regular-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
+import { getAccountData } from "../../../store/actions/account/account"
+import { getTaskData } from "../../../store/actions/task/task"
+import { createIncident, closeTask } from "../../../api/index"
+import { useDispatch, useSelector } from "react-redux"
+import { isBrowser } from "react-device-detect"
 
 const Reclamo = (props) => {
-  const id_service = useSelector((state) => state.auth.user.id_service);
-  const id_account = props.location.state.id_account;
-  const id_task = props.location.state.id_task;
-  const user_id = useSelector((state) => state.auth.user.id);
-  const [task, setTask] = useState();
-  const [subAccount, setSubAccount] = useState();
-  const [showIssueModal, setShowIssueModal] = useState(false);
-  const [showCloseModal, setShowShowModal] = useState(false);
-  const isMounted = useRef(true);
+  const id_service = useSelector((state) => state.auth.user.id_service)
+  const task = useSelector((state) => state.task.task)
+  const subAccount = useSelector((state) => state.account.account)
+
+  const id_account = props.location.state.id_account
+  const id_task = props.location.state.id_task
+  const user_id = useSelector((state) => state.auth.user.id)
+  const [showIssueModal, setShowIssueModal] = useState(false)
+  const [showCloseModal, setShowShowModal] = useState(false)
+  const isMounted = useRef(true)
+
+  const dispatch = useDispatch()
+
+  console.log(props.location.state.id_account)
 
   const renderPhones = (phones) => {
     return phones.map((phone, index) => (
@@ -48,8 +50,8 @@ const Reclamo = (props) => {
         <FontAwesomeIcon icon={faPhone} size="1x" color="#4299e1" />
         <p className={style.phone_content}>{phone.phone_number}</p>
       </div>
-    ));
-  };
+    ))
+  }
 
   const renderIncidents = (incidents) => {
     return incidents.map((incident, index) => {
@@ -59,74 +61,61 @@ const Reclamo = (props) => {
             <Incident incident={incident} />
           </li>
         </AnimatedListItem>
-      );
-    });
-  };
+      )
+    })
+  }
 
   const renderTeam = (teams) => {
     return teams.map((team, index) => {
       return (
         <div key={index}>
-          <img
-            className={style.img}
-            src={`${team.photo}`}
-            alt=""
-            title={team.operator_name}
-          />
+          <img className={style.img} src={`${team.photo}`} alt="" title={team.operator_name} />
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   const incidentHandler = useCallback(
     (description) => {
-      return createIncident(id_task, description, user_id);
+      return createIncident(id_task, description, user_id)
     },
     [id_task, user_id]
-  );
+  )
 
   const closeTaskHandler = useCallback(
-    (description) => {
-      return closeTask(id_task, user_id, task.id_calendar, description);
+    (description, technical, materials) => {
+      return closeTask(id_task, user_id, task.id_calendar, description, technical, materials)
     },
     [id_task, user_id, task]
-  );
+  )
 
   useEffect(() => {
     return () => {
-      isMounted.current = false;
-    };
-  }, []);
+      isMounted.current = false
+    }
+  }, [])
 
   useEffect(() => {
-    getTask(id_service, id_task).then((res) => {
-      const resultTaks = res;
-      getSubAccountData(id_service, id_account).then((res) => {
-        if (isMounted.current) {
-          setTask(resultTaks);
-          setSubAccount(res);
-        }
-      });
-    });
-  }, [id_service, id_task, id_account, closeTaskHandler, incidentHandler]);
+    dispatch(getAccountData(id_service, id_account))
+    dispatch(getTaskData(id_service, id_task))
+  }, [id_service, id_task, id_account, dispatch, showCloseModal, showIssueModal])
 
   const renderServices = (services) => {
     return services.map((service, i) => {
       return (
         <li key={i}>
           <p>
-            {service.service_name} desde{" "}
-            {new Date(service.date_from).toLocaleDateString().toString()}
+            {service.service_name} desde {new Date(service.date_from).toLocaleDateString().toString()}
           </p>
         </li>
-      );
-    });
-  };
+      )
+    })
+  }
   let loaded = (
     <div className={style.contentCentered}>
       <Spinner color="#4299e1" size="4rem" />
     </div>
-  );
+  )
   if (task) {
     loaded = (
       <div className={style.wrapper}>
@@ -135,14 +124,7 @@ const Reclamo = (props) => {
             <h3 style={{ marginRight: "1rem" }}>
               <b>{"Reclamo #" + task.number + " - " + task.created_at}</b>
             </h3>
-            {task.last_state ? (
-              <Status
-                description={task.last_state_description}
-                name={task.last_state}
-              />
-            ) : (
-              ""
-            )}
+            {task.last_state ? <Status description={task.last_state_description} name={task.last_state} /> : ""}
           </div>
           {task.is_active ? (
             <Button onClick={() => setShowShowModal(true)} variant="outline">
@@ -156,26 +138,16 @@ const Reclamo = (props) => {
               <div className={style.wrapper_info_content}>
                 <div className={style.card_content_title}>
                   <div className={style.card_content_icon}>
-                    <FontAwesomeIcon
-                      icon={faExclamationCircle}
-                      size="1x"
-                      color="#c30000"
-                    />
+                    <FontAwesomeIcon icon={faExclamationCircle} size="1x" color="#c30000" />
                   </div>
                   <h4 className={style.card_title}>Descripcion</h4>
                 </div>
                 <div className={style.card_content_icon}>
-                  {task.user_last_name !== "0" && (
-                    <p>Ultima modificacion: {task.user_last_name}</p>
-                  )}
+                  {task.user_last_name !== "0" && <p>Ultima modificacion: {task.user_last_name}</p>}
                 </div>
               </div>
               <div className={style.card_content}>
-                {task.description ? (
-                  <p> {task.description}</p>
-                ) : (
-                  <p>Sin descripcion</p>
-                )}
+                {task.description ? <p> {task.description}</p> : <p>Sin descripcion</p>}
               </div>
             </Card>
           </div>
@@ -189,46 +161,35 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Datos Tecnicos</h4>
                 </div>
                 <div className={style.card_content}>
-                  {!subAccount?.dslam ? (
+                  {subAccount?.fo ? (
+                    <p>
+                      <span className={style.boldText}>OLT: </span> {subAccount?.fo[0]?.olt_description}
+                    </p>
+                  ) : subAccount?.dslam?.length > 0 || subAccount?.node?.length > 0 ? (
+                    <>
+                      <p>
+                        {subAccount?.dslam[0] ? (
+                          <span className={style.boldText}>DSLAM: </span>
+                        ) : (
+                          <span className={style.boldText}>Nodo: </span>
+                        )}
+                        <a href={subAccount?.dslam[0]?.nas_ip ?? subAccount?.node[0]?.ip}>
+                          {subAccount?.dslam[0]?.dslam ?? subAccount?.node[0]?.node}
+                        </a>
+                      </p>
+                      <p>
+                        {subAccount?.dslam[0] ? (
+                          <span className={style.boldText}>Port: </span>
+                        ) : (
+                          <span className={style.boldText}>Banda: </span>
+                        )}
+                        {subAccount?.dslam[0]?.port_number ?? subAccount?.node[0]?.band}
+                      </p>
+                    </>
+                  ) : (
                     <div className={style.error_message_content}>
                       <h4 className={style.boldText}>No existen datos.</h4>
                     </div>
-                  ) : (
-                    <>
-                      <p>
-                        {subAccount?.dslam[0]?.dslam && (
-                          <span className={style.boldText}>DSLAM: </span>
-                        )}
-                        {subAccount?.node[0]?.node && (
-                          <span className={style.boldText}>Nodo: </span>
-                        )}
-                        <a
-                          href={
-                            subAccount?.dslam[0]?.ip ?? subAccount?.node[0]?.ip
-                          }
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {subAccount?.dslam[0]?.dslam ??
-                            subAccount?.node[0]?.node}
-                        </a>
-                      </p>
-                      {subAccount?.dslam[0]?.dslam ||
-                      subAccount?.node[0]?.node ? null : (
-                        <p>
-                          <span className={style.boldText}>DSLAM/Nodo: </span>{" "}
-                          Sin datos
-                        </p>
-                      )}
-                      <p>
-                        <span className={style.boldText}>Login: </span>
-                        {subAccount.info[0]?.radius_login}
-                      </p>
-                      <p>
-                        <span className={style.boldText}>Password: </span>
-                        {subAccount.info[0]?.radius_passwd}
-                      </p>
-                    </>
                   )}
                 </div>
               </Card>
@@ -242,7 +203,7 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Equipamiento</h4>
                 </div>
                 <div className={style.card_content}>
-                  {task?.equipment.length > 0 ? (
+                  {task?.equipment?.length > 0 ? (
                     <>
                       <div className={style.info_content}>
                         <p>
@@ -293,9 +254,7 @@ const Reclamo = (props) => {
                   ) : (
                     <div className={style.wrapper_info_content}>
                       <div className={style.info_content}>
-                        <ul className={style.list}>
-                          {renderServices(task.service)}
-                        </ul>
+                        <ul className={style.list}>{renderServices(task.service)}</ul>
                       </div>
                     </div>
                   )}
@@ -311,19 +270,15 @@ const Reclamo = (props) => {
                 <div className={style.wrapper_info_content}>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon
-                        icon={faClipboardCheck}
-                        size="1x"
-                        color="#a91ec1"
-                      />
+                      <FontAwesomeIcon icon={faClipboardCheck} size="1x" color="#a91ec1" />
                     </div>
                     <h4 className={style.card_title}>Incidentes</h4>
                   </div>
-                  {task.is_active ? (
+                  {task?.is_active ? (
                     <div className={style.card_content_icon}>
                       <Button
                         onClick={() => {
-                          setShowIssueModal(true);
+                          setShowIssueModal(true)
                         }}
                         variant="outline"
                       >
@@ -333,7 +288,7 @@ const Reclamo = (props) => {
                   ) : null}
                 </div>
                 <div className={style.card_content}>
-                  {task.incidents.length > 0 ? (
+                  {task?.incidents?.length > 0 ? (
                     <ul>{renderIncidents(task.incidents)}</ul>
                   ) : (
                     <div className={style.error_message_content}>
@@ -351,18 +306,12 @@ const Reclamo = (props) => {
                 <Card>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon
-                        icon={faUserCircle}
-                        size="1x"
-                        color="#ffca75"
-                      />
+                      <FontAwesomeIcon icon={faUserCircle} size="1x" color="#ffca75" />
                     </div>
-                    <h4 className={style.card_title}>
-                      Cuenta # {task.id_account}
-                    </h4>
+                    <h4 className={style.card_title}>Cuenta # {task.id_account}</h4>
                   </div>
                   <div className={style.card_content}>
-                    {task.error ? (
+                    {task?.error ? (
                       <div className={style.error_message_content}>
                         <h4 className={style.boldText}>No existen datos.</h4>
                       </div>
@@ -376,15 +325,9 @@ const Reclamo = (props) => {
                             </p>
                           </div>
                           <div className={style.info_content}>
-                            <FontAwesomeIcon
-                              icon={faAddressCard}
-                              size="1x"
-                              color="#17c3b2"
-                            />
+                            <FontAwesomeIcon icon={faAddressCard} size="1x" color="#17c3b2" />
                             <p>
-                              <span className={style.boldText}>
-                                N° Documento:
-                              </span>
+                              <span className={style.boldText}>N° Documento:</span>
                               {task.doc_number}
                             </p>
                           </div>
@@ -393,31 +336,21 @@ const Reclamo = (props) => {
                           <div>
                             <div className={style.info_content}>
                               <div className={style.card_content_icon}>
-                                <FontAwesomeIcon
-                                  icon={faMapMarkerAlt}
-                                  size="1x"
-                                  color="#fe6d73"
-                                />
+                                <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" color="#fe6d73" />
                               </div>
                               <p>
-                                <span className={style.boldText}>
-                                  Ubicación
-                                </span>
+                                <span className={style.boldText}>Ubicación</span>
                               </p>
                             </div>
                             <div className={style.info_content}>
                               <p>
-                                <span className={style.boldText}>
-                                  Domicilio:{" "}
-                                </span>
+                                <span className={style.boldText}>Domicilio: </span>
                                 {task.address}
                               </p>
                             </div>
                             <div className={style.info_content}>
                               <p>
-                                <span className={style.boldText}>
-                                  Localidad:{" "}
-                                </span>
+                                <span className={style.boldText}>Localidad: </span>
                                 {task.region_name}
                               </p>
                             </div>
@@ -441,24 +374,18 @@ const Reclamo = (props) => {
                 <Card>
                   <div className={style.card_content_title}>
                     <div className={style.card_content_icon}>
-                      <FontAwesomeIcon
-                        icon={faHardHat}
-                        size="1x"
-                        color="#ff791a"
-                      />
+                      <FontAwesomeIcon icon={faHardHat} size="1x" color="#ff791a" />
                     </div>
                     <h4 className={style.card_title}>Cuadrilla</h4>
                   </div>
                   <div className={style.card_content}>
-                    {task.team[0] ? (
+                    {task?.team.length > 0 ? (
                       <div>
                         <Card>
                           <div className={style.team_content}>
                             <p> #{task.team[0].id_team}</p>
                             <p> {task.team[0].vehicle_name}</p>
-                            <div className={style.img_content}>
-                              {renderTeam(task.team)}
-                            </div>
+                            <div className={style.img_content}>{renderTeam(task.team)}</div>
                           </div>
                         </Card>
                       </div>
@@ -474,10 +401,7 @@ const Reclamo = (props) => {
           </div>
         </div>
         {showIssueModal && (
-          <Modal
-            title="Nuevo Incidente"
-            onClose={() => setShowIssueModal(false)}
-          >
+          <Modal title="Nuevo Incidente" onClose={() => setShowIssueModal(false)}>
             <NewIssueModal
               onClose={() => setShowIssueModal(false)}
               onSave={(description) => incidentHandler(description)}
@@ -486,17 +410,14 @@ const Reclamo = (props) => {
         )}
         {showCloseModal && (
           <Modal title="Cerrar reclamo" onClose={() => setShowShowModal(false)}>
-            <CloseTaskModal
-              onClose={() => setShowShowModal(false)}
-              onSave={closeTaskHandler}
-            />
+            <CloseTaskModal onClose={() => setShowShowModal(false)} onSave={closeTaskHandler} />
           </Modal>
         )}
       </div>
-    );
+    )
   }
 
-  return <>{loaded}</>;
-};
+  return <>{loaded}</>
+}
 
-export default Reclamo;
+export default Reclamo

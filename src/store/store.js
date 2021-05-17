@@ -1,14 +1,17 @@
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import thunk from "redux-thunk";
-import authReducer from "./reducers/auth";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux"
+import thunk from "redux-thunk"
+import accountReducer from "./reducers/account"
+import authReducer from "./reducers/auth"
+import closeTaskReducer from "./reducers/closeTask"
+import taskReducer from "./reducers/task"
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
-  auth: authReducer
-});
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+  auth: authReducer,
+  closeTask: closeTaskReducer,
+  account: accountReducer,
+  task: taskReducer,
+})
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
-export default store;
+export default store

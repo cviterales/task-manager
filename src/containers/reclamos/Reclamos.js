@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import styles from "./reclamos.module.scss";
+import React, { useEffect, useState } from "react"
+import styles from "./reclamos.module.scss"
 
-import { faListOl } from "@fortawesome/free-solid-svg-icons";
-import AssignTeam from "../../components/AssignTeam/index";
-import Selector from "../../components/Selector/Selector";
-import InputText from "../../components/InputText/index";
-import AnimationListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
-import Button from "../../components/Button";
-import TaskItem from "./TaskItem/TaskItem";
-import { useSelector } from "react-redux";
-import { createCalendar, getTasks, getTeams, getFilters } from "../../api/index";
+import { faListOl } from "@fortawesome/free-solid-svg-icons"
+import AssignTeam from "../../components/AssignTeam/index"
+import Selector from "../../components/Selector/Selector"
+import InputText from "../../components/InputText/index"
+import AnimationListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem"
+import Button from "../../components/Button"
+import TaskItem from "./TaskItem/TaskItem"
+import { useSelector } from "react-redux"
+import { createCalendar, getTasks, getTeams, getFilters } from "../../api/index"
 
 const Reclamos = ({ history }) => {
-  let timeout = null;
-  const id_user = useSelector((state) => state?.auth?.user?.id);
+  let timeout = null
+  const id_user = useSelector((state) => state?.auth?.user?.id)
 
-  const id_service = useSelector((state) => state.auth.user.id_service);
-  const [reclamos, setReclamos] = useState([]);
-  const [operators, setOperators] = useState([]);
+  const id_service = useSelector((state) => state.auth.user.id_service)
+  const [reclamos, setReclamos] = useState([])
+  const [operators, setOperators] = useState([])
   const [filtersData, setFiltersData] = useState({
     task_type: [],
     service_types: [],
     regions: [],
     states: [],
-  });
-  const [counter, setCounter] = useState(9);
+  })
+  const [counter, setCounter] = useState(9)
 
-  const [open, setOpen] = useState(false);
-  const [selectedReclamo, setSelectedReclamo] = useState({});
+  const [open, setOpen] = useState(false)
+  const [selectedReclamo, setSelectedReclamo] = useState({})
 
   const [valuesSelected, setValuesSelected] = useState({
     stateSelected: "",
@@ -35,27 +35,27 @@ const Reclamos = ({ history }) => {
     taskTypeSelected: "",
     serviceTypesSelected: "",
     numberTaskSelected: "",
-  });
+  })
 
   const filterHandler = (event) => {
     setValuesSelected({
       ...valuesSelected,
       [event.target.name]: event.target.value,
-    });
-    setOpen(false);
-  };
+    })
+    setOpen(false)
+  }
 
   const inputHandler = (e) => {
-    if (timeout) clearTimeout(timeout);
+    if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => {
-      filterHandler(e);
-    }, 500);
-  };
+      filterHandler(e)
+    }, 500)
+  }
 
   useEffect(() => {
-    getFilters(id_service).then((res, filtersData) => setFiltersData({ ...filtersData, ...res }));
-    getTeams(id_service).then((res) => setOperators(res));
-  }, [id_service]);
+    getFilters(id_service).then((res, filtersData) => setFiltersData({ ...filtersData, ...res }))
+    getTeams(id_service).then((res) => setOperators(res))
+  }, [id_service])
 
   useEffect(() => {
     getTasks(
@@ -68,9 +68,9 @@ const Reclamos = ({ history }) => {
       valuesSelected.stateSelected,
       valuesSelected.regionSelected
     ).then((response) => {
-      setReclamos(response);
-    });
-  }, [id_service, valuesSelected]);
+      setReclamos(response)
+    })
+  }, [id_service, valuesSelected])
 
   const onSave = async (test, teamDate, team, priority) => {
     return createCalendar(test, teamDate, team, priority, id_user).then((res) => {
@@ -84,23 +84,23 @@ const Reclamos = ({ history }) => {
         valuesSelected.stateSelected,
         valuesSelected.regionSelected
       ).then((response) => {
-        setReclamos(response);
-      });
-      return res;
-    });
-  };
+        setReclamos(response)
+      })
+      return res
+    })
+  }
 
   const handlerTask = (reclamo) => {
-    setSelectedReclamo(reclamo);
+    setSelectedReclamo(reclamo)
     if (!open) {
-      setOpen(true);
+      setOpen(true)
     }
-  };
+  }
 
   const handleClose = (e) => {
-    setOpen(false);
-    e.preventDefault();
-  };
+    setOpen(false)
+    e.preventDefault()
+  }
 
   const createLiReclamos = (reclamos) => {
     if (reclamos[0]?.number) {
@@ -109,16 +109,16 @@ const Reclamos = ({ history }) => {
           <AnimationListItem index={index} key={index} style={{ listStyleType: "none" }}>
             <TaskItem reclamo={reclamo} handlerTask={handlerTask} history={history} />
           </AnimationListItem>
-        );
-      });
+        )
+      })
     } else {
       return (
         <div className={styles.error_title}>
           <h3>No hay resultados.</h3>
         </div>
-      );
+      )
     }
-  };
+  }
   return (
     <>
       <div className={styles.header}>
@@ -136,7 +136,7 @@ const Reclamos = ({ history }) => {
               icon={faListOl}
               iconColor="#fe6d73"
               onChange={(e) => {
-                inputHandler(e);
+                inputHandler(e)
               }}
             />
           </div>
@@ -146,11 +146,16 @@ const Reclamos = ({ history }) => {
                 <p className={styles.boldText}>Tipo</p>
                 <Selector nameKey="taskTypeSelected" data={filtersData.task_type} onSelected={filterHandler} />
               </div>
-              {filtersData.service_types &&
-                < div className={styles.input_container}>
+              {filtersData.service_types && (
+                <div className={styles.input_container}>
                   <p className={styles.boldText}>Servicio</p>
-                  <Selector nameKey="serviceTypesSelected" data={filtersData.service_types} onSelected={filterHandler} />
-                </div>}
+                  <Selector
+                    nameKey="serviceTypesSelected"
+                    data={filtersData.service_types}
+                    onSelected={filterHandler}
+                  />
+                </div>
+              )}
               <div className={styles.input_container}>
                 <p className={styles.boldText}>Region</p>
                 <Selector nameKey="regionSelected" data={filtersData.regions} onSelected={filterHandler} />
@@ -181,6 +186,6 @@ const Reclamos = ({ history }) => {
         </div>
       </main>
     </>
-  );
-};
-export default Reclamos;
+  )
+}
+export default Reclamos

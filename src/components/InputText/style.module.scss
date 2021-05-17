@@ -1,11 +1,10 @@
 .content_input {
   display: flex;
-  justify-content: center;
   align-items: center;
   background: #ffffff;
   border-radius: 30px;
   width: 100%;
-  padding: 0.5em 0rem;
+  padding: 0.5em 0.5rem;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
@@ -24,7 +23,7 @@
 }
 
 /* Firefox */
-.input[type=number] {
+.input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -32,4 +31,8 @@
   margin: 0rem 0.5rem;
   min-width: 0.5rem;
   width: 10%;
+}
+
+.label {
+  height: 100%;
 }

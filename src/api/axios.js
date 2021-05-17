@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_LOGOUT } from "../store/actions/actionTypes";
+import { AUTH_LOGOUT } from "../store/actions/auth/actionTypes";
 import store from "../store/store";
 
 //baseURL: 'http://192.168.77.244:4000',

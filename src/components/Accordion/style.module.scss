@@ -1,0 +1,23 @@
+.accordion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 1rem 0.5rem;
+  border-radius: 10px;
+  &:hover {
+    background-color: var(--light);
+  }
+}
+
+.active {
+  margin-bottom: 1rem;
+  display: block;
+  border-radius: 5px;
+  border-bottom: 1px solid #4299e1;
+}
+
+.inactive {
+  display: none;
+}

@@ -1,26 +1,22 @@
-import React from "react";
-import {
-  faCog,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "./style.module.scss";
+import React from "react"
+import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import style from "./style.module.scss"
 
-import Card from "../../Card/index";
+import Card from "../../Card/index"
 
-import { useDispatch } from "react-redux";
-import * as actions from '../../../store/actions/index'
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux"
+import * as actions from "../../../store/actions/auth"
+import { useHistory } from "react-router-dom"
 
 const UserProfile = (props) => {
-
   const dispatch = useDispatch()
   const history = useHistory()
 
   const logoutHandler = () => {
     dispatch(actions.authLogout())
-    history.push('/')
-  };
+    history.push("/")
+  }
 
   return (
     <div className={style.options_menu_container}>
@@ -29,7 +25,7 @@ const UserProfile = (props) => {
           <button
             className={style.button_option}
             onClick={() => {
-              props.onEdit();
+              props.onEdit()
             }}
           >
             <div className={style.option}>
@@ -40,22 +36,18 @@ const UserProfile = (props) => {
           <button
             className={style.button_option}
             onClick={() => {
-              logoutHandler();
+              logoutHandler()
             }}
           >
             <div className={style.option}>
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                size="1x"
-                className={style.icon}
-              />
+              <FontAwesomeIcon icon={faSignOutAlt} size="1x" className={style.icon} />
             </div>
             <p>Cerrar sesión</p>
           </button>
         </div>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default UserProfile
