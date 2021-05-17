@@ -38,9 +38,15 @@
 }
 
 .li {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
   list-style: none;
+  width: 100%;
+  cursor: pointer;
+  &:hover .icon {
+    color: white;
+  }
 }
 
 .icon {
@@ -49,9 +55,6 @@
   stroke-width: 25px;
   font-size: 1.5rem;
   transition: color 0.2s linear;
-  &:hover {
-    color: white;
-  }
 }
 
 .icon_active {

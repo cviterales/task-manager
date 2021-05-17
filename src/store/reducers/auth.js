@@ -1,6 +1,6 @@
-import * as actionTypes from "../actions/actionTypes";
+import * as actionTypes from "../actions/auth/actionTypes"
 
-const isUserAuthenticated = JSON.parse(sessionStorage.getItem("user"));
+const isUserAuthenticated = JSON.parse(sessionStorage.getItem("user"))
 
 const initialState = {
   user: isUserAuthenticated ? isUserAuthenticated : null,
@@ -8,52 +8,52 @@ const initialState = {
   socket: null,
   isSocketConnected: false,
   isSocketRefresh: 0,
-};
+}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_LOGGED:
-      let newUser = action.payload;
-      newUser["id_service"] = 1; //asigna por defecto el servicio Ecolan
+      let newUser = action.payload
+      newUser["id_service"] = 1 //asigna por defecto el servicio Ecolan
       newUser["isAdmin"] = newUser.permissions.filter((el) => el.id_permission.toString() === "2" || "1").length > 0
-      sessionStorage.setItem("user", JSON.stringify(newUser));
+      sessionStorage.setItem("user", JSON.stringify(newUser))
       return {
         ...state,
         logged: true,
         user: newUser,
-      };
+      }
     case actionTypes.AUTH_LOGOUT:
-      sessionStorage.clear();
+      sessionStorage.clear()
       return {
         ...state,
         user: null,
         logged: false,
         socket: null,
         isSocketConnected: false,
-      };
+      }
     case actionTypes.SET_SOCKET:
       return {
         ...state,
         socket: action.payload,
         isSocketConnected: true,
-      };
+      }
     case actionTypes.SET_SOCKET_REFRESH:
       return {
         ...state,
         isSocketRefresh: action.payload,
-      };
+      }
     case actionTypes.UPDATED_SERVICE_SELECTED:
-      let newService = action.payload;
-      let updatedUser = state.user;
-      updatedUser["id_service"] = newService;
-      sessionStorage.setItem("user", JSON.stringify(updatedUser));
+      let newService = action.payload
+      let updatedUser = state.user
+      updatedUser["id_service"] = newService
+      sessionStorage.setItem("user", JSON.stringify(updatedUser))
       return {
         ...state,
         user: updatedUser,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default authReducer;
+export default authReducer

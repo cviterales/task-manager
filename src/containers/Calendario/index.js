@@ -175,7 +175,6 @@ const Calendario = () => {
       const tasks = res;
       const calendar = getDaysArray(tasks, year, month);
       setCalendar(calendar);
-      console.log(calendar);
     });
   }, [year, month, socket_refresh, id_service, getDaysArray]);
 

@@ -1,18 +1,18 @@
 
-import {render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../../test-utils'
 import AssignTeam from './index';
 
 test("render AssignTeam", async () => {
-  const handleOnSave= jest.fn()
+  const handleOnSave = jest.fn()
   const handleOnClose = jest.fn()
-  
-  render(<AssignTeam data={{priority: false}} onClose={handleOnClose} operators={[]} onSave={handleOnSave}/>)
-  
+
+  render(<AssignTeam data={{ priority: false }} onClose={handleOnClose} operators={[]} onSave={handleOnSave} />)
+
   expect(screen.getByTestId('form')).toBeInTheDocument();
-  
+
   expect(screen.getByLabelText('Cuadrilla')).toBeInTheDocument();
   expect(screen.getByTestId('cuadrilla')).toBeInTheDocument();
-  
+
   expect(screen.getByLabelText('Fecha')).toBeInTheDocument();
   expect(screen.getByTestId('prioridad')).toBeInTheDocument();
 

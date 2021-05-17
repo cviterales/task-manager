@@ -1,15 +1,34 @@
-import styles from "./style.module.scss";
-import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./style.module.scss"
+import PropTypes from "prop-types"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const InputText = ({ type, name = "", onChange, placeHolder, icon, iconColor = "rgba(45, 55, 72, 1)" }) => {
+const InputText = ({
+  type,
+  name = "",
+  onChange,
+  placeHolder,
+  icon,
+  iconColor = "rgba(45, 55, 72, 1)",
+  label = "",
+  ...rest
+}) => {
   return (
-    <div className={styles.content_input}>
-      {icon && <FontAwesomeIcon className={styles.icon} icon={icon} size="lg" color={iconColor} />}
-      <input name={name} type={type} className={styles.input} onChange={onChange} placeholder={placeHolder} />
-    </div>
-  );
-};
+    <label className={styles.label}>
+      {label}
+      <div className={styles.content_input}>
+        {icon && <FontAwesomeIcon className={styles.icon} icon={icon} size="lg" color={iconColor} />}
+        <input
+          name={name}
+          type={type}
+          className={styles.input}
+          onChange={onChange}
+          placeholder={placeHolder}
+          {...rest}
+        />
+      </div>
+    </label>
+  )
+}
 
 InputText.propTypes = {
   iconColor: PropTypes.string,
@@ -17,6 +36,6 @@ InputText.propTypes = {
   placeHolder: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-};
+}
 
-export default InputText;
+export default InputText

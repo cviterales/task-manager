@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as actions from "../../store/actions/index";
+import * as actions from "../../store/actions/auth";
 import { getServices, updatedUserProfile } from "../../api/index";
 
 const Header = () => {
