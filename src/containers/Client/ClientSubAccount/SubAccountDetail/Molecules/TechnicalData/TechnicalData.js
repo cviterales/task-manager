@@ -19,7 +19,7 @@ const TechnicalData = ({ subAccData }) => {
   let item10 = null
   let item11 = null
   switch (id_service) {
-    // ECOLAN TECHNICAL DATA // 
+    // ECOLAN TECHNICAL DATA //
     case 1:
       item1 =
         subAccData?.dslam.length > 0 || subAccData?.node.length > 0 ? (
@@ -30,7 +30,12 @@ const TechnicalData = ({ subAccData }) => {
               ) : (
                 <span className={styles.boldText}>Nodo: </span>
               )}
-              <a href={subAccData?.dslam[0]?.ip ?? subAccData?.node[0]?.ip} target="_blank" title={subAccData?.dslam[0]?.ip} rel="noreferrer">
+              <a
+                href={subAccData?.dslam[0]?.ip ?? subAccData?.node[0]?.ip}
+                target="_blank"
+                title={subAccData?.dslam[0]?.ip}
+                rel="noreferrer"
+              >
                 {subAccData?.dslam[0]?.dslam ?? subAccData?.node[0]?.node}
               </a>
             </p>
@@ -45,18 +50,9 @@ const TechnicalData = ({ subAccData }) => {
           </>
         ) : (
           <p>
-            {subAccData?.dslam[0] ? (
-              <span className={styles.boldText}>Port: </span>
-            ) : (
-              <span className={styles.boldText}>Banda: </span>
-            )}
-            {subAccData?.dslam[0]?.port_number ?? subAccData?.node[0]?.band}
+            <span className={styles.boldText}>Sin datos tecnicos</span>
           </p>
-      ) : (
-        <p>
-          <span className={styles.boldText}>Sin datos tecnicos</span>
-        </p>
-      )
+        )
       item2 = subAccData?.info[0]?.radius_login && (
         <p>
           <span className={styles.boldText}>Login: </span>
