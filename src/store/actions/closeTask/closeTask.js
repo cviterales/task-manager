@@ -74,9 +74,19 @@ const addMaterials = (materials) => ({ type: actionTypes.GET_TASK_MATERIALS, pay
 
 export const getMaterials = (id_deposit) => {
   return async (dispatch) => {
-    const res = await getTeamMaterials(id_deposit)
+    let res = await getTeamMaterials(id_deposit)
+
     let materials = res.filter((el) => el.equipment === 0)
     let equipment = res.filter((el) => el.equipment === 1)
+    equipment = equipment.map((el) => {
+      return {
+        id: el.id_article_detail,
+        orden_de_retiro_id: el.orden_de_retiro_id,
+        cant_in_stock: el.cant_in_stock,
+        equipment: el.equipment,
+        name: el.name,
+      }
+    })
     let availableMaterials = { materials, equipment }
     dispatch(addMaterials(availableMaterials))
   }

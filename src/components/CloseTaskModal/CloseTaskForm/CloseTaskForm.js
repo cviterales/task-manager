@@ -15,8 +15,8 @@ const CloseTaskForm = ({ onClose }) => {
 
   let renderStepComponent = [
     { component: <TaskFormDescription />, name: "Descripcion" },
-    { component: <TaskFormData />, name: "Datos Tecnicos" },
-    { component: <TaskFormEquipment onClose={onClose} />, name: "Equipamiento" },
+    { component: <TaskFormData />, name: "Datos" },
+    { component: <TaskFormEquipment />, name: "Equipamiento" },
     { component: <TaskFormMaterials />, name: "Materiales" },
     { component: <TaskFormSignature onClose={onClose} />, name: "Firma" },
   ]

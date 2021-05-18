@@ -40,8 +40,7 @@ const TaskFormData = () => {
   }
 
   useEffect(() => {
-    account[clientConnection]?.length > 0 &&
-      clientConnection === "dslam" &&
+    clientConnection === "dslam" &&
       getDslamPorts(closeTask.dslam.id_dslam ?? account[clientConnection][0].id_dslam).then((res) => setPorts(res))
   }, [account, clientConnection, closeTask.dslam])
 
@@ -95,14 +94,17 @@ const TaskFormData = () => {
             />
           </label>
         )}
-        {account[clientConnection]?.length > 0 && (
+        {(closeTask.dslam.id_dslam || account[clientConnection]?.length > 0) && (
           <label>
             Port
             <Select
               options={ports}
               defaultValue={{
-                value: account[clientConnection][0]["id_dslam_port"],
-                label: `${account[clientConnection][0]["port_number"]} - Actual`,
+                value: account[clientConnection]?.length > 0 ? account[clientConnection][0]["id_dslam_port"] : "",
+                label:
+                  account[clientConnection]?.length > 0
+                    ? `${account[clientConnection][0]["port_number"]} - Actual`
+                    : "",
               }}
               onChange={(e) => dispatch(setTaskPort(e.value))}
               required

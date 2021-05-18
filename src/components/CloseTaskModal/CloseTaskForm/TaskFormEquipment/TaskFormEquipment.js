@@ -104,13 +104,19 @@ const TaskFormEquipment = () => {
           <li style={{ listStyleType: "none" }}>
             <Card>
               <div className={styles.gridContainer}>
-                <p className={styles.gridItem}>{el.equipment}</p>
+                <p className={styles.gridItem}>
+                  {el.equipment} - {el.model}
+                </p>
                 <p className={styles.gridItem}>MAC: {el.mac}</p>
                 <div className={styles.gridItem}>
                   <FontAwesomeIcon
                     onClick={() => editEquipmentHandler(el)}
                     icon={faEdit}
-                    color="#2c5282"
+                    color={
+                      closeTask.equipment_updated.find((e) => e.id_sub_cta_equipment === el.id_equipment)
+                        ? "green"
+                        : "#2c5282"
+                    }
                     style={{ cursor: "pointer" }}
                   />
                   <FontAwesomeIcon

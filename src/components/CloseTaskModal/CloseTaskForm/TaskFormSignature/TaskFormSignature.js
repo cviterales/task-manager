@@ -1,18 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { closeTask } from "../../../../api"
 import { resetSteps, updateStep } from "../../../../store/actions/closeTask/closeTask"
 import Button from "../../../Button"
 import Signature from "../../../Signature/Signature"
 import styles from "./style.module.scss"
-import Message from "../../../Message/index"
 
 const TaskFormSignature = ({ onClose }) => {
   const closeTaskData = useSelector((state) => state.closeTask)
   const task = useSelector((state) => state.task.task)
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
-  //const [message, setMessage] = useState()
+
   const saveTaskHandler = () => {
     closeTask(
       user.id_service,
@@ -28,7 +27,6 @@ const TaskFormSignature = ({ onClose }) => {
       closeTaskData.equipment_recovered,
       closeTaskData.materials
     ).then((res) => {
-      //setMessage(res)
       dispatch(resetSteps())
       onClose()
     })
@@ -39,7 +37,6 @@ const TaskFormSignature = ({ onClose }) => {
       <h3 className={styles.boldText}>Firma</h3>
       <Signature />
       <div>
-        {/* {message && <Message type={message.error ? "error" : "success"} message={message.message} />} */}
         <div className={styles.bottom}>
           <Button type="button" variant="blue" onClick={() => dispatch(updateStep())}>
             Atras
