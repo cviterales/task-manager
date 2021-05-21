@@ -1,5 +1,20 @@
 import instance from "./axios"
 
+export async function getPairs(id_cable, pair_number, pair_sec) {
+  let result = await instance.get(`/pairs/${id_cable}/${pair_number}/${pair_sec}`)
+  return result.data
+}
+
+export async function getPorts(port_name) {
+  let result = await instance.get(`/ports/${port_name}`)
+  return result.data
+}
+
+export async function getWires() {
+  let result = await instance.get("/cables")
+  return result.data
+}
+
 export async function getEquipmentMode() {
   let result = await instance.get("/equipment/mode")
   return result.data

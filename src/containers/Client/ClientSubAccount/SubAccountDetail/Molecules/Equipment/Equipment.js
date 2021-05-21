@@ -1,9 +1,20 @@
-import React from "react";
-import styles from "../../style.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Card from "../../../../../../components/Card";
-import { faHdd } from "@fortawesome/free-solid-svg-icons";
-const Equipment = ({ subAccData }) => {
+import React from "react"
+import styles from "../../style.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Card from "../../../../../../components/Card"
+import { faHdd } from "@fortawesome/free-solid-svg-icons"
+import AnimatedListItem from "../../../../../../components/Animations/AnimatedListItem/AnimatedListItem"
+import EquipmentItem from "./EquipmentItem/EquipmentItem"
+
+const Equipment = ({ equipment }) => {
+  const renderEquipment = () => {
+    return equipment.map((e, i) => (
+      <AnimatedListItem key={i} delay={i}>
+        <EquipmentItem item={e} />
+      </AnimatedListItem>
+    ))
+  }
+
   return (
     <div className={styles.card_wrapper}>
       <Card>
@@ -12,29 +23,8 @@ const Equipment = ({ subAccData }) => {
           Equipamiento
         </h4>
         <div className={styles.cardContent}>
-          {subAccData?.equipment[0]?.model ? (
-            subAccData.equipment.map((e, i) => {
-              return (
-                <div key={i}>
-                  <p>
-                    <span className={styles.boldText}>Modelo: </span>
-                    {e?.model}
-                  </p>
-                  <p>
-                    <span className={styles.boldText}>MAC: </span>
-                    {e?.mac}
-                  </p>
-                  <p>
-                    <span className={styles.boldText}>IP: </span>
-                    {e?.ip}
-                  </p>
-                  <p>
-                    <span className={styles.boldText}>Modo: </span>
-                    {e?.mode}
-                  </p>
-                </div>
-              );
-            })
+          {equipment.length > 0 ? (
+            <ul>{renderEquipment()}</ul>
           ) : (
             <div className={styles.contentCentered}>
               <h4 className={styles.boldText}>No hay Datos</h4>{" "}
@@ -43,7 +33,7 @@ const Equipment = ({ subAccData }) => {
         </div>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default Equipment;
+export default Equipment
