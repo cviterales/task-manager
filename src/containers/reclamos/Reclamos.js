@@ -69,7 +69,6 @@ const Reclamos = ({ history }) => {
       valuesSelected.regionSelected
     ).then((response) => {
       setReclamos(response)
-      console.log(response)
     })
   }, [id_service, valuesSelected])
 

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import style from "./style.module.scss";
+import React, { useEffect, useState, useRef } from "react"
+import style from "./style.module.scss"
 
-import Card from "../../../components/Card/index";
-import Status from "../../../components/Status/index";
+import Card from "../../../components/Card/index"
+import Status from "../../../components/Status/index"
 
 import {
   faAddressCard,
@@ -12,32 +12,32 @@ import {
   faMapMarkerAlt,
   faPhone,
   faWifi,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getClientSubAccounts } from "../../../api/index";
-import { useSelector } from "react-redux";
-import Button from "../../../components/Button";
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { getClientSubAccounts } from "../../../api/index"
+import { useSelector } from "react-redux"
+import Button from "../../../components/Button"
 
 const ClientAccordion = ({ client, history }) => {
-  const [showAccount, setShowAccount] = useState(false);
-  const [subAccounts, setSubAccounts] = useState(false);
-  const id_service = useSelector((state) => state.auth.user.id_service);
+  const [showAccount, setShowAccount] = useState(false)
+  const [subAccounts, setSubAccounts] = useState(false)
+  const id_service = useSelector((state) => state.auth.user.id_service)
   const isMounted = useRef(true)
 
   const showSubAccountHandler = async (id_service, client) => {
     if (id_service === 1) {
       const res = await getClientSubAccounts(id_service, client.id_account)
       if (isMounted.current) {
-        setShowAccount((showAccount) => !showAccount);
-        setSubAccounts(res);
+        setShowAccount((showAccount) => !showAccount)
+        setSubAccounts(res)
       }
     } else {
       if (isMounted.current) {
-        setShowAccount((showAccount) => !showAccount);
-        setSubAccounts();
+        setShowAccount((showAccount) => !showAccount)
+        setSubAccounts()
       }
     }
-  };
+  }
 
   useEffect(() => {
     return () => {
@@ -49,9 +49,9 @@ const ClientAccordion = ({ client, history }) => {
     let state = {
       client_sub_account: item?.id_sub_account ?? client.id_account,
       client_id: client.id_account,
-    };
-    history.push("/client_sub_account", state);
-  };
+    }
+    history.push("/client_sub_account", state)
+  }
 
   const renderClient = (client) => {
     return (
@@ -88,13 +88,13 @@ const ClientAccordion = ({ client, history }) => {
           (subAccounts ? (
             <div className={`${showAccount ? style.show_accounts : style.hidden_accounts}`}>
               {subAccounts?.map((item, index) => {
-                let dateInactive = new Date(item.date_inactive).toLocaleDateString();
+                let dateInactive = new Date(item.date_inactive).toLocaleDateString()
                 return (
                   <div
                     className={style.client_card_child}
                     key={index}
                     onClick={() => {
-                      toSubAcc(item);
+                      toSubAcc(item)
                     }}
                   >
                     <div className={style.client_content_childs}>
@@ -144,7 +144,7 @@ const ClientAccordion = ({ client, history }) => {
                       </div>
                     </div>
                   </div>
-                );
+                )
               })}
             </div>
           ) : (
@@ -152,7 +152,7 @@ const ClientAccordion = ({ client, history }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  toSubAcc();
+                  toSubAcc()
                 }}
               >
                 <h4>Ver Cuenta</h4>
@@ -160,15 +160,15 @@ const ClientAccordion = ({ client, history }) => {
             </div>
           ))}
       </>
-    );
-  };
+    )
+  }
   return (
     <div className={style.client_card}>
       <Card>
         <div onClick={() => showSubAccountHandler(id_service, client)}>{renderClient(client)}</div>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default ClientAccordion;
+export default ClientAccordion

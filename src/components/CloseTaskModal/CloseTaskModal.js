@@ -26,7 +26,6 @@ const CloseTask = ({ onClose }) => {
 
 CloseTask.propTypes = {
   onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 }
 
 export default CloseTask

@@ -10,10 +10,38 @@ const initialState = {
   availableMaterials: null,
   materials: [],
   step: 1,
+  technical_data: {
+    cable_pair: null,
+    pair_sec: null,
+    id_port: null,
+    box: null,
+    catastro: null,
+  },
 }
 
 const closeTaskReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SET_TECHNICAL_DATA_PAIR:
+      return {
+        ...state,
+        technical_data: { ...state.technical_data, ...action.payload },
+      }
+
+    case actionTypes.SET_TECHNICAL_DATA_PORT:
+      return {
+        ...state,
+        technical_data: { ...state.technical_data, id_port: action.payload },
+      }
+    case actionTypes.SET_TECHNICAL_DATA_BOX:
+      return {
+        ...state,
+        technical_data: { ...state.technical_data, box: action.payload },
+      }
+    case actionTypes.SET_TECHNICAL_DATA_CADASTRE:
+      return {
+        ...state,
+        technical_data: { ...state.technical_data, catastro: action.payload },
+      }
     case actionTypes.REMOVE_TASK_RECOVERED_EQUIPMENT:
       let filteredRecoveredEquipment = state.equipment_recovered.filter((el) => el !== action.payload)
       return {
@@ -68,10 +96,8 @@ const closeTaskReducer = (state = initialState, action) => {
         fo: newOlt,
       }
     case actionTypes.RESET_FORM_STEP:
-      return {
-        ...state,
-        step: 1,
-      }
+      return initialState
+
     case actionTypes.SET_FORM_STEP:
       let newStep
       if (action.payload === "next") {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styles from "./style.module.scss"
 
 import Button from "../../../Button"
@@ -81,7 +81,7 @@ const TaskFormEquipment = () => {
                 <p className={styles.gridItem}>
                   {closeTask?.availableMaterials?.equipment?.find((e) => e.id === el.id_material).name}
                 </p>
-                <p className={styles.gridItem}>{el.quantity}</p>
+                <div></div>
                 <div className={styles.gridItem}>
                   <FontAwesomeIcon
                     icon={faTrash}

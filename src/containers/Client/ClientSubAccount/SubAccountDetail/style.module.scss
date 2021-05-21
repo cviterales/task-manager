@@ -5,6 +5,9 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  @include mq("phone", "max") {
+    height: auto;
+  }
 }
 
 .header {
@@ -24,6 +27,7 @@
 
 .ctnr_sm {
   display: flex;
+  min-height: 30%;
   justify-content: space-between;
   @include mq("phone", "max") {
     flex-direction: column;
@@ -32,7 +36,7 @@
 
 .ctnr_lg {
   display: flex;
-  height: 40%;
+  height: 35%;
   @include mq("phone", "max") {
     flex-direction: column;
   }
@@ -166,6 +170,7 @@
 .balance {
   padding: 0.25rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .balance_true {

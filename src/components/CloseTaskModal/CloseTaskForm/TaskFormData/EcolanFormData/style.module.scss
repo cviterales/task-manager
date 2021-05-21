@@ -1,0 +1,11 @@
+.technicalData {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.boldText {
+  font-family: "Roboto Bold";
+  color: var(--blue);
+}

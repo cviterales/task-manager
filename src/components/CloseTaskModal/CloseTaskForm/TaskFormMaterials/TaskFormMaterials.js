@@ -60,8 +60,6 @@ const TaskFormMaterials = () => {
       ))
   }
 
-  console.log(selectedMaterial)
-
   return (
     <div className={styles.wrapper}>
       <form className={styles.contentForm} onSubmit={(e) => materialHandler(e)}>

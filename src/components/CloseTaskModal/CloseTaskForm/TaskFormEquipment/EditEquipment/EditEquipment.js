@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Select from "react-select"
 import { getEquipmentCharacteristics, getEquipmentMode } from "../../../../../api"
-import {
-  setMaterials,
-  setTaskNewEquipment,
-  setTaskUpdatedEquipment,
-} from "../../../../../store/actions/closeTask/closeTask"
+import { setTaskNewEquipment, setTaskUpdatedEquipment } from "../../../../../store/actions/closeTask/closeTask"
 import Button from "../../../../Button"
 import Checkbox from "../../../../Checkbox"
 import DropDown from "../../../../DropDown"
@@ -49,10 +45,6 @@ const EditEquipment = ({ onClose, equipment }) => {
     getEquipmentMode().then((res) => setEquipmentModes(res))
   }, [])
 
-  useEffect(() => {
-    setWifi(equipment?.wifi)
-  }, [equipment])
-
   const getSelectedMaterial = (e) => {
     let material = closeTask.availableMaterials.equipment.find((el) => el.id.toString() === e.target.value)
     setSelectedMaterial(material)
@@ -73,6 +65,7 @@ const EditEquipment = ({ onClose, equipment }) => {
       if (selectedMaterial) {
         let obj = {
           id_material: selectedMaterial?.id,
+          id_article_detail: selectedMaterial.id_article_detail,
           id_mode: equipmentMode,
           wifi: wifi,
           ip: equipmentIP,
@@ -146,7 +139,7 @@ const EditEquipment = ({ onClose, equipment }) => {
           check={equipment?.wifi === 1 ? true : false}
           onChange={() => setWifi(!wifi)}
         />
-        {equipment?.wifi === 1 && (
+        {wifi === true && (
           <>
             <InputText
               type="text"

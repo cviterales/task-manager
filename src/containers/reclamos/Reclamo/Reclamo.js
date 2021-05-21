@@ -24,9 +24,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
 import { getTaskData } from "../../../store/actions/task/task"
-import { createIncident, closeTask } from "../../../api/index"
+import { createIncident } from "../../../api/index"
 import { useDispatch, useSelector } from "react-redux"
 import { isBrowser } from "react-device-detect"
+import { resetForm } from "../../../store/actions/closeTask/closeTask"
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
@@ -37,12 +38,16 @@ const Reclamo = (props) => {
   const id_task = props.location.state.id_task
   const user_id = useSelector((state) => state.auth.user.id)
   const [showIssueModal, setShowIssueModal] = useState(false)
-  const [showCloseModal, setShowShowModal] = useState(false)
+  const [showCloseModal, setShowCloseModal] = useState(false)
   const isMounted = useRef(true)
 
   const dispatch = useDispatch()
 
-  console.log(props.location.state.id_account)
+  const closeTaskModalHandler = () => {
+    console.log("test")
+    dispatch(resetForm())
+    setShowCloseModal(false)
+  }
 
   const renderPhones = (phones) => {
     return phones.map((phone, index) => (
@@ -80,13 +85,6 @@ const Reclamo = (props) => {
       return createIncident(id_task, description, user_id)
     },
     [id_task, user_id]
-  )
-
-  const closeTaskHandler = useCallback(
-    (description, technical, materials) => {
-      return closeTask(id_task, user_id, task.id_calendar, description, technical, materials)
-    },
-    [id_task, user_id, task]
   )
 
   useEffect(() => {
@@ -127,7 +125,7 @@ const Reclamo = (props) => {
             {task.last_state ? <Status description={task.last_state_description} name={task.last_state} /> : ""}
           </div>
           {task.is_active ? (
-            <Button onClick={() => setShowShowModal(true)} variant="outline">
+            <Button onClick={() => setShowCloseModal(true)} variant="outline">
               <p>Cerrar reclamo</p>
             </Button>
           ) : null}
@@ -161,7 +159,7 @@ const Reclamo = (props) => {
                   <h4 className={style.card_title}>Datos Tecnicos</h4>
                 </div>
                 <div className={style.card_content}>
-                  {subAccount?.fo ? (
+                  {subAccount?.fo[0] ? (
                     <p>
                       <span className={style.boldText}>OLT: </span> {subAccount?.fo[0]?.olt_description}
                     </p>
@@ -409,8 +407,8 @@ const Reclamo = (props) => {
           </Modal>
         )}
         {showCloseModal && (
-          <Modal title="Cerrar reclamo" onClose={() => setShowShowModal(false)}>
-            <CloseTaskModal onClose={() => setShowShowModal(false)} onSave={closeTaskHandler} />
+          <Modal title="Cerrar reclamo" onClose={() => closeTaskModalHandler()}>
+            <CloseTaskModal onClose={() => closeTaskModalHandler()} />
           </Modal>
         )}
       </div>

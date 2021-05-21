@@ -1,6 +1,34 @@
 import { getTeamMaterials } from "../../../api/index"
 import * as actionTypes from "./actionTypes"
 
+export const setTechnicalDataBox = (payload) => {
+  return {
+    type: actionTypes.SET_TECHNICAL_DATA_BOX,
+    payload: payload,
+  }
+}
+
+export const setTechnicalDataCatastro = (payload) => {
+  return {
+    type: actionTypes.SET_TECHNICAL_DATA_CADASTRE,
+    payload: payload,
+  }
+}
+
+export const setTechnicalDataPort = (payload) => {
+  return {
+    type: actionTypes.SET_TECHNICAL_DATA_PORT,
+    payload: payload,
+  }
+}
+
+export const setTechnicalDataPair = (payload) => {
+  return {
+    type: actionTypes.SET_TECHNICAL_DATA_PAIR,
+    payload: payload,
+  }
+}
+
 export const removeTaskRecoveredEquipment = (payload) => {
   return {
     type: actionTypes.REMOVE_TASK_RECOVERED_EQUIPMENT,
@@ -57,7 +85,7 @@ export const setTaskOlt = (val) => {
   }
 }
 
-export const resetSteps = () => {
+export const resetForm = () => {
   return {
     type: actionTypes.RESET_FORM_STEP,
   }
@@ -78,15 +106,6 @@ export const getMaterials = (id_deposit) => {
 
     let materials = res.filter((el) => el.equipment === 0)
     let equipment = res.filter((el) => el.equipment === 1)
-    equipment = equipment.map((el) => {
-      return {
-        id: el.id_article_detail,
-        orden_de_retiro_id: el.orden_de_retiro_id,
-        cant_in_stock: el.cant_in_stock,
-        equipment: el.equipment,
-        name: el.name,
-      }
-    })
     let availableMaterials = { materials, equipment }
     dispatch(addMaterials(availableMaterials))
   }
