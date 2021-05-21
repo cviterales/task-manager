@@ -44,7 +44,6 @@ const Reclamo = (props) => {
   const dispatch = useDispatch()
 
   const closeTaskModalHandler = () => {
-    console.log("test")
     dispatch(resetForm())
     setShowCloseModal(false)
   }
