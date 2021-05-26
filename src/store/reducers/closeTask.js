@@ -1,22 +1,16 @@
 import * as actionTypes from "../actions/closeTask/actionTypes"
 
 const initialState = {
-  id_node: null,
-  fo: {},
-  dslam: {},
+  id_node: false,
+  fo: false,
+  dslam: false,
   description: "",
   equipment_updated: [],
   equipment_recovered: [],
-  availableMaterials: null,
+  availableMaterials: false,
   materials: [],
   step: 1,
-  technical_data: {
-    cable_pair: null,
-    pair_sec: null,
-    id_port: null,
-    box: null,
-    catastro: null,
-  },
+  technical_data: false,
 }
 
 const closeTaskReducer = (state = initialState, action) => {

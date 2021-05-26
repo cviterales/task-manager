@@ -25,7 +25,8 @@ const TaskFormSignature = ({ onClose }) => {
       closeTaskData.dslam.id_port,
       closeTaskData.equipment_updated,
       closeTaskData.equipment_recovered,
-      closeTaskData.materials
+      closeTaskData.materials,
+      closeTaskData.technical_data
     ).then((res) => {
       onClose()
     })

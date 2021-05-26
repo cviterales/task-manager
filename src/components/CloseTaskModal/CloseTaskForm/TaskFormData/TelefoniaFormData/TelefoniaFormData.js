@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Select from "react-select"
-import InputText from "../../../../InputText/index"
-import { getPairs, getWires, getPorts } from "../../../../../api/index"
+import InputText from "../../../../InputText"
+import Button from "../../../../Button"
+import { getPairs, getWires, getPorts } from "../../../../../api"
 import { useDispatch, useSelector } from "react-redux"
 import {
   setTechnicalDataBox,
@@ -15,20 +16,36 @@ const TelefoniaFormData = () => {
   let timeout
   const dispatch = useDispatch()
   const account = useSelector((state) => state.account.account)
+  const technicalData = useSelector((state) => state.closeTask.technical_data)
+
   const [wires, setWires] = useState([])
   const [pairs, setPairs] = useState([])
   const [ports, setPorts] = useState([])
-  const [selectedWire, setSelectedWire] = useState()
+  const [removeCablePair, setRemoveCablePair] = useState()
+  const [removeCableSec, setRemoveCableSec] = useState(false)
+  const [selectedWire, setSelectedWire] = useState(false)
+
+  useEffect(() => {
+    dispatch(
+      setTechnicalDataPair({
+        cable_pair: account?.technical[0]?.id_cable_pair ?? false,
+        pair_sec: account?.technical[0]?.id_par_sec ?? false,
+        id_port: account?.technical[0]?.id_ports ?? false,
+        box: account?.technical[0]?.nro_box ?? false,
+        catastro: account?.technical[0]?.cadastre ?? false,
+      })
+    )
+  }, [account, dispatch])
 
   useEffect(() => {
     getWires().then((res) => setWires(res))
   }, [])
 
-  const inputSelectPairHandler = (inputValue) => {
+  const inputSelectPairHandler = (inputValue, secondary) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => {
       inputValue.length > 0 &&
-        getPairs(selectedWire?.value, inputValue, selectedWire?.pairs_secundaries === 1 ? true : false).then((res) => {
+        getPairs(selectedWire?.value, inputValue, secondary).then((res) => {
           if (res.length > 0) {
             setPairs(res)
           }
@@ -63,63 +80,132 @@ const TelefoniaFormData = () => {
   }
 
   return (
-    <div className={styles.technicalData}>
+    <div className={styles.wrapper}>
       <h3 className={styles.boldText}>Datos Tecnicos</h3>
+      <div className={styles.content}>
+        <div className={styles.contentColumn}>
+          <label>
+            Cable
+            <Select
+              options={wires}
+              onChange={(data) => setSelectedWire(data)}
+              defaultValue={{
+                value: account?.technical[0]?.cable_number ?? "",
+                label: account?.technical[0]?.cable_number ?? "",
+              }}
+            />
+          </label>
+          <div className={styles.labelContent}>
+            {removeCablePair ? (
+              <h4 style={{ width: "100%" }} className={styles.boldText}>
+                Par eleminado
+              </h4>
+            ) : (
+              <label style={{ width: "100%" }}>
+                Par Primario
+                <span>{selectedWire || account?.technical[0]?.par_cable ? "" : "- Seleccione un Cable"}</span>
+                <Select
+                  options={pairs}
+                  onInputChange={(inputValue) => inputSelectPairHandler(inputValue, false)}
+                  onChange={(data) =>
+                    dispatch(
+                      setTechnicalDataPair({
+                        cable_pair: data.value,
+                      })
+                    )
+                  }
+                  defaultValue={{
+                    value: account?.technical[0]?.id_cable_pair ?? "",
+                    label: account?.technical[0]?.par_cable ?? "",
+                  }}
+                />
+              </label>
+            )}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                dispatch(
+                  setTechnicalDataPair({
+                    cable_pair: false,
+                  })
+                )
+                setRemoveCablePair(!removeCablePair)
+              }}
+            >
+              Borrar
+            </Button>
+          </div>
 
-      <label>
-        Cable
-        <Select
-          options={wires}
-          onChange={(data) => setSelectedWire(data)}
-          defaultValue={{
-            value: account?.technical[0]?.cable_number ?? "",
-            label: account?.technical[0]?.cable_number ?? "",
-          }}
-        />
-      </label>
-      <label>
-        Par <span>{selectedWire ? "" : "- Seleccione un Cable"}</span>
-        <Select
-          options={pairs}
-          onInputChange={inputSelectPairHandler}
-          onChange={(data) =>
-            dispatch(
-              setTechnicalDataPair({
-                cable_pair: data.value,
-                pair_sec: selectedWire.pairs_secundaries === 1 ? true : false,
-              })
-            )
-          }
-          defaultValue={{
-            value: account?.technical[0]?.par_cable ?? "",
-            label: account?.technical[0]?.par_cable ?? "",
-          }}
-        />
-      </label>
-      <label>
-        Port
-        <Select
-          options={ports}
-          onInputChange={inputSelectPortHandler}
-          onChange={(data) => dispatch(setTechnicalDataPort(data.value))}
-          defaultValue={{
-            value: account?.technical[0]?.port ?? "",
-            label: account?.technical[0]?.port ?? "",
-          }}
-        />
-      </label>
-      <InputText
-        type="text"
-        label="Nro Caja"
-        onChange={(e) => inputBoxHandler(e.target.value)}
-        placeHolder={account?.technical[0]?.nro_box ?? ""}
-      />
-      <InputText
-        type="text"
-        label="Catastro"
-        onChange={(e) => inputCatastroHandler(e.target.value)}
-        placeHolder={account?.technical[0]?.cadastre ?? ""}
-      />
+          <div className={styles.labelContent}>
+            {removeCableSec ? (
+              <h4 style={{ width: "100%" }} className={styles.boldText}>
+                Par eleminado
+              </h4>
+            ) : (
+              <label style={{ width: "100%" }}>
+                Par Secundario
+                <Select
+                  options={pairs}
+                  onInputChange={(inputValue) => inputSelectPairHandler(inputValue, true)}
+                  onChange={(data) =>
+                    dispatch(
+                      setTechnicalDataPair({
+                        pair_sec: data.value,
+                      })
+                    )
+                  }
+                  defaultValue={{
+                    value: account?.technical[0]?.id_par_sec ?? "",
+                    label: account?.technical[0]?.par_secondary ?? "",
+                  }}
+                />
+              </label>
+            )}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                dispatch(
+                  setTechnicalDataPair({
+                    pair_sec: false,
+                  })
+                )
+                setRemoveCableSec(!removeCableSec)
+              }}
+            >
+              Borrar
+            </Button>
+          </div>
+        </div>
+
+        <div className={styles.contentColumn}>
+          <label>
+            Port
+            <Select
+              options={ports}
+              onInputChange={inputSelectPortHandler}
+              onChange={(data) => dispatch(setTechnicalDataPort(data.value))}
+              defaultValue={{
+                value: account?.technical[0]?.port ?? "",
+                label: account?.technical[0]?.port ?? "",
+              }}
+            />
+          </label>
+          <InputText
+            type="text"
+            label="Nro Caja"
+            onChange={(e) => inputBoxHandler(e.target.value)}
+            placeHolder={account?.technical[0]?.nro_box ?? ""}
+          />
+          <InputText
+            type="text"
+            label="Catastro"
+            onChange={(e) => inputCatastroHandler(e.target.value)}
+            placeHolder={account?.technical[0]?.cadastre ?? ""}
+          />
+        </div>
+      </div>
     </div>
   )
 }
