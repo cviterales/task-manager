@@ -32,7 +32,7 @@ const TelefoniaFormData = () => {
         pair_sec: account?.technical[0]?.id_par_sec ?? false,
         id_port: account?.technical[0]?.id_ports ?? false,
         box: account?.technical[0]?.nro_box ?? false,
-        catastro: account?.technical[0]?.cadastre ?? false,
+        cadastre: account?.technical[0]?.cadastre ?? false,
       })
     )
   }, [account, dispatch])
@@ -78,7 +78,7 @@ const TelefoniaFormData = () => {
       value.length > 0 && dispatch(setTechnicalDataCatastro(value))
     }, 500)
   }
-
+  console.log(selectedWire)
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.boldText}>Datos Tecnicos</h3>
@@ -96,14 +96,13 @@ const TelefoniaFormData = () => {
             />
           </label>
           <div className={styles.labelContent}>
-            {removeCablePair ? (
-              <h4 style={{ width: "100%" }} className={styles.boldText}>
-                Par eleminado
-              </h4>
-            ) : (
-              <label style={{ width: "100%" }}>
-                Par Primario
-                <span>{selectedWire || account?.technical[0]?.par_cable ? "" : "- Seleccione un Cable"}</span>
+            <label style={{ width: "100%" }}>
+              Par Primario
+              {removeCablePair ? (
+                <h4 style={{ width: "100%" }} className={styles.boldText}>
+                  Par eleminado
+                </h4>
+              ) : (
                 <Select
                   options={pairs}
                   onInputChange={(inputValue) => inputSelectPairHandler(inputValue, false)}
@@ -119,8 +118,8 @@ const TelefoniaFormData = () => {
                     label: account?.technical[0]?.par_cable ?? "",
                   }}
                 />
-              </label>
-            )}
+              )}
+            </label>
             <Button
               type="button"
               variant="outline"
@@ -133,50 +132,52 @@ const TelefoniaFormData = () => {
                 setRemoveCablePair(!removeCablePair)
               }}
             >
-              Borrar
+              {removeCablePair ? "Agregar" : "Borrar"}
             </Button>
           </div>
 
-          <div className={styles.labelContent}>
-            {removeCableSec ? (
-              <h4 style={{ width: "100%" }} className={styles.boldText}>
-                Par eleminado
-              </h4>
-            ) : (
+          {selectedWire.pairs_secundaries && (
+            <div className={styles.labelContent}>
               <label style={{ width: "100%" }}>
                 Par Secundario
-                <Select
-                  options={pairs}
-                  onInputChange={(inputValue) => inputSelectPairHandler(inputValue, true)}
-                  onChange={(data) =>
-                    dispatch(
-                      setTechnicalDataPair({
-                        pair_sec: data.value,
-                      })
-                    )
-                  }
-                  defaultValue={{
-                    value: account?.technical[0]?.id_par_sec ?? "",
-                    label: account?.technical[0]?.par_secondary ?? "",
-                  }}
-                />
+                {removeCableSec ? (
+                  <h4 style={{ width: "100%" }} className={styles.boldText}>
+                    Par eleminado
+                  </h4>
+                ) : (
+                  <Select
+                    options={pairs}
+                    onInputChange={(inputValue) => inputSelectPairHandler(inputValue, true)}
+                    onChange={(data) =>
+                      dispatch(
+                        setTechnicalDataPair({
+                          pair_sec: data.value,
+                        })
+                      )
+                    }
+                    defaultValue={{
+                      value: account?.technical[0]?.id_par_sec ?? "",
+                      label: account?.technical[0]?.par_secondary ?? "",
+                    }}
+                  />
+                )}
               </label>
-            )}
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => {
-                dispatch(
-                  setTechnicalDataPair({
-                    pair_sec: false,
-                  })
-                )
-                setRemoveCableSec(!removeCableSec)
-              }}
-            >
-              Borrar
-            </Button>
-          </div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  dispatch(
+                    setTechnicalDataPair({
+                      pair_sec: false,
+                    })
+                  )
+                  setRemoveCableSec(!removeCableSec)
+                }}
+              >
+                {removeCableSec ? "Agregar" : "Borrar"}
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className={styles.contentColumn}>

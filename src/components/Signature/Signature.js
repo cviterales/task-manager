@@ -14,13 +14,9 @@ const Signature = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.signatureContainer}>
-        <SignatureCanvas
-          ref={signatureRef}
-          penColor="green"
-          canvasProps={{ width: 300, height: 200, className: "sigCanvas" }}
-        />
+        <SignatureCanvas ref={signatureRef} penColor="green" canvasProps={{ className: styles.sigPad }} />
       </div>
-      <div className={styles.container}>
+      <div className={styles.bottom}>
         <Button type="button" variant="outline" onClick={() => handleClear()}>
           <p>Borrar</p>
         </Button>

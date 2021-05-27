@@ -2,15 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .signatureContainer {
   border: 1px solid var(--gray-text);
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   margin-bottom: 0.25rem;
 }
 
-.container {
+.sigPad {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom {
   display: flex;
   justify-content: center;
   gap: 2rem;

@@ -34,7 +34,7 @@ const closeTaskReducer = (state = initialState, action) => {
     case actionTypes.SET_TECHNICAL_DATA_CADASTRE:
       return {
         ...state,
-        technical_data: { ...state.technical_data, catastro: action.payload },
+        technical_data: { ...state.technical_data, cadastre: action.payload },
       }
     case actionTypes.REMOVE_TASK_RECOVERED_EQUIPMENT:
       let filteredRecoveredEquipment = state.equipment_recovered.filter((el) => el !== action.payload)
