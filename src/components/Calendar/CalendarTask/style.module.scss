@@ -60,14 +60,6 @@ $breakpoint-lg: 1360px;
   border-left: 2px solid red;
 }
 
-/* .task_content {
-  display: flex;
-  flex-direction: column;
-  p {
-    font-size: 14px;
-  }
-} */
-
 .content_icon {
   display: flex;
   align-items: center;
@@ -107,7 +99,6 @@ $breakpoint-lg: 1360px;
   border-left: 12px solid transparent;
   border-right: 10px solid #fff;
   border-top: 16px solid transparent;
-  /* border-bottom: 5px solid #fff; */
   right: 20px;
   top: -13px;
   border-radius: 50%;

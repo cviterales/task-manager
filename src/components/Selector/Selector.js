@@ -100,7 +100,6 @@ const Selector = ({ nameKey, onSelected, icons, data }) => {
                   filterValue(e.target.value)
                 }}
               />
-              {/*               <div>{newData[value].name}</div> */}
             </div>
             <div onClick={() => openHandler()}>
               <FontAwesomeIcon icon={faChevronCircleDown} color="#2c5282" />

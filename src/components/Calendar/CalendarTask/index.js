@@ -147,7 +147,7 @@ const CalendarTask = ({ task, onEdit, parentPos, handleDrag, draggable = true })
 CalendarTask.propTypes = {
   task: PropTypes.object, 
   onEdit: PropTypes.func, 
-  parentPos: PropTypes.number, 
+  parentPos: PropTypes.object, 
   handleDrag: PropTypes.func, 
   draggable: PropTypes.bool 
 }

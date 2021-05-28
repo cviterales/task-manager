@@ -91,7 +91,6 @@ const Reclamos = ({ history }) => {
       return res
     })
   }
-  console.log(filtersData)
   const handlerTask = (reclamo) => {
     setSelectedReclamo(reclamo)
     if (!open) {

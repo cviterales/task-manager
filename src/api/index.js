@@ -217,21 +217,6 @@ export async function createStatusTask(id_calendar, id_status) {
   return data
 }
 
-/* export async function getCalendar(id_service, from_date = '') {
-  let url = `http://localhost:4000/task/calendar/${id_service}`
-  if (from_date.length > 0) {
-    url = `http://localhost:4000/task/calendar/${id_service}/${from_date}`
-  }
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  const data = await res.data
-  return data
-} */
-
 export async function closeTask(
   id_service,
   id_task,
@@ -355,23 +340,3 @@ export async function getObservations(id_service, id_account) {
   let result = await instance.get(`/observations/${id_service}/${id_account}`)
   return result.data
 }
-
-/*
-export async function getInconvenientes(service) {
-  const res = await fetch(`http://181.41.240.18:4000/Inconvenientes/${service}`);
-  const data = res.data;
-  return data;
-}
-
-export async function getSoluciones(service) {
-  const res = await fetch(`http://181.41.240.18:4000/soluciones/${service}`);
-  const data = res.data;
-  return data;
-}
-
-export async function getTipos() {
-  const res = await fetch('http://181.41.240.18:4000/tipos');
-  const data = res.data;
-  return data;
-}
-*/

@@ -60,9 +60,6 @@ const AssignTask = ({ task, onClose }) => {
         setMessage(error.message);
         setLoading(false);
       });
-    /* setTimeout(() => {
-      setMessage('')
-    }, 5000) */
   };
 
   return (

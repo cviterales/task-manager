@@ -21,18 +21,6 @@ export const setSocketInstance = (socket) => {
   }
 }
 
-/* export const connectSocket = (customClientID) => {
-  return dispatch => {
-    const socket = io('http://localhost:4000')
-    socket.on('connect', () => {
-      //if (socket.connected) {
-        socket.emit('storeClient', { customId: customClientID })
-        dispatch(setSocketInstance(socket))
-      //}
-    })
-  }
-} */
-
 const refreshMessage = (value) => {
   return {
     type: actionTypes.SET_SOCKET_REFRESH,

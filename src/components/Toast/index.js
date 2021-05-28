@@ -7,7 +7,7 @@ import * as actions from "../../store/actions/message/action";
 
 import styles from "./style.module.scss";
 
-const Toast = (/* { message, error = false, show } */) => {
+const Toast = () => {
   const dispatch = useDispatch();
   const { message, error } = useSelector((state) => state.message);
   const icon = error ? faTimesCircle : faCheckCircle;
@@ -17,7 +17,6 @@ const Toast = (/* { message, error = false, show } */) => {
     let time = setTimeout(() => {
       dispatch(actions.setMessage("", false))
     }, 5000)
-    //if (time) clearTimeout(time)
     return () => {
       clearTimeout(time)
     }

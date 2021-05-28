@@ -7,23 +7,11 @@ import CalendarTask from "../CalendarTask/index";
 import moment from "moment";
 import "moment/locale/es";
 
-
 const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
   const [pos, setPost] = useState();
   const rowRef = useRef(null);
 
-  const dayDateNow = useMemo(
-    () =>
-      moment(
-        `${new Date(Date.now()).getMonth() + 1}/${new Date(
-          Date.now()
-        ).getDate()}/${new Date(Date.now()).getFullYear()}`,
-        "DD/MM/YYYY"
-      )
-        .locale("ES")
-        .format("DD/MM/YYYY"),
-    []
-  );
+  const dayDateNow = useMemo(() => moment().locale("ES").format("DD/MM/YYYY"), []);
 
   useEffect(() => {
     setPost(rowRef.current.getBoundingClientRect());
@@ -37,16 +25,14 @@ const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
       onDragOver={(ev) => ev.preventDefault()}
     >
       {day.tasks.map((task, index) => {
-        const dayTaskDate = moment(task.date, "DD/MM/YYYY")
-          .locale("ES")
-          .format("MM/DD/YYYY");
+        const dayTaskDate = moment(task.date, "DD/MM/YYYY").locale("ES").format("DD/MM/YYYY");
         return team.id_team === task.id_team && task.date === day.day ? (
-          <div key={index} style={dayDateNow > dayTaskDate ? {opacity: "0.5"} : {}}>
+          <div key={index} style={dayDateNow > dayTaskDate ? { opacity: "0.5" } : {}}>
             <AnimatedListItem index={index} delay={0.15}>
               <CalendarTask
                 task={task}
                 onEdit={editHandler}
-                //draggable={dayDateNow > dayTaskDate ? false : true}
+                draggable={dayDateNow > dayTaskDate ? false : true}
                 parentPos={pos}
                 handleDrag={handleDrag}
               />
@@ -61,10 +47,10 @@ const CalendarRow = ({ day, team, editHandler, handleDrag, handleDrop }) => {
 };
 
 CalendarRow.propTypes = {
-  day: PropTypes.object, 
-  team: PropTypes.object, 
-  editHandler: PropTypes.func, 
-  handleDrag: PropTypes.func, 
-  handleDrop: PropTypes.func
-}
+  day: PropTypes.object,
+  team: PropTypes.object,
+  editHandler: PropTypes.func,
+  handleDrag: PropTypes.func,
+  handleDrop: PropTypes.func,
+};
 export default CalendarRow;

@@ -22,20 +22,15 @@ const TaskStateModal = ({ onClose, task }) => {
 
   const onSaveHandler = async () => {
 
-    console.log(task.id_calendar)
     if (newState) {
       setLoading(true);
       const res = await createStatusTask(task.id_calendar, newState);
-      console.log(res)
       dispatch(actions.setMessage(res.message, res.error))
       setLoading(false);
       setMessage(res);
     } else {
       setMessage({ error: true, message: "Seleccione Estado" });
     }
-    /*     setTimeout(() => {
-      setMessage();
-    }, 6000); */
   };
 
   const renderStatus = () => {

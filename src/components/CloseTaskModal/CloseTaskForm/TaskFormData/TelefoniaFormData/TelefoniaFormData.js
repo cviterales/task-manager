@@ -45,7 +45,6 @@ const TelefoniaFormData = () => {
     timeout = setTimeout(() => {
       inputValue.length > 0 &&
         getPairs(selectedWire?.value, inputValue, secondary).then((res) => {
-          console.log(res, selectedWire?.value, inputValue, secondary)
           if (res.length > 0) {
             setPairs(res)
           }
@@ -78,7 +77,6 @@ const TelefoniaFormData = () => {
       value.length > 0 && dispatch(setTechnicalDataCatastro(value))
     }, 500)
   }
-  console.log(selectedWire)
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.boldText}>Datos Tecnicos</h3>
