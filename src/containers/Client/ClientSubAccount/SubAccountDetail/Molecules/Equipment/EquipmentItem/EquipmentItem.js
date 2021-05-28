@@ -13,9 +13,9 @@ const EquipmentItem = ({ item }) => {
     ))
   }
   return (
-    <li style={{ listStyleType: "none" }}>
+    <li style={{ listStyleType: "none", marginBottom: "1rem" }}>
       <div className={styles.wrapper}>
-        <div className={styles.listItem} onClick={() => setShow(!show)}>
+        <div className={!show ? styles.listItem : styles.listItemClicked} onClick={() => setShow(!show)}>
           <p>
             <span className={styles.boldText}>{item.model}</span>
           </p>
@@ -33,7 +33,7 @@ const EquipmentItem = ({ item }) => {
             <span className={styles.boldText}>Modo: </span>
             {item.mode}
           </p>
-          {item?.equipment_details && renderCharacteristics(item)}
+          {renderCharacteristics(item)}
         </div>
       </div>
     </li>
