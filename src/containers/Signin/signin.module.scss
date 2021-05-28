@@ -74,10 +74,15 @@
   top: 20px;
   height: 70px;
   z-index: 1;
-  animation-duration: 2s;
+  /*   animation-duration: 2s;
   animation-delay: 4s;
   animation-name: logo;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
+  -webkit-animation: logo 2s 4s forwards;
+  -moz-animation: logo 2s 4s forwards;
+  -o-animation: logo 2s 4s forwards;
+  animation: logo 2s 4s forwards;
+
   visibility: hidden;
 }
 .logo {
@@ -91,11 +96,19 @@
   position: absolute;
   left: 100px;
   top: 600px;
+  -webkit-transform: rotate3d(9, 3, -6, 85deg);
+  -moz-transform: rotate3d(9, 3, -6, 85deg);
+  -o-transform: rotate3d(9, 3, -6, 85deg);
+  -ms-transform: rotate3d(9, 3, -6, 85deg);
   transform: rotate3d(9, 3, -6, 85deg);
-  animation-duration: 2s;
+  /*   animation-duration: 2s;
   animation-delay: 1s;
   animation-name: title;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
+  -webkit-animation: title 2s 1s forwards;
+  -moz-animation: title 2s 1s forwards;
+  -o-animation: title 2s 1s forwards;
+  animation: title 2s 1s forwards;
   visibility: hidden;
   display: flex;
   flex-direction: column;
@@ -119,74 +132,103 @@
     position: absolute;
     height: 5px;
     visibility: hidden;
+    -webkit-transform: rotate3d(9, 2, -6, 80deg);
+    -moz-transform: rotate3d(9, 2, -6, 80deg);
+    -o-transform: rotate3d(9, 2, -6, 80deg);
+    -ms-transform: rotate3d(9, 2, -6, 80deg);
     transform: rotate3d(9, 2, -6, 80deg);
     &:nth-child(1) {
       top: 100px;
       width: 40%;
       left: 100px;
       opacity: 0.3;
-      animation-name: line_2;
+      /*       animation-name: line_2;
       animation-fill-mode: forwards;
       animation-duration: 1s;
+ */
+      -webkit-animation: line_2 1s forwards;
+      -moz-animation: line_2 1s forwards;
+      -o-animation: line_2 1s forwards;
+      animation: line_2 1s forwards;
     }
     &:nth-child(2) {
       top: 100px;
       width: 20%;
       left: 450px;
       opacity: 0.8;
-      animation-name: line_2;
-      animation-fill-mode: forwards;
-      animation-duration: 2s;
-      animation-delay: 1s;
+      -webkit-animation: line_2 2s 1s forwards;
+      -moz-animation: line_2 2s 1s forwards;
+      -o-animation: line_2 2s 1s forwards;
+      animation: line_2 2s 1s forwards;
     }
     &:nth-child(3) {
       top: 300px;
       width: 20%;
       left: 0px;
       opacity: 0.5;
-      animation-name: line_2;
-      animation-fill-mode: forwards;
-      animation-duration: 3s;
+/*       animation-name: line_2; */
+/*       animation-fill-mode: forwards; */
+/*       animation-duration: 3s; */
+      -webkit-animation: line_2 3s  forwards;
+      -moz-animation: line_2 3s  forwards;
+      -o-animation: line_2 3s  forwards;
+      animation: line_2 3s forwards;
     }
     &:nth-child(4) {
       top: 250px;
       width: 80%;
       left: 250px;
       opacity: 0.3;
-      animation-name: line_1;
+/*       animation-name: line_1;
       animation-fill-mode: forwards;
       animation-duration: 3s;
-      animation-delay: 1s;
+      animation-delay: 1s; */
+      -webkit-animation: line_1 3s 1s forwards;
+      -moz-animation: line_1 3s 1s forwards;
+      -o-animation: line_1 3s 1s forwards;
+      animation: line_1 3s 1s forwards;
     }
     &:nth-child(5) {
       top: 500px;
       width: 80%;
       left: 0px;
       opacity: 0.5;
-      animation-name: line_1;
+/*       animation-name: line_1;
       animation-fill-mode: forwards;
       animation-duration: 3s;
-      animation-delay: 1s;
+      animation-delay: 1s; */
+      -webkit-animation: line_1 3s 1s forwards;
+      -moz-animation: line_1 3s 1s forwards;
+      -o-animation: line_1 3s 1s forwards;
+      animation: line_1 3s 1s forwards;
     }
     &:nth-child(6) {
       top: 450px;
       width: 20%;
       left: 0px;
       opacity: 0.8;
-      animation-name: line_2;
+/*       animation-name: line_2;
       animation-fill-mode: forwards;
       animation-duration: 2s;
-      animation-delay: 1s;
+      animation-delay: 1s; */
+      -webkit-animation: line_2 2s 1s forwards;
+      -moz-animation: line_2 2s 1s forwards;
+      -o-animation: line_2 2s 1s forwards;
+      animation: line_2 2s 1s forwards;
     }
     &:nth-child(7) {
       top: 600px;
       width: 80%;
       left: 250px;
       opacity: 0.8;
-      animation-name: line_1;
+/*       animation-name: line_1;
       animation-fill-mode: forwards;
       animation-duration: 1s;
-      animation-delay: 2s;
+      animation-delay: 2s; */
+      -webkit-animation: line_1 1s 2s forwards;
+      -moz-animation: line_1 1s 2s forwards;
+      -o-animation: line_1 1s 2s forwards;
+      animation: line_1 1s 2s forwards;
     }
   }
 }

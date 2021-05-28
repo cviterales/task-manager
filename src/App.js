@@ -11,9 +11,7 @@ const Reclamos = lazy(() => import("./containers/Reclamos/Reclamos"));
 const Reclamo = lazy(() => import("./containers/Reclamos/Reclamo/Reclamo"));
 const Layout = lazy(() => import("./containers/Layout/index"));
 const Client = lazy(() => import("./containers/Client/Client"));
-const ClientSubAccount = lazy(() =>
-  import("./containers/Client/ClientSubAccount/ClientSubAccount")
-);
+const ClientSubAccount = lazy(() => import("./containers/Client/ClientSubAccount/ClientSubAccount"));
 const Cuadrillas = lazy(() => import("./containers/Cuadrillas/Cuadrillas"));
 
 function App() {
@@ -32,11 +30,7 @@ function App() {
           exact
           path="/"
           render={() => {
-            return isUserAuthenticated ? (
-              <Redirect to="/home" />
-            ) : (
-              <Redirect to="/" />
-            );
+            return isUserAuthenticated ? <Redirect to="/home" /> : <Redirect to="/" />;
           }}
         />
         <Switch>

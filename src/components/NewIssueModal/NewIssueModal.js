@@ -6,6 +6,7 @@ import Message from "../Message/index";
 import Spinner from "../Spinner";
 
 const NewIssueModal = ({ onClose, onSave }) => {
+  
   const [description, setDescription] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);

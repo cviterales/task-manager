@@ -7,8 +7,11 @@ import Message from "../Message/index"
 import { useSelector } from "react-redux"
 import { getProblems, getTaskTypes } from "../../api/index"
 import Spinner from "../Spinner"
+import { useDispatch } from "react-redux";
+import * as actions from '../../store/actions/message/action';
 
 const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
+  const dispatch = useDispatch();
   const id_service = useSelector((state) => state.auth.user.id_service)
   let timeout
   const [taskType, setTaskType] = useState(0)
@@ -46,6 +49,7 @@ const NewTaskModal = ({ id, sid, serviceType, onClose, onSave }) => {
     try {
       const res = await onSave(id_service, sid, taskType, idProblem, description)
       res.error ? setError(true) : setError(false)
+      dispatch(actions.setMessage(res.message, res.error))
       setMessage(res.message)
       setLoading(false)
     } catch (err) {

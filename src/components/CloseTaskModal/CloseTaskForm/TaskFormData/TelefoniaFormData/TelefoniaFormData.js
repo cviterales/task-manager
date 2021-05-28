@@ -16,7 +16,6 @@ const TelefoniaFormData = () => {
   let timeout
   const dispatch = useDispatch()
   const account = useSelector((state) => state.account.account)
-  const technicalData = useSelector((state) => state.closeTask.technical_data)
 
   const [wires, setWires] = useState([])
   const [pairs, setPairs] = useState([])

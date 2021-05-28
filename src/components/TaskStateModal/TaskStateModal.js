@@ -9,7 +9,11 @@ import DropDown from "../DropDown/index";
 import { getStatus, getStatusTask, createStatusTask } from "../../api/index";
 import Message from "../Message/index";
 
+import * as actions from '../../store/actions/message/action'
+import { useDispatch } from "react-redux";
+
 const TaskStateModal = ({ onClose, task }) => {
+  const dispatch = useDispatch()
   const [states, setStates] = useState([]);
   const [statusTask, setStatusTask] = useState([]);
   const [newState, setNewState] = useState(0);
@@ -17,9 +21,13 @@ const TaskStateModal = ({ onClose, task }) => {
   const [loading, setLoading] = useState(false);
 
   const onSaveHandler = async () => {
+
+    console.log(task.id_calendar)
     if (newState) {
       setLoading(true);
       const res = await createStatusTask(task.id_calendar, newState);
+      console.log(res)
+      dispatch(actions.setMessage(res.message, res.error))
       setLoading(false);
       setMessage(res);
     } else {
