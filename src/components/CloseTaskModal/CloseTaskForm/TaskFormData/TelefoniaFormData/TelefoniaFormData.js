@@ -16,7 +16,6 @@ const TelefoniaFormData = () => {
   let timeout
   const dispatch = useDispatch()
   const account = useSelector((state) => state.account.account)
-  const technicalData = useSelector((state) => state.closeTask.technical_data)
 
   const [wires, setWires] = useState([])
   const [pairs, setPairs] = useState([])
@@ -46,6 +45,7 @@ const TelefoniaFormData = () => {
     timeout = setTimeout(() => {
       inputValue.length > 0 &&
         getPairs(selectedWire?.value, inputValue, secondary).then((res) => {
+          console.log(res, selectedWire?.value, inputValue, secondary)
           if (res.length > 0) {
             setPairs(res)
           }
@@ -136,7 +136,7 @@ const TelefoniaFormData = () => {
             </Button>
           </div>
 
-          {selectedWire.pairs_secundaries && (
+          {selectedWire.pairs_secundaries === 1 && (
             <div className={styles.labelContent}>
               <label style={{ width: "100%" }}>
                 Par Secundario

@@ -98,11 +98,21 @@
   }
 }
 
+.card_title {
+  font-family: "Roboto Bold";
+}
+
 .card_content_title {
   font-weight: bold;
-  margin: 0.5rem;
   display: flex;
   align-items: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
+
+  @include mq("phone", "max") {
+    margin-left: 0.5rem;
+    margin-top: 0.25rem;
+  }
 }
 
 .card_content_icon {
@@ -151,11 +161,6 @@
 .boldText {
   font-family: "Roboto Bold";
   color: var(--blue);
-}
-
-.card_title {
-  font-family: "Roboto Bold";
-  color: black;
 }
 
 .contentCentered {

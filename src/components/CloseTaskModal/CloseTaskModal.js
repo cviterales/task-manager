@@ -17,9 +17,7 @@ const CloseTask = ({ onClose }) => {
 
   return (
     <div className={styles.modal_wrapper}>
-      <div className={styles.contentWrapper}>
-        <CloseTaskForm onClose={onClose} />
-      </div>
+      <CloseTaskForm onClose={onClose} />
     </div>
   )
 }
