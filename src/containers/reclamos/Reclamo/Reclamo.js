@@ -16,10 +16,8 @@ import {
   faHardHat,
   faMapMarkerAlt,
   faPhone,
-  faHdd,
-  faWifi,
 } from "@fortawesome/free-solid-svg-icons"
-import { faUserCircle, faEdit } from "@fortawesome/free-regular-svg-icons"
+import { faUserCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
@@ -28,6 +26,9 @@ import { createIncident } from "../../../api/index"
 import { useDispatch, useSelector } from "react-redux"
 import { isBrowser } from "react-device-detect"
 import { resetForm } from "../../../store/actions/closeTask/closeTask"
+import Equipment from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Equipment/Equipment"
+import TechnicalData from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/TechnicalData/TechnicalData"
+import Services from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Services/Services"
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
@@ -97,17 +98,7 @@ const Reclamo = (props) => {
     dispatch(getTaskData(id_service, id_task))
   }, [id_service, id_task, id_account, dispatch, showCloseModal, showIssueModal])
 
-  const renderServices = (services) => {
-    return services.map((service, i) => {
-      return (
-        <li key={i}>
-          <p>
-            {service.service_name} desde {new Date(service.date_from).toLocaleDateString().toString()}
-          </p>
-        </li>
-      )
-    })
-  }
+
   let loaded = (
     <div className={style.contentCentered}>
       <Spinner color="#4299e1" size="4rem" />
@@ -148,116 +139,17 @@ const Reclamo = (props) => {
               </div>
             </Card>
           </div>
+
           <div className={style.card_content_header}>
-            <div className={style.card_container}>
-              <Card>
-                <div className={style.card_content_title}>
-                  <div className={style.card_content_icon}>
-                    <FontAwesomeIcon icon={faWifi} size="1x" color="#84B5FF" />
-                  </div>
-                  <h4 className={style.card_title}>Datos Tecnicos</h4>
-                </div>
-                <div className={style.card_content}>
-                  {subAccount?.fo[0] ? (
-                    <p>
-                      <span className={style.boldText}>OLT: </span> {subAccount?.fo[0]?.olt_description}
-                    </p>
-                  ) : subAccount?.dslam?.length > 0 || subAccount?.node?.length > 0 ? (
-                    <>
-                      <p>
-                        {subAccount?.dslam[0] ? (
-                          <span className={style.boldText}>DSLAM: </span>
-                        ) : (
-                          <span className={style.boldText}>Nodo: </span>
-                        )}
-                        <a href={subAccount?.dslam[0]?.nas_ip ?? subAccount?.node[0]?.ip}>
-                          {subAccount?.dslam[0]?.dslam ?? subAccount?.node[0]?.node}
-                        </a>
-                      </p>
-                      <p>
-                        {subAccount?.dslam[0] ? (
-                          <span className={style.boldText}>Port: </span>
-                        ) : (
-                          <span className={style.boldText}>Banda: </span>
-                        )}
-                        {subAccount?.dslam[0]?.port_number ?? subAccount?.node[0]?.band}
-                      </p>
-                    </>
-                  ) : (
-                    <div className={style.error_message_content}>
-                      <h4 className={style.boldText}>No existen datos.</h4>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            </div>
-            <div className={style.card_container}>
-              <Card>
-                <div className={style.card_content_title}>
-                  <div className={style.card_content_icon}>
-                    <FontAwesomeIcon icon={faHdd} size="1x" color="#777777" />
-                  </div>
-                  <h4 className={style.card_title}>Equipamiento</h4>
-                </div>
-                <div className={style.card_content}>
-                  {task?.equipment?.length > 0 ? (
-                    <>
-                      <div className={style.info_content}>
-                        <p>
-                          <span className={style.boldText}>Modo:</span>
-                          {task.equipment[0].model} | {task.equipment[0].mode}
-                        </p>
-                      </div>
-                      <div className={style.info_content}>
-                        <p>
-                          <span className={style.boldText}>IP:</span>
-                          {task.equipment[0].ip}
-                        </p>
-                      </div>
-                      <div className={style.info_content}>
-                        <p>
-                          <span className={style.boldText}>Mac:</span>
-                          {task.equipment[0].mac}{" "}
-                        </p>
-                      </div>
-                      <div className={style.info_content}>
-                        <p>
-                          <span className={style.boldText}>Wifi:</span>
-                          {task.equipment[0].wifi ? "Si" : "No"}{" "}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <div className={style.error_message_content}>
-                      <h4 className={style.boldText}>No existen datos.</h4>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            </div>
-            <div className={style.card_container}>
-              <Card>
-                <div className={style.card_content_title}>
-                  <div className={style.card_content_icon}>
-                    <FontAwesomeIcon icon={faEdit} size="1x" color="#5DCE68" />
-                  </div>
-                  <h4 className={style.card_title}>Servicios</h4>
-                </div>
-                <div className={style.card_content}>
-                  {task.error || task.service.length === 0 ? (
-                    <div className={style.error_message_content}>
-                      <h4 className={style.boldText}>No existen datos.</h4>
-                    </div>
-                  ) : (
-                    <div className={style.wrapper_info_content}>
-                      <div className={style.info_content}>
-                        <ul className={style.list}>{renderServices(task.service)}</ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            </div>
+            <TechnicalData subAccData={subAccount} />
+            {task?.equipment?.length > 0 ? (
+              <Equipment equipment={task?.equipment} />
+            ) : (
+              <div className={style.error_message_content}>
+                <h4 className={style.boldText}>No existen datos.</h4>
+              </div>
+            )}
+            <Services subAccData={subAccount} />
           </div>
         </div>
         <div className={style.wrapper_content_main}>

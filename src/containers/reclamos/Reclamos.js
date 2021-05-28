@@ -53,7 +53,9 @@ const Reclamos = ({ history }) => {
   }
 
   useEffect(() => {
-    getFilters(id_service).then((res, filtersData) => setFiltersData({ ...filtersData, ...res }))
+    getFilters(id_service).then((res, filtersData) => {
+      setFiltersData({ ...filtersData, ...res })
+    })
     getTeams(id_service).then((res) => setOperators(res))
   }, [id_service])
 
@@ -89,7 +91,7 @@ const Reclamos = ({ history }) => {
       return res
     })
   }
-
+  console.log(filtersData)
   const handlerTask = (reclamo) => {
     setSelectedReclamo(reclamo)
     if (!open) {

@@ -45,6 +45,7 @@ const TelefoniaFormData = () => {
     timeout = setTimeout(() => {
       inputValue.length > 0 &&
         getPairs(selectedWire?.value, inputValue, secondary).then((res) => {
+          console.log(res, selectedWire?.value, inputValue, secondary)
           if (res.length > 0) {
             setPairs(res)
           }
@@ -135,7 +136,7 @@ const TelefoniaFormData = () => {
             </Button>
           </div>
 
-          {selectedWire.pairs_secundaries && (
+          {selectedWire.pairs_secundaries === 1 && (
             <div className={styles.labelContent}>
               <label style={{ width: "100%" }}>
                 Par Secundario

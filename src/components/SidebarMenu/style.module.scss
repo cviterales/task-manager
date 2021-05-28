@@ -16,7 +16,8 @@
   align-items: center;
   height: 4rem;
   width: 100%;
-  background-color: #4299e1;
+  background-color: var(--dark);
+  border-bottom: 1px solid white;
 }
 
 .logo {
