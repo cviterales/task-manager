@@ -1,0 +1,179 @@
+@import "../../styles/index.scss";
+
+.client_sub {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  @include mq("phone", "max") {
+    height: auto;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  flex-wrap: wrap;
+  @include mq("phone", "max") {
+    margin: $m-mbY;
+  }
+}
+
+.child {
+  align-items: center;
+  display: flex;
+}
+
+.ctnr_sm {
+  display: flex;
+  min-height: 30%;
+  justify-content: space-between;
+  @include mq("phone", "max") {
+    flex-direction: column;
+  }
+}
+
+.ctnr_lg {
+  display: flex;
+  height: 35%;
+  @include mq("phone", "max") {
+    flex-direction: column;
+  }
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  @include mq("phone", "max") {
+    flex-direction: column;
+  }
+}
+
+.card_wrapper {
+  display: flex;
+  width: 100%;
+  margin: 0.25rem;
+  @include mq("phone", "max") {
+    margin: 0.25rem 0rem;
+    height: 100%;
+  }
+}
+
+.cardContent {
+  height: 100%;
+  margin: 0.5rem 1rem;
+  overflow: auto;
+  scrollbar-color: #2c5282e8 white;
+  scrollbar-width: thin;
+  @include mq("phone", "max") {
+    margin: 0.25rem 0.5rem;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--dark-blue);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--light-blue);
+  }
+}
+
+.cardTitle {
+  font-family: "Roboto Bold";
+  margin-left: 1rem;
+  margin-top: 1rem;
+  @include mq("phone", "max") {
+    margin-left: 0.5rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.contentCentered {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ObservationsItem {
+  margin: 0.5rem;
+  &[data-important="1"] {
+    border-left: 2px solid red;
+    border-radius: 10px;
+  }
+}
+
+.observationsContent {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.boldText {
+  font-family: "Roboto Bold";
+  color: var(--blue);
+}
+
+.tbody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  scrollbar-color: #2c5282e8 #f1f1f1;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--dark-blue);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--light-blue);
+  }
+}
+
+.innerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  padding: 0.25rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.balance_true {
+  @extend .balance;
+  border: 1px solid #ff000047;
+  color: red;
+}
+.balance_false {
+  @extend .balance;
+  border: 1px solid #0d551647;
+  color: green;
+}

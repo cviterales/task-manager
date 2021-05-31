@@ -1,8 +1,8 @@
 import React from "react"
-import styles from "../../style.module.scss"
+import styles from "../style.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faWifi } from "@fortawesome/free-solid-svg-icons"
-import Card from "../../../../../../components/Card"
+import Card from "../../Card"
 import { useSelector } from "react-redux"
 const TechnicalData = ({ subAccData }) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
@@ -22,7 +22,7 @@ const TechnicalData = ({ subAccData }) => {
     // ECOLAN TECHNICAL DATA //
     case 1:
       item1 =
-        subAccData?.dslam.length > 0 || subAccData?.node.length > 0 ? (
+        subAccData?.dslam?.length > 0 || subAccData?.node?.length > 0 ? (
           <>
             <p>
               {subAccData?.dslam[0] ? (
@@ -56,13 +56,13 @@ const TechnicalData = ({ subAccData }) => {
       item2 = subAccData?.info[0]?.radius_login && (
         <p>
           <span className={styles.boldText}>Login: </span>
-          {subAccData.info[0].radius_login}
+          {subAccData?.info[0]?.radius_login}
         </p>
       )
       item3 = subAccData?.info[0]?.radius_passwd && (
         <p>
           <span className={styles.boldText}>Password: </span>
-          {subAccData.info[0].radius_passwd}
+          {subAccData?.info[0]?.radius_passwd}
         </p>
       )
 

@@ -9,15 +9,7 @@ import Button from "../../../components/Button/index"
 import Modal from "../../../components/Modal/index"
 import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal"
 import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal"
-import {
-  faAddressCard,
-  faClipboardCheck,
-  faExclamationCircle,
-  faHardHat,
-  faMapMarkerAlt,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons"
-import { faUserCircle } from "@fortawesome/free-regular-svg-icons"
+import { faClipboardCheck, faExclamationCircle, faHardHat, faPhone } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
@@ -26,9 +18,10 @@ import { createIncident } from "../../../api/index"
 import { useDispatch, useSelector } from "react-redux"
 import { isBrowser } from "react-device-detect"
 import { resetForm } from "../../../store/actions/closeTask/closeTask"
-import Equipment from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Equipment/Equipment"
-import TechnicalData from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/TechnicalData/TechnicalData"
-import Services from "../../Client/ClientSubAccount/SubAccountDetail/Molecules/Services/Services"
+import Equipment from "../../../components/Molecules/Equipment/Equipment"
+import TechnicalData from "../../../components/Molecules/TechnicalData/TechnicalData"
+import Services from "../../../components/Molecules/Services/Services"
+import Info from "../../../components/Molecules/Info/Info"
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
@@ -47,15 +40,6 @@ const Reclamo = (props) => {
   const closeTaskModalHandler = () => {
     dispatch(resetForm())
     setShowCloseModal(false)
-  }
-
-  const renderPhones = (phones) => {
-    return phones.map((phone, index) => (
-      <div className={style.info_content} key={index}>
-        <FontAwesomeIcon icon={faPhone} size="1x" color="#4299e1" />
-        <p className={style.phone_content}>{phone.phone_number}</p>
-      </div>
-    ))
   }
 
   const renderIncidents = (incidents) => {
@@ -97,7 +81,6 @@ const Reclamo = (props) => {
     dispatch(getAccountData(id_service, id_account))
     dispatch(getTaskData(id_service, id_task))
   }, [id_service, id_task, id_account, dispatch, showCloseModal, showIssueModal])
-
 
   let loaded = (
     <div className={style.contentCentered}>
@@ -142,13 +125,7 @@ const Reclamo = (props) => {
 
           <div className={style.card_content_header}>
             <TechnicalData subAccData={subAccount} />
-            {task?.equipment?.length > 0 ? (
-              <Equipment equipment={task?.equipment} />
-            ) : (
-              <div className={style.error_message_content}>
-                <h4 className={style.boldText}>No existen datos.</h4>
-              </div>
-            )}
+            <Equipment equipment={task?.equipment} />
             <Services subAccData={subAccount} />
           </div>
         </div>
@@ -191,72 +168,10 @@ const Reclamo = (props) => {
 
           <div className={style.card_content_main}>
             <div className={style.card_container}>
-              <div className={style.content_column}>
-                <Card>
-                  <div className={style.card_content_title}>
-                    <div className={style.card_content_icon}>
-                      <FontAwesomeIcon icon={faUserCircle} size="1x" color="#ffca75" />
-                    </div>
-                    <h4 className={style.card_title}>Cuenta # {task.id_account}</h4>
-                  </div>
-                  <div className={style.card_content}>
-                    {task?.error ? (
-                      <div className={style.error_message_content}>
-                        <h4 className={style.boldText}>No existen datos.</h4>
-                      </div>
-                    ) : (
-                      <>
-                        <div className={style.wrapper_info_content}>
-                          <div className={style.info_content}>
-                            <p>
-                              <span className={style.boldText}>Nombre:</span>
-                              {task.account_name}
-                            </p>
-                          </div>
-                          <div className={style.info_content}>
-                            <FontAwesomeIcon icon={faAddressCard} size="1x" color="#17c3b2" />
-                            <p>
-                              <span className={style.boldText}>N° Documento:</span>
-                              {task.doc_number}
-                            </p>
-                          </div>
-                        </div>
-                        <div className={style.wrapper_info_content}>
-                          <div>
-                            <div className={style.info_content}>
-                              <div className={style.card_content_icon}>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" color="#fe6d73" />
-                              </div>
-                              <p>
-                                <span className={style.boldText}>Ubicación</span>
-                              </p>
-                            </div>
-                            <div className={style.info_content}>
-                              <p>
-                                <span className={style.boldText}>Domicilio: </span>
-                                {task.address}
-                              </p>
-                            </div>
-                            <div className={style.info_content}>
-                              <p>
-                                <span className={style.boldText}>Localidad: </span>
-                                {task.region_name}
-                              </p>
-                            </div>
-                            <div className={style.info_content}>
-                              <p>
-                                <span className={style.boldText}>Zona: </span>
-                                {task.region_name}
-                              </p>
-                            </div>
-                          </div>
-                          <div>{renderPhones(task.phone)}</div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </Card>
-              </div>
+              <Info
+                subAccData={subAccount}
+                title={id_service === 1 ? "Subcuenta: #" : `Cuenta: #${subAccount.client_id}`}
+              />
             </div>
             {isBrowser && (
               <div className={style.card_container}>

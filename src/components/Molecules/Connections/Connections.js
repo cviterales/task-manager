@@ -1,12 +1,12 @@
-import React from "react";
-import styles from "../../style.module.scss";
-import Card from "../../../../../../components/Card";
-import Button from "../../../../../../components/Button/index";
-import ConnectionsTable from "../../../../../../components/ConnectionsTable/ConnectionsTable";
-import Spinner from "../../../../../../components/Spinner/index";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-import { isBrowser } from "react-device-detect";
+import React from "react"
+import styles from "../style.module.scss"
+import Card from "../../Card"
+import Button from "../../Button/index"
+import ConnectionsTable from "../../ConnectionsTable/ConnectionsTable"
+import Spinner from "../../Spinner/index"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons"
+import { isBrowser } from "react-device-detect"
 
 const Connections = ({ connectSubAcc, setShowCoonectModal }) => {
   return (
@@ -44,7 +44,7 @@ const Connections = ({ connectSubAcc, setShowCoonectModal }) => {
         )}
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default Connections;
+export default Connections

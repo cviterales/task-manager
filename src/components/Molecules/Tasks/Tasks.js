@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "../../style.module.scss";
-import Card from "../../../../../../components/Card";
+import styles from "../style.module.scss";
+import Card from "../../Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AnimatedListItem from "../../../../../../components/Animations/AnimatedListItem/AnimatedListItem";
-import TaskList from "../../../../../../components/TasksList/TaskList";
+import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem";
+import TaskList from "../../TasksList/TaskList";
 import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
-import Button from "../../../../../../components/Button";
+import Button from "../../Button";
 
 const Tasks = ({ subAccTasks, taskHandler, setShowTaskModal }) => {
   const renderTasks = () => {

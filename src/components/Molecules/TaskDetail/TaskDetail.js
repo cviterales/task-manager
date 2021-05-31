@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "../../style.module.scss";
+import styles from "../style.module.scss";
 
-import Card from "../../../../../../components/Card";
-import Button from "../../../../../../components/Button/index";
+import Card from "../../Card";
+import Button from "../../Button/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-import TaskItem from "../../../../../../components/TasksList/TaskItem/TaskItem";
+import TaskItem from "../../TasksList/TaskItem/TaskItem";
 
 const TaskDetail = ({ selectedTask, toTask }) => {
   return (

@@ -1,9 +1,9 @@
 import React from "react"
-import styles from "../../style.module.scss"
+import styles from "../style.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Card from "../../../../../../components/Card"
+import Card from "../../Card"
 import { faHdd } from "@fortawesome/free-solid-svg-icons"
-import AnimatedListItem from "../../../../../../components/Animations/AnimatedListItem/AnimatedListItem"
+import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem"
 import EquipmentItem from "./EquipmentItem/EquipmentItem"
 
 const Equipment = ({ equipment }) => {
@@ -23,7 +23,7 @@ const Equipment = ({ equipment }) => {
           Equipamiento
         </h4>
         <div className={styles.cardContent}>
-          {equipment.length > 0 ? (
+          {equipment[0] ? (
             <ul>{renderEquipment()}</ul>
           ) : (
             <div className={styles.contentCentered}>
