@@ -141,23 +141,6 @@
   font-family: "Roboto";
 }
 
-.team_content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0rem 1rem;
-}
-
-.img_content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.img {
-  width: 50px;
-  margin: 0rem 0.2rem;
-}
-
 .boldText {
   font-family: "Roboto Bold";
   color: var(--blue);
@@ -172,4 +155,9 @@
 
 .list {
   list-style: none;
+}
+
+.card_content_aside {
+  display: flex;
+  height: 100%;
 }
