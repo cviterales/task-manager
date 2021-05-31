@@ -21,12 +21,12 @@ const TelefoniaFormData = () => {
   const [ports, setPorts] = useState([])
   const [removeCablePair, setRemoveCablePair] = useState()
   const [selectedWire, setSelectedWire] = useState(false)
-
+  console.log(account)
   useEffect(() => {
     dispatch(
       setTechnicalDataPair({
         cable_pair: account?.technical[0]?.id_cable_pair ?? false,
-        pair_sec: account?.technical[0]?.id_par_sec ?? false,
+        pair_sec: account?.technical[0]?.pair_secundary ?? false,
         id_port: account?.technical[0]?.id_ports ?? false,
         box: account?.technical[0]?.nro_box ?? false,
       })
@@ -115,7 +115,7 @@ const TelefoniaFormData = () => {
                   }
                   defaultValue={{
                     value: account?.technical[0]?.id_cable_pair ?? "",
-                    label: account?.technical[0]?.par_cable ?? "",
+                    label: account?.technical[0]?.pair_cable ?? "",
                   }}
                 />
               )}
@@ -139,7 +139,7 @@ const TelefoniaFormData = () => {
             type="text"
             label="Par Secundario"
             onChange={(e) => inputPairSec(e.target.value)}
-            placeHolder={account?.technical[0]?.pair_sec ?? ""}
+            placeHolder={account?.technical[0]?.pair_secondary ?? ""}
           />
         </div>
 
