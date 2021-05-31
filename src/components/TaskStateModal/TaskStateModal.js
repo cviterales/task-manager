@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import PropTypes from "prop-types";
+import moment from "moment";
+import "moment/locale/es";
 
 import Spinner from "../Spinner/index";
 import Status from "../Status/index";
@@ -35,11 +37,10 @@ const TaskStateModal = ({ onClose, task }) => {
 
   const renderStatus = () => {
     return statusTask.map((el, i) => {
-      const formatedDate = new Date(el.date).toLocaleString("es-ES", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
+      const formatedDate = moment(el.date)
+      .locale("ES")
+      .format("DD/MM/YYYY")
+      console.log(el)
       const date = el.status + " " + formatedDate + " " + el.time;
       return (
         <li className={styles.m_v} key={i + el.description}>
@@ -53,8 +54,10 @@ const TaskStateModal = ({ onClose, task }) => {
     const filterStates = async () => {
       const allStates = await getStatus();
       const taskStates = await getStatusTask(task.id_task);
+
       setStatusTask(taskStates);
       const filteredState = allStates.filter((e) => !taskStates.find(({ status }) => e.name === status));
+      console.log(filteredState)
       const finish = taskStates.find((status) => status.status === "Finalizado")
       setStates(filteredState);
       if (finish) {
