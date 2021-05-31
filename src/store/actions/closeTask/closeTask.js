@@ -8,13 +8,6 @@ export const setTechnicalDataBox = (payload) => {
   }
 }
 
-export const setTechnicalDataCatastro = (payload) => {
-  return {
-    type: actionTypes.SET_TECHNICAL_DATA_CADASTRE,
-    payload: payload,
-  }
-}
-
 export const setTechnicalDataPort = (payload) => {
   return {
     type: actionTypes.SET_TECHNICAL_DATA_PORT,

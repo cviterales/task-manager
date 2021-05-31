@@ -69,12 +69,12 @@ const TechnicalData = ({ subAccData }) => {
       break
     case 2:
       // TELEFONIA TECHNICAL DATA //
-      item1 = subAccData?.technical[0]?.cadastre && (
+      /* item1 = subAccData?.technical[0]?.cadastre && (
         <p>
           <span className={styles.boldText}>Catastro: </span>
           {subAccData.technical[0].cadastre}
         </p>
-      )
+      ) */
       item2 = subAccData?.technical[0]?.nro_box && (
         <p>
           <span className={styles.boldText}>Nro de Caja: </span>
@@ -93,18 +93,18 @@ const TechnicalData = ({ subAccData }) => {
           {subAccData.technical[0].cable_number}
         </p>
       )
-      item5 = subAccData?.technical[0]?.par_cable && (
+      item5 = subAccData?.technical[0]?.pair_cable && (
         <p>
           <span className={styles.boldText}>Par: </span>
-          {subAccData.technical[0].par_cable}
+          {subAccData.technical[0].pair_cable}
         </p>
       )
-      item6 = subAccData?.technical[0]?.par_status && (
+      /*       item6 = subAccData?.technical[0]?.par_status && (
         <p>
           <span className={styles.boldText}>Estado de Par: </span>
           {subAccData.technical[0].par_status}
         </p>
-      )
+      ) */
       item7 = subAccData?.technical[0]?.par_secondary && (
         <p>
           <span className={styles.boldText}>Par secundario: </span>
@@ -129,12 +129,12 @@ const TechnicalData = ({ subAccData }) => {
           {subAccData.technical[0].location}
         </p>
       )
-      item11 = subAccData?.technical[0]?.associed_account && (
+      /* item11 = subAccData?.technical[0]?.associed_account && (
         <p>
           <span className={styles.boldText}>Subcuenta internet: </span>
           {subAccData.technical[0].associed_account}
         </p>
-      )
+      ) */
       break
     case 3:
       // GAS TECHNICAL DATA //

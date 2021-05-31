@@ -168,10 +168,7 @@ const Reclamo = (props) => {
 
           <div className={style.card_content_main}>
             <div className={style.card_container}>
-              <Info
-                subAccData={subAccount}
-                title={id_service === 1 ? "Subcuenta: #" : `Cuenta: #${subAccount.client_id}`}
-              />
+              <Info subAccData={subAccount} />
             </div>
             {isBrowser && (
               <div className={style.card_container}>

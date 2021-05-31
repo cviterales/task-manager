@@ -6,7 +6,6 @@ import { getPairs, getWires, getPorts } from "../../../../../api"
 import { useDispatch, useSelector } from "react-redux"
 import {
   setTechnicalDataBox,
-  setTechnicalDataCatastro,
   setTechnicalDataPair,
   setTechnicalDataPort,
 } from "../../../../../store/actions/closeTask/closeTask"
@@ -21,7 +20,6 @@ const TelefoniaFormData = () => {
   const [pairs, setPairs] = useState([])
   const [ports, setPorts] = useState([])
   const [removeCablePair, setRemoveCablePair] = useState()
-  const [removeCableSec, setRemoveCableSec] = useState(false)
   const [selectedWire, setSelectedWire] = useState(false)
 
   useEffect(() => {
@@ -31,7 +29,6 @@ const TelefoniaFormData = () => {
         pair_sec: account?.technical[0]?.id_par_sec ?? false,
         id_port: account?.technical[0]?.id_ports ?? false,
         box: account?.technical[0]?.nro_box ?? false,
-        cadastre: account?.technical[0]?.cadastre ?? false,
       })
     )
   }, [account, dispatch])
@@ -39,12 +36,11 @@ const TelefoniaFormData = () => {
   useEffect(() => {
     getWires().then((res) => setWires(res))
   }, [])
-
-  const inputSelectPairHandler = (inputValue, secondary) => {
+  const inputSelectPairHandler = (inputValue) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => {
       inputValue.length > 0 &&
-        getPairs(selectedWire?.value, inputValue, secondary).then((res) => {
+        getPairs(selectedWire?.value, inputValue).then((res) => {
           if (res.length > 0) {
             setPairs(res)
           }
@@ -71,12 +67,18 @@ const TelefoniaFormData = () => {
     }, 500)
   }
 
-  const inputCatastroHandler = (value) => {
+  const inputPairSec = (value) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => {
-      value.length > 0 && dispatch(setTechnicalDataCatastro(value))
+      value.length > 0 &&
+        dispatch(
+          setTechnicalDataPair({
+            pair_sec: value,
+          })
+        )
     }, 500)
   }
+
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.boldText}>Datos Tecnicos</h3>
@@ -103,7 +105,7 @@ const TelefoniaFormData = () => {
               ) : (
                 <Select
                   options={pairs}
-                  onInputChange={(inputValue) => inputSelectPairHandler(inputValue, false)}
+                  onInputChange={(inputValue) => inputSelectPairHandler(inputValue)}
                   onChange={(data) =>
                     dispatch(
                       setTechnicalDataPair({
@@ -133,49 +135,12 @@ const TelefoniaFormData = () => {
               {removeCablePair ? "Agregar" : "Borrar"}
             </Button>
           </div>
-
-          {selectedWire.pairs_secundaries === 1 && (
-            <div className={styles.labelContent}>
-              <label style={{ width: "100%" }}>
-                Par Secundario
-                {removeCableSec ? (
-                  <h4 style={{ width: "100%" }} className={styles.boldText}>
-                    Par eleminado
-                  </h4>
-                ) : (
-                  <Select
-                    options={pairs}
-                    onInputChange={(inputValue) => inputSelectPairHandler(inputValue, true)}
-                    onChange={(data) =>
-                      dispatch(
-                        setTechnicalDataPair({
-                          pair_sec: data.value,
-                        })
-                      )
-                    }
-                    defaultValue={{
-                      value: account?.technical[0]?.id_par_sec ?? "",
-                      label: account?.technical[0]?.par_secondary ?? "",
-                    }}
-                  />
-                )}
-              </label>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  dispatch(
-                    setTechnicalDataPair({
-                      pair_sec: false,
-                    })
-                  )
-                  setRemoveCableSec(!removeCableSec)
-                }}
-              >
-                {removeCableSec ? "Agregar" : "Borrar"}
-              </Button>
-            </div>
-          )}
+          <InputText
+            type="text"
+            label="Par Secundario"
+            onChange={(e) => inputPairSec(e.target.value)}
+            placeHolder={account?.technical[0]?.pair_sec ?? ""}
+          />
         </div>
 
         <div className={styles.contentColumn}>
@@ -196,12 +161,6 @@ const TelefoniaFormData = () => {
             label="Nro Caja"
             onChange={(e) => inputBoxHandler(e.target.value)}
             placeHolder={account?.technical[0]?.nro_box ?? ""}
-          />
-          <InputText
-            type="text"
-            label="Catastro"
-            onChange={(e) => inputCatastroHandler(e.target.value)}
-            placeHolder={account?.technical[0]?.cadastre ?? ""}
           />
         </div>
       </div>
