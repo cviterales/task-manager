@@ -21,7 +21,6 @@ const TelefoniaFormData = () => {
   const [ports, setPorts] = useState([])
   const [removeCablePair, setRemoveCablePair] = useState()
   const [selectedWire, setSelectedWire] = useState(false)
-  console.log(account)
   useEffect(() => {
     dispatch(
       setTechnicalDataPair({

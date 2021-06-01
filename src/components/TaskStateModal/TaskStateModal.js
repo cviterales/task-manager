@@ -40,7 +40,6 @@ const TaskStateModal = ({ onClose, task }) => {
       const formatedDate = moment(el.date)
       .locale("ES")
       .format("DD/MM/YYYY")
-      console.log(el)
       const date = el.status + " " + formatedDate + " " + el.time;
       return (
         <li className={styles.m_v} key={i + el.description}>
@@ -57,7 +56,6 @@ const TaskStateModal = ({ onClose, task }) => {
 
       setStatusTask(taskStates);
       const filteredState = allStates.filter((e) => !taskStates.find(({ status }) => e.name === status));
-      console.log(filteredState)
       const finish = taskStates.find((status) => status.status === "Finalizado")
       setStates(filteredState);
       if (finish) {
