@@ -230,7 +230,8 @@ export async function closeTask(
   equipment_updated,
   equipment_recovered,
   materials,
-  technical_data
+  technical_data, 
+  signature
 ) {
   const json_data = {
     id_service,
@@ -246,6 +247,7 @@ export async function closeTask(
     equipment_recovered,
     materials,
     technical_data,
+    signature
   }
   let result = await instance.post(`/task/close`, JSON.stringify(json_data))
   return result.data

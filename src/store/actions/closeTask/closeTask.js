@@ -131,3 +131,10 @@ export const updateMaterials = (material) => {
     payload: material,
   }
 }
+
+export const setSignature = (signature) => {
+  return {
+    type: actionTypes.SET_SIGNATURE,
+    payload: signature,
+  }
+}

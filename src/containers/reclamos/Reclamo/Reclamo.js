@@ -17,8 +17,6 @@ import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal";
 import {
   faClipboardCheck,
   faExclamationCircle,
-  faHardHat,
-  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem";
