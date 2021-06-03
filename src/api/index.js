@@ -1,5 +1,17 @@
 import instance from "./axios"
 
+export async function updateEquipment(id_sub_cta_equipment, id_mode, wifi, ip, characteristics) {
+  let json_data = {
+    id_sub_cta_equipment,
+    id_mode,
+    wifi,
+    ip,
+    characteristics,
+  }
+  let result = await instance.post(`/equipment/update`, JSON.stringify(json_data))
+  return result.data
+}
+
 export async function getPairs(id_cable, pair_number) {
   let result = await instance.get(`/pairs/${id_cable}/${pair_number}`)
   return result.data

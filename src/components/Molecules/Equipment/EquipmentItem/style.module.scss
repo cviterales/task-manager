@@ -13,12 +13,13 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem;
   cursor: pointer;
   background-color: #ffffff;
   &:hover {
     background-color: var(--light);
-    transition: background-color .3s linear;
+    transition: background-color 0.3s linear;
   }
 }
 
@@ -41,4 +42,17 @@
 .boldText {
   font-family: "Roboto Bold";
   color: var(--blue);
+}
+
+.editButton {
+  background-color: white;
+  color: var(--dark-blue);
+  padding: 0.25rem;
+  border-radius: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--blue);
+    color: white;
+  }
 }

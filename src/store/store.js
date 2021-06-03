@@ -3,6 +3,7 @@ import thunk from "redux-thunk"
 import accountReducer from "./reducers/account"
 import authReducer from "./reducers/auth"
 import closeTaskReducer from "./reducers/closeTask"
+import { editReducer } from "./reducers/edit"
 import messageReducer from "./reducers/message"
 import taskReducer from "./reducers/task"
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   account: accountReducer,
   message: messageReducer,
   task: taskReducer,
+  edit: editReducer,
 })
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 

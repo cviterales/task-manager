@@ -74,7 +74,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
         </div>
         <div className={styles.content}>
           <TechnicalData subAccData={subAccData} />
-          {location.state.client_sub_account && <Equipment equipment={subAccData.equipment} />}
+          {location.state.client_sub_account && <Equipment equipment={subAccData.equipment} edit={true} />}
         </div>
       </div>
 
