@@ -9,7 +9,7 @@ import Button from "../../../components/Button/index"
 import Modal from "../../../components/Modal/index"
 import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal"
 import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal"
-import { faClipboardCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons"
+import { faClipboardCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons" 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
@@ -188,7 +188,7 @@ const Reclamo = (props) => {
       </div>
     )
   }
-
+ 
   return <>{loaded}</>
 }
 

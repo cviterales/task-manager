@@ -25,7 +25,7 @@ const TaskFormMaterials = () => {
 
   const materialHandler = (e) => {
     const newOb = {
-      material: selectedMaterial.id,
+      id_material: selectedMaterial.id,
       quantity: selectedQuantity,
       equipment: false,
     }
@@ -42,7 +42,7 @@ const TaskFormMaterials = () => {
             <Card>
               <div className={styles.gridContainer}>
                 <p className={styles.gridItem}>
-                  {closeTask.availableMaterials.materials.find((e) => e.id === el.material).name}
+                  {closeTask.availableMaterials.materials.find((e) => e.id === el.id_material).name}
                 </p>
                 <p className={styles.gridItem}>{el.quantity}</p>
                 <div className={styles.gridItem}>
