@@ -1,0 +1,24 @@
+.header {
+  margin: 1rem 0.5rem;
+}
+
+.filters {
+  display: flex;
+  margin-bottom: 2rem;
+  width: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .input_container {
+    text-align: center;
+    width: 12%;
+    min-width: 250px;
+    margin: 0.5rem;
+    height: 100%;
+  }
+}
+
+.boldText {
+  font-family: "Roboto Bold";
+  color: var(--blue);
+}
