@@ -16,7 +16,7 @@ const Orders = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
   const [orders, setOrders] = useState([]);
   const [types, setTypes] = useState([]);
-  
+
   const [valuesSelected, setValuesSelected] = useState({
     stateSelected: "",
     typeSelected: "",
@@ -78,7 +78,6 @@ const Orders = () => {
           />
         </div>
       </div>
-
       <ul>{orders.length > 0 && renderOrders(orders)}</ul>
     </>
   );

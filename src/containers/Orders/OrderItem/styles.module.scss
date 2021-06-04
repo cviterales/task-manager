@@ -3,6 +3,7 @@
 .card_wrapper {
   margin-bottom: 0.5rem;
   list-style: none;
+  cursor: pointer;
   .content {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
