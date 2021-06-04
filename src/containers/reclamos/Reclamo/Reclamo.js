@@ -4,14 +4,12 @@ import style from "./reclamo.module.scss"
 import Card from "../../../components/Card/index"
 import Status from "../../../components/Status/index"
 import Spinner from "../../../components/Spinner/index"
-import Incident from "../../../components/Incident/Incident"
 import Button from "../../../components/Button/index"
 import Modal from "../../../components/Modal/index"
 import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal"
 import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal"
-import { faClipboardCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons" 
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons" 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
 import { getTaskData } from "../../../store/actions/task/task"
 import { createIncident } from "../../../api/index"
@@ -23,6 +21,7 @@ import TechnicalData from "../../../components/Molecules/TechnicalData/Technical
 import Services from "../../../components/Molecules/Services/Services"
 import Info from "../../../components/Molecules/Info/Info"
 import Team from "../../../components/Molecules/Team"
+import Incidents from '../../../components/Molecules/Incidents'
 
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
@@ -41,18 +40,6 @@ const Reclamo = (props) => {
   const closeTaskModalHandler = () => {
     dispatch(resetForm())
     setShowCloseModal(false)
-  }
-
-  const renderIncidents = (incidents) => {
-    return incidents.map((incident, index) => {
-      return (
-        <AnimatedListItem key={index} index={index}>
-          <li style={{ listStyleType: "none" }}>
-            <Incident incident={incident} />
-          </li>
-        </AnimatedListItem>
-      )
-    })
   }
 
   const incidentHandler = useCallback(
@@ -121,42 +108,7 @@ const Reclamo = (props) => {
           </div>
         </div>
         <div className={style.wrapper_content_main}>
-          <div className={style.card_container}>
-            <div className={style.content_column}>
-              <Card>
-                <div className={style.wrapper_info_content}>
-                  <div className={style.card_content_title}>
-                    <div className={style.card_content_icon}>
-                      <FontAwesomeIcon icon={faClipboardCheck} size="1x" color="#a91ec1" />
-                    </div>
-                    <h4 className={style.card_title}>Incidentes</h4>
-                  </div>
-                  {task?.is_active ? (
-                    <div className={style.card_content_icon}>
-                      <Button
-                        onClick={() => {
-                          setShowIssueModal(true)
-                        }}
-                        variant="outline"
-                      >
-                        <p>Nuevo Incidente</p>
-                      </Button>
-                    </div>
-                  ) : null}
-                </div>
-                <div className={style.card_content}>
-                  {task?.incidents?.length > 0 ? (
-                    <ul>{renderIncidents(task.incidents)}</ul>
-                  ) : (
-                    <div className={style.error_message_content}>
-                      <h4 className={style.boldText}>No existen datos.</h4>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            </div>
-          </div>
-
+          <Incidents task={task} setShowIssueModal={setShowIssueModal} />
           <div className={style.card_content_main}>
             <div className={style.card_content_aside}>
               <Info
