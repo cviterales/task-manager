@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getOrders, getOrderType } from "../../api";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import Selector from "../../components/Selector/Selector";
+import Title from '../../components/Title';
 import OrderItem from "./OrderItem";
 import styles from "./styles.module.scss";
 
@@ -56,9 +57,7 @@ const Orders = () => {
   return (
     <>
       <div className={styles.header}>
-        <h3 style={{ marginBottom: "1rem" }}>
-          <span className={styles.boldText}>Buscar ordenes</span>
-        </h3>
+        <Title title="Buscar Ordenes" />
       </div>
       <div className={styles.filters}>
         <div className={styles.input_container}>
