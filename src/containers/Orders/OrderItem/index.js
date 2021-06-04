@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../../components/Card";
-import { faCheckCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons"
+import { faCheckCircle, faTimesCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './styles.module.scss'
 
@@ -41,8 +41,8 @@ const OrderItem = ({ order }) => {
           <div>
             <h4>
             <FontAwesomeIcon icon={with_hours ? faCheckCircle : faTimesCircle} color={with_hours ? '#00c851' : '#fb6376'}/>
-              Horas</h4>
-            <h5>{with_hours ? with_hours : "0:00h"}</h5>
+              Tiempo</h4>
+            <h5>{with_hours ? with_hours : "0:00"}</h5>
           </div>
           <div>
             <h4>
