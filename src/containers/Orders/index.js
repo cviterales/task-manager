@@ -1,31 +1,32 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getOrders } from "../../api";
+import { getOrders, getOrderType } from "../../api";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import Selector from "../../components/Selector/Selector";
 import OrderItem from "./OrderItem";
 import styles from "./styles.module.scss";
 
-const types = [
-  { id: 1, name: "Trabajo" },
-  { id: 2, name: "Instalacion" },
-];
+
 const status = [
   { id: 0, name: "Sin Cargo" },
   { id: 1, name: "Con Cargo" },
 ];
+
 const Orders = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
   const [orders, setOrders] = useState([]);
-
+  const [types, setTypes] = useState([]);
+  
   const [valuesSelected, setValuesSelected] = useState({
     stateSelected: "",
     typeSelected: "",
   });
 
   useEffect(() => {
-    console.log("SEGUNDO");
-    console.log(valuesSelected)
+    getOrderType().then(setTypes)
+  },[])
+
+  useEffect(() => {
     getOrders(
       id_service,
       valuesSelected.typeSelected,
