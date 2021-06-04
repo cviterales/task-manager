@@ -1,0 +1,21 @@
+@use '../../../styles/index.scss' as *;
+
+.card_wrapper {
+  margin-bottom: 0.5rem;
+  list-style: none;
+  cursor: pointer;
+  .content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4rem;
+    padding: 1rem;
+    h4 {
+      & > svg {
+        margin-right: 5px;
+      }
+    }
+    h5 {
+      color: var(--gray-text);
+    }
+  }
+}
