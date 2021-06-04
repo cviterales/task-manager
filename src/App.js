@@ -14,6 +14,7 @@ const Client = lazy(() => import("./containers/Client/Client"));
 const ClientSubAccount = lazy(() => import("./containers/Client/ClientSubAccount/ClientSubAccount"));
 const Cuadrillas = lazy(() => import("./containers/Cuadrillas/Cuadrillas"));
 const Orders = lazy(() => import("./containers/Orders/index"));
+const Order = lazy(() => import("./containers/Orders/Order/index"));
 
 function App() {
   const isUserAuthenticated = useSelector((state) => state.auth.logged);
@@ -45,6 +46,7 @@ function App() {
             <Route path="/reclamo" component={Reclamo} />
             <Route path="/cuadrillas" component={Cuadrillas} />
             <Route path="/orders" component={Orders} />
+            <Route path="/order" component={Order} />
           </Layout>
         </Switch>
       </Suspense>
