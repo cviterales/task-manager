@@ -394,6 +394,11 @@ export async function getObservations(id_service, id_account) {
   return result.data;
 }
 
+export async function getOrderType() {
+  let result = await instance.get(`/order/type`);
+  return result.data;
+}
+
 export async function getOrders(id_service, id_order_type, with_cargo) {
   const json_data = {
     id_service,
