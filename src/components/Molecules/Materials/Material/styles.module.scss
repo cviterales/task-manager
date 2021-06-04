@@ -1,0 +1,10 @@
+@use '../../../../styles/index.scss' as *;
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+}
