@@ -6,11 +6,11 @@ import { faHdd } from "@fortawesome/free-solid-svg-icons"
 import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem"
 import EquipmentItem from "./EquipmentItem/EquipmentItem"
 
-const Equipment = ({ equipment }) => {
+const Equipment = ({ equipment, edit }) => {
   const renderEquipment = () => {
     return equipment.map((e, i) => (
       <AnimatedListItem key={i} delay={i}>
-        <EquipmentItem item={e} />
+        <EquipmentItem item={e} edit={edit} />
       </AnimatedListItem>
     ))
   }
