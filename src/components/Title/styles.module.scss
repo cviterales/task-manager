@@ -1,0 +1,15 @@
+@use '../../styles/index.scss' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  .title {
+    font-family: "Roboto Bold";
+    color: var(--blue);
+  }
+  .subtitle {
+    font-family: "Roboto";
+    color: var(--gray-text);
+  }
+}

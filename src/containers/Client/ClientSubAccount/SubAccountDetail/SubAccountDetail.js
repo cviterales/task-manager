@@ -25,7 +25,7 @@ const SubAccountDetail = ({ setShowTaskModal, location, connectSubAcc, subAccTas
   const [showObsModal, setShowObsModal] = useState(false)
   const [obsAccount, setObsAccount] = useState()
 
-  const id_account = account.info[0].id_sub_account > 0 ? account.info[0].id_sub_account : account.info[0].id_account
+  const id_account = account.info.id_sub_account > 0 ? account.info.id_sub_account : account.info.id_account
 
   const taskHandler = async (id) => {
     const res = await getTask(id_service, id)
@@ -92,7 +92,7 @@ const SubAccountDetail = ({ setShowTaskModal, location, connectSubAcc, subAccTas
           <ConnectionsModal
             onClose={() => setShowCoonectModal(false)}
             connectSubAcc={connectSubAcc}
-            login={account?.info[0]?.radius_login}
+            login={account?.info?.radius_login}
           />
         </Modal>
       )}

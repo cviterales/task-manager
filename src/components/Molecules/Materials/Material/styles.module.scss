@@ -1,0 +1,16 @@
+@use '../../../../styles/index.scss' as *;
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+  align-items: center;
+  .content_input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

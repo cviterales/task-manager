@@ -188,3 +188,58 @@
     color: white;
   }
 }
+
+.error_message_content {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.total_work {
+  border-top: 1px solid var(--gray-text);
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+ }
+
+ .total {
+  margin-top: 0.5rem;
+  font-size: 14px;
+}
+
+.list_materials {
+  background-color: var(--light);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  & > p {
+    text-align: center;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.content_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+}
+
+.total_cargo {
+  border-top: 1px solid var(--gray-text);
+  padding: 0.5rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }

@@ -5,7 +5,7 @@ const initialState = {
   editData: null,
 }
 
-export const editReducer = (state = initialState, action) => {
+const editReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_EDIT_MODE:
       return {
@@ -21,3 +21,5 @@ export const editReducer = (state = initialState, action) => {
       return state
   }
 }
+
+export default editReducer;
