@@ -27,7 +27,7 @@ const Observations = ({ obsAccount, setShowObsModal }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <div className={styles.innerHeader}>
+        <div className={styles.titleContainer}>
           <h4 className={styles.cardTitle}>
             <FontAwesomeIcon icon={faEye} color="#BE2323" style={{ marginRight: "0.5rem" }} />
             Observaciones

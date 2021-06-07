@@ -9,7 +9,7 @@ import Button from "../../../components/Button/index"
 import Modal from "../../../components/Modal/index"
 import NewIssueModal from "../../../components/NewIssueModal/NewIssueModal"
 import CloseTaskModal from "../../../components/CloseTaskModal/CloseTaskModal"
-import { faClipboardCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons" 
+import { faClipboardCheck, faExclamationCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AnimatedListItem from "../../../components/Animations/AnimatedListItem/AnimatedListItem"
 import { getAccountData } from "../../../store/actions/account/account"
@@ -27,7 +27,7 @@ import Team from "../../../components/Molecules/Team"
 const Reclamo = (props) => {
   const id_service = useSelector((state) => state.auth.user.id_service)
   const task = useSelector((state) => state.task.task)
-  const subAccount = useSelector((state) => state.account.account)
+  const account = useSelector((state) => state.account.account)
 
   const id_account = props.location.state.id_account
   const id_task = props.location.state.id_task
@@ -115,9 +115,9 @@ const Reclamo = (props) => {
           </div>
 
           <div className={style.card_content_header}>
-            <TechnicalData subAccData={subAccount} />
-            <Equipment equipment={task?.equipment} />
-            <Services subAccData={subAccount} />
+            <TechnicalData />
+            <Equipment equipment={account?.equipment} />
+            <Services />
           </div>
         </div>
         <div className={style.wrapper_content_main}>
@@ -159,10 +159,7 @@ const Reclamo = (props) => {
 
           <div className={style.card_content_main}>
             <div className={style.card_content_aside}>
-              <Info
-                subAccData={subAccount}
-                title={id_service === 1 ? `Subcuenta: #${task.id_account}` : `Cuenta: #${task.id_account}`}
-              />
+              <Info title={`Cuenta: #${account.info[0].id_account}`} />
             </div>
 
             {isBrowser && (
@@ -188,7 +185,7 @@ const Reclamo = (props) => {
       </div>
     )
   }
- 
+
   return <>{loaded}</>
 }
 

@@ -8,6 +8,7 @@ import InputText from "../../InputText"
 import styles from "./style.module.scss"
 import { setEditMode } from "../../../store/actions/edit/edit"
 import { setMessage } from "../../../store/actions/message/action"
+import Spinner from "../../Spinner"
 
 const EditEquipment = () => {
   const item = useSelector((state) => state.edit.editData)
@@ -22,15 +23,19 @@ const EditEquipment = () => {
     { id_characteristic: "3", value: item?.equipment_details[2]?.value ?? "" },
     { id_characteristic: "4", value: item?.equipment_details[3]?.value ?? "" },
   ])
+  const [loading, setLoading] = useState(false)
+
   const dispatch = useDispatch()
   let timeout
 
   const editEquipmentHandler = (e) => {
     e.preventDefault()
+    setLoading(true)
     let id_sub_cta_equipment = item.id_equipment
     let equipmentCurrentMode = equipmentMode ?? equipmentModes.find((el) => el.label === item.mode).value
     updateEquipment(id_sub_cta_equipment, equipmentCurrentMode, wifi, equipmentIP, characteristics).then((res) => {
       if (res) {
+        setLoading(false)
         dispatch(setMessage(res.message, res.error))
         dispatch(setEditMode(null))
       }
@@ -91,7 +96,7 @@ const EditEquipment = () => {
           onChange={(e) => setEquipmentIP(e.target.value)}
         />
         <Checkbox name="Wifi" label="Wifi" check={item?.wifi === 1 ? true : false} onChange={() => setWifi(!wifi)} />
-        {item?.wifi && (
+        {wifi === true && (
           <>
             <InputText
               type="text"
@@ -114,7 +119,7 @@ const EditEquipment = () => {
       </div>
       <div className={styles.bottom}>
         <Button type="submit" variant="blue" onClick={() => {}}>
-          Siguiente
+          {loading ? <Spinner /> : "Guardar"}
         </Button>
         <Button type="submit" variant="outline" onClick={() => dispatch(setEditMode(null))}>
           Cancelar

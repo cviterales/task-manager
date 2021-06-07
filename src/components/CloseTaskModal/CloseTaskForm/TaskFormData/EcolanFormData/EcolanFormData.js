@@ -7,7 +7,6 @@ import { setTaskDslam, setTaskOlt, setTaskPort, setTaskNode } from "../../../../
 import { getNodes, getDslams, getOlt, getDslamPorts } from "../../../../../api/index"
 
 const EcolanFormData = () => {
-  const task = useSelector((state) => state.task.task)
   const account = useSelector((state) => state.account.account)
   const closeTask = useSelector((state) => state.closeTask)
 
@@ -18,7 +17,7 @@ const EcolanFormData = () => {
   const dispatch = useDispatch()
 
   const connectionHandler = (val) => {
-    switch (task.service[0].id_service_type) {
+    switch (account.service[0].id_service_type) {
       case 25:
         dispatch(setTaskOlt(val))
         break
@@ -39,7 +38,7 @@ const EcolanFormData = () => {
   }, [account, clientConnection, closeTask.dslam])
 
   useEffect(() => {
-    switch (task.service[0].id_service_type) {
+    switch (account.service[0].id_service_type) {
       case 25:
         getOlt().then((res) => {
           setClientConnection("fo")
@@ -62,7 +61,7 @@ const EcolanFormData = () => {
       default:
         break
     }
-  }, [task, account, dispatch])
+  }, [account, dispatch])
 
   return (
     <div className={styles.tecnicalData}>

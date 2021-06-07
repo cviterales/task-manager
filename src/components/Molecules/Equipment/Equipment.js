@@ -18,10 +18,12 @@ const Equipment = ({ equipment, edit }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <h4 className={styles.cardTitle}>
-          <FontAwesomeIcon icon={faHdd} color="#656565" style={{ marginRight: "0.5rem" }} />
-          Equipamiento
-        </h4>
+        <div className={styles.titleContainer}>
+          <h4 className={styles.cardTitle}>
+            <FontAwesomeIcon icon={faHdd} color="#656565" style={{ marginRight: "0.5rem" }} />
+            Equipamiento
+          </h4>
+        </div>
         <div className={styles.cardContent}>
           {equipment[0] ? (
             <ul>{renderEquipment()}</ul>

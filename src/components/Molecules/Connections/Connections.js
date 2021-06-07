@@ -12,16 +12,14 @@ const Connections = ({ connectSubAcc, setShowCoonectModal }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <div className={styles.innerHeader}>
-          <h4>
+        <div className={styles.titleContainer}>
+          <h4 className={styles.cardTitle}>
             <FontAwesomeIcon icon={faExchangeAlt} color="#D133AF" style={{ marginRight: "0.5rem" }} />
             Conexiones
           </h4>
-          <div>
-            <Button onClick={() => setShowCoonectModal(true)} type="button" variant="outline">
-              <p>{isBrowser ? "Ver mas" : "Ver"}</p>
-            </Button>
-          </div>
+          <Button onClick={() => setShowCoonectModal(true)} type="button" variant="outline">
+            <p>{isBrowser ? "Ver mas" : "Ver"}</p>
+          </Button>
         </div>
         {isBrowser && (
           <div className={styles.cardContent}>

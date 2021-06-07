@@ -16,7 +16,8 @@ import Observations from "../../../../components/Molecules/Observations/Observat
 import Tasks from "../../../../components/Molecules/Tasks/Tasks"
 import TaskDetail from "../../../../components/Molecules/TaskDetail/TaskDetail"
 
-const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAcc, subAccTasks }) => {
+const SubAccountDetail = ({ setShowTaskModal, location, connectSubAcc, subAccTasks }) => {
+  const account = useSelector((state) => state.account.account)
   const id_service = useSelector((state) => state.auth.user.id_service)
   const history = useHistory()
   const [selectedTask, setSelectedTask] = useState({})
@@ -24,8 +25,7 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
   const [showObsModal, setShowObsModal] = useState(false)
   const [obsAccount, setObsAccount] = useState()
 
-  const id_account =
-    subAccData.info[0].id_sub_account > 0 ? subAccData.info[0].id_sub_account : subAccData.info[0].id_account
+  const id_account = account.info[0].id_sub_account > 0 ? account.info[0].id_sub_account : account.info[0].id_account
 
   const taskHandler = async (id) => {
     const res = await getTask(id_service, id)
@@ -66,15 +66,12 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
 
       <div className={styles.ctnr_sm}>
         <div className={styles.content}>
-          <Info
-            subAccData={subAccData}
-            title={id_service === 1 ? "Subcuenta: #" : `Cuenta: #${location.state.client_id}`}
-          />
-          <Services subAccData={subAccData} />
+          <Info title={id_service === 1 ? "Subcuenta: #" : `Cuenta: #${location.state.client_id}`} />
+          <Services />
         </div>
         <div className={styles.content}>
-          <TechnicalData subAccData={subAccData} />
-          {location.state.client_sub_account && <Equipment equipment={subAccData.equipment} edit={true} />}
+          <TechnicalData edit={true} />
+          {location.state.client_sub_account && <Equipment equipment={account.equipment} edit={true} />}
         </div>
       </div>
 
@@ -95,10 +92,11 @@ const SubAccountDetail = ({ subAccData, setShowTaskModal, location, connectSubAc
           <ConnectionsModal
             onClose={() => setShowCoonectModal(false)}
             connectSubAcc={connectSubAcc}
-            login={subAccData?.info[0]?.radius_login}
+            login={account?.info[0]?.radius_login}
           />
         </Modal>
       )}
+
       {showObsModal && (
         <Modal title="Nueva Observacion" onClose={() => setShowObsModal(false)}>
           <ObservationsModal

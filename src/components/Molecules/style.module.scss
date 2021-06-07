@@ -90,14 +90,20 @@
   }
 }
 
-.cardTitle {
-  font-family: "Roboto Bold";
-  margin-left: 1rem;
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0rem 1rem;
   margin-top: 1rem;
   @include mq("phone", "max") {
-    margin-left: 0.5rem;
-    margin-top: 0.25rem;
+    margin: 0rem 0.5rem;
+    margin-top: 0.5rem;
   }
+}
+
+.cardTitle {
+  font-family: "Roboto Bold";
 }
 
 .contentCentered {
@@ -153,15 +159,7 @@
   }
 }
 
-.innerHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .balance {
-  margin-top: 1rem;
-  margin-right: 1rem;
   padding: 0.25rem;
   border-radius: 5px;
   text-align: center;

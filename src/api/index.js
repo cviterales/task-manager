@@ -1,5 +1,17 @@
 import instance from "./axios"
 
+export async function updateTechnical(id_service, id_account, dslam, id_node, technical_data) {
+  let json_data = {
+    id_service,
+    id_account,
+    dslam,
+    id_node,
+    technical_data,
+  }
+  let result = await instance.post(`/account/update/technical`, JSON.stringify(json_data))
+  return result.data
+}
+
 export async function updateEquipment(id_sub_cta_equipment, id_mode, wifi, ip, characteristics) {
   let json_data = {
     id_sub_cta_equipment,
@@ -242,7 +254,7 @@ export async function closeTask(
   equipment_updated,
   equipment_recovered,
   materials,
-  technical_data, 
+  technical_data,
   signature
 ) {
   const json_data = {
@@ -259,7 +271,7 @@ export async function closeTask(
     equipment_recovered,
     materials,
     technical_data,
-    signature
+    signature,
   }
   let result = await instance.post(`/task/close`, JSON.stringify(json_data))
   return result.data

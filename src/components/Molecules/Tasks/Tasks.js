@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "../style.module.scss";
-import Card from "../../Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem";
-import TaskList from "../../TasksList/TaskList";
-import { faNewspaper } from "@fortawesome/free-regular-svg-icons";
-import Button from "../../Button";
+import React from "react"
+import styles from "../style.module.scss"
+import Card from "../../Card"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import AnimatedListItem from "../../Animations/AnimatedListItem/AnimatedListItem"
+import TaskList from "../../TasksList/TaskList"
+import { faNewspaper } from "@fortawesome/free-regular-svg-icons"
+import Button from "../../Button"
 
 const Tasks = ({ subAccTasks, taskHandler, setShowTaskModal }) => {
   const renderTasks = () => {
@@ -13,25 +13,17 @@ const Tasks = ({ subAccTasks, taskHandler, setShowTaskModal }) => {
       <AnimatedListItem key={i} index={i}>
         <TaskList key={i} task={e} onClick={(val) => taskHandler(val)} />
       </AnimatedListItem>
-    ));
-  };
+    ))
+  }
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <div className={styles.innerHeader}>
+        <div className={styles.titleContainer}>
           <h4 className={styles.cardTitle}>
-            <FontAwesomeIcon
-              icon={faNewspaper}
-              color="#2B4E93"
-              style={{ marginRight: "0.5rem" }}
-            />
+            <FontAwesomeIcon icon={faNewspaper} color="#2B4E93" style={{ marginRight: "0.5rem" }} />
             Reclamos
           </h4>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => setShowTaskModal(true)}
-          >
+          <Button type="button" variant="outline" onClick={() => setShowTaskModal(true)}>
             <p>Nuevo Reclamo</p>
           </Button>
         </div>
@@ -46,7 +38,7 @@ const Tasks = ({ subAccTasks, taskHandler, setShowTaskModal }) => {
         </div>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default Tasks;
+export default Tasks
