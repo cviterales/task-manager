@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetail } from "../../../api";
 
 import Info from "../../../components/Molecules/Info/Info";
@@ -14,8 +14,10 @@ import Concept from "../../../components/Molecules/Concept";
 import { useLocation } from "react-router";
 import { formatDate } from "../../../helpers/formatDate";
 import Spinner from '../../../components/Spinner';
+import * as actions from '../../../store/actions/account/account'
 
 const Order = () => {
+  const dispatch = useDispatch()
   const id_service = useSelector((state) => state.auth.user.id_service);
   const location = useLocation();
   const order = location.state.order;
@@ -27,14 +29,16 @@ const Order = () => {
     work_time: false,
   });
   let timeRounded = 0.0;
-  const { id_order, number, date, order_type, with_hours, with_cargo } = order;
+  const { id_order, id_account, number, date, order_type, with_hours } = order;
   const dateFormat = formatDate(date);
+
 
   useEffect(() => {
     getOrderDetail(id_service, id_order)
       .then(setOrderDetail)
       .catch((err) => console.log(err));
-  }, [id_service, id_order]);
+      dispatch(actions.getAccountData(id_service, id_account))
+  }, [id_service, id_order, id_account, dispatch]);
 
 
   if (with_hours) {
@@ -68,7 +72,7 @@ const Order = () => {
                 <Team task={orderDetail} />
               </div>
               <div className={styles.content}>
-                <Info subAccData={orderDetail} title={`Cuenta #${orderDetail.info.id_account}`} />
+                <Info title={`Cuenta #${orderDetail.info.id_account}`} />
               </div>
             </div>
             <div className={styles.content}>

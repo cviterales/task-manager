@@ -41,10 +41,12 @@ const Materials = ({ materials }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <h4 className={styles.cardTitle}>
-          <FontAwesomeIcon icon={faClipboardList} color="#656565" style={{ marginRight: "0.5rem" }} />
-          Materiales utilizados
-        </h4>
+        <div className={styles.titleContainer}>
+          <h4 className={styles.cardTitle}>
+            <FontAwesomeIcon icon={faClipboardList} color="#656565" style={{ marginRight: "0.5rem" }} />
+            Materiales utilizados
+          </h4>
+        </div>
         <div className={styles.cardContent}>
           {materials ? (
             <div className={styles.content_list}>

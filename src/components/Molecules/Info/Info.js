@@ -7,7 +7,6 @@ import { useSelector } from "react-redux"
 
 const Info = ({ title }) => {
   const account = useSelector((state) => state.account.account)
-
   return (
     <div className={styles.card_wrapper}>
       <Card>

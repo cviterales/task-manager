@@ -8,7 +8,6 @@ import Incident from "../../Incident/Incident";
 import Button from "../../Button";
 
 const Incidents = ({ task, setShowIssueModal }) => {
-  
   const renderIncidents = (incidents) => {
     return incidents.map((incident, index) => {
       return (
@@ -24,13 +23,9 @@ const Incidents = ({ task, setShowIssueModal }) => {
   return (
     <div className={styles.card_wrapper}>
       <Card>
-        <div className={styles.innerHeader}>
+        <div className={styles.titleContainer}>
           <h4 className={styles.cardTitle}>
-            <FontAwesomeIcon
-              icon={faClipboardCheck}
-              color="#a91ec1"
-              style={{ marginRight: "0.5rem" }}
-            />
+            <FontAwesomeIcon icon={faClipboardCheck} color="#a91ec1" style={{ marginRight: "0.5rem" }} />
             Incidentes
           </h4>
 
@@ -47,6 +42,7 @@ const Incidents = ({ task, setShowIssueModal }) => {
             </div>
           ) : null}
         </div>
+
         <div className={styles.cardContent}>
           {task?.incidents?.length > 0 ? (
             <ul>{renderIncidents(task.incidents)}</ul>

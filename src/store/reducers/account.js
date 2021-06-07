@@ -1,8 +1,8 @@
-import * as actionTypes from "../actions/account/actionTypes"
+import * as actionTypes from "../actions/account/actionTypes";
 
 let initialState = {
   account: null,
-}
+};
 
 const accountReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,10 +10,15 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         account: action.payload,
-      }
+      };
+    case actionTypes.SET_ACCOUNT:
+      return {
+        ...state,
+        account: action.payload,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default accountReducer
+export default accountReducer;

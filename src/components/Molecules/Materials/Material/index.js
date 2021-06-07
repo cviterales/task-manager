@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import Checkbox from '../../../Checkbox/index';
 
 const Material = ({ material, onHandlerMaterials }) => {
-  const { description, equipment, quantity, price } = material;
+  const { description, quantity, price } = material;
 
   return (
       <div className={styles.content}>

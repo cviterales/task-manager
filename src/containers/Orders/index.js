@@ -33,7 +33,7 @@ const Orders = () => {
       valuesSelected.typeSelected,
       valuesSelected.stateSelected
     )
-      .then(res => {setOrders(res); console.log(res)})
+      .then(setOrders)
       .catch((err) => console.log(err));
   }, [id_service, valuesSelected]);
 

@@ -7,3 +7,7 @@ export const getAccountData = (id_service, id_account) => {
     dispatch({ type: actionTypes.GET_ACCOUNT, payload: res })
   }
 }
+
+export const setAccountData = (account) => {
+  return {type: actionTypes.SET_ACCOUNT, payload: account}
+}

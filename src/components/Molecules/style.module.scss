@@ -223,17 +223,22 @@
   }
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-}
-
 .content_list {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list_item {
+  display: flex;
+  justify-content: space-between;
 }
 
 .total_cargo {
