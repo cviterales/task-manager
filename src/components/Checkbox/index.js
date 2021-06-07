@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 const Checkbox = ({ label, name, onChange, check, disabled }) => {
   return (
-    <div className={styles.wrapper}>
     <label htmlFor={name} className={styles.container}>
-      {label}
+      {label.length > 0 && label}
       <input
         id={name}
         data-testid={name}
@@ -18,7 +17,6 @@ const Checkbox = ({ label, name, onChange, check, disabled }) => {
       />
       <span className={styles.checkmark}></span>
     </label>
-    </div>
   )
 }
 
