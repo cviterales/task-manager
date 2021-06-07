@@ -3,9 +3,10 @@ import thunk from "redux-thunk"
 import accountReducer from "./reducers/account"
 import authReducer from "./reducers/auth"
 import closeTaskReducer from "./reducers/closeTask"
-import { editReducer } from "./reducers/edit"
+import editReducer from "./reducers/edit"
 import messageReducer from "./reducers/message"
 import taskReducer from "./reducers/task"
+import cargoReducer from "./reducers/cargo"
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   message: messageReducer,
   task: taskReducer,
   edit: editReducer,
+  cargo: cargoReducer,
 })
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
