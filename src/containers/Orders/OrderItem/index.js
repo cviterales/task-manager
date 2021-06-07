@@ -3,10 +3,14 @@ import Card from "../../../components/Card";
 import { faCheckCircle, faTimesCircle } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './styles.module.scss'
+import { useHistory } from 'react-router';
+import { formatDate } from '../../../helpers/formatDate';
+
 
 const OrderItem = ({ order }) => {
+  const history = useHistory()
+
   const {
-    id_order,
     number,
     date,
     order_type,
@@ -15,13 +19,14 @@ const OrderItem = ({ order }) => {
     with_hours,
     with_cargo
   } = order;
-  const dateFormat = new Date(date).toLocaleString("es-ES", {
-    "day":"2-digit",
-    "month": "2-digit",
-    "year": "numeric"
-  })
+  const dateFormat = formatDate(date)
+
+  const handlerOrder = (order) => {
+    history.push("/order", {order: order})
+  }
+  
   return (
-    <li className={styles.card_wrapper}>
+    <li className={styles.card_wrapper} onClick={() => {handlerOrder(order)}}>
       <Card>
         <div className={styles.content}>
           <div>
