@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faHardHat, faHome, faSearch, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClipboardCheck, faHardHat, faHome, faSearch, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
 
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const SidebarMenu = () => {
     { path: "/calendario", icon: faCalendar, mobile: false },
     { path: "/reclamos", icon: faSearch, mobile: false },
     { path: "/cuadrillas", icon: faHardHat, mobile: false },
+    { path: "/orders", icon: faClipboardCheck, mobile: false },
   ];
 
   const createNavItems = () => {
