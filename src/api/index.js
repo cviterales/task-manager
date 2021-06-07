@@ -420,3 +420,8 @@ export async function getOrders(id_service, id_order_type, with_cargo) {
   let result = await instance.post(`/orders`, JSON.stringify(json_data));
   return result.data;
 }
+
+export async function getOrderDetail(id_service, id_order) {
+  let result = await instance.get(`/order/${id_service}/${id_order}`);
+  return result.data;
+}
