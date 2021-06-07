@@ -3,15 +3,13 @@ import Card from "../../Card";
 import styles from "../style.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { formatDate } from "../../../helpers/formatDate";
 
 const WorkTime = ({ work, totalTime }) => {
+  console.log(totalTime)
   const renderWork = () => {
     return work.map(({ date, time, status }) => {
-      const dateFormat = new Date(date).toLocaleString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      });
+      const dateFormat = formatDate(date);
       return (
         <li key={status} className={styles.innerHeader}>
           <h5>{dateFormat}</h5>
@@ -28,12 +26,18 @@ const WorkTime = ({ work, totalTime }) => {
           Horas trabajadas
         </h4>
         <div className={styles.cardContent}>
-          <div className={styles.content_list}>
-            <ul className={styles.list}>{renderWork()}</ul>
-            <div className={styles.total_work}>
-              <span className={styles.total}>Total: {totalTime}</span>
+          {totalTime ? (
+            <div className={styles.content_list}>
+              <ul className={styles.list}>{renderWork()}</ul>
+              <div className={styles.total_work}>
+                <span className={styles.total}>Total: {totalTime}</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className={styles.contentCentered}>
+              <h4 className={styles.boldText}>No hay Datos</h4>{" "}
+            </div>
+          )}
         </div>
       </Card>
     </div>
