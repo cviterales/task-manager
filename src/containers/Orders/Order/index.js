@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderDetail } from "../../../api";
 
 import Info from "../../../components/Molecules/Info/Info";
 import Title from "../../../components/Title";
@@ -11,52 +10,37 @@ import Incidents from "../../../components/Molecules/Incidents";
 import WorkTime from "../../../components/Molecules/WorkTime";
 import Materials from "../../../components/Molecules/Materials";
 import Concept from "../../../components/Molecules/Concept";
-import { useLocation } from "react-router";
 import { formatDate } from "../../../helpers/formatDate";
-import Spinner from '../../../components/Spinner';
-import * as actions from '../../../store/actions/account/account'
+import Spinner from "../../../components/Spinner";
+import * as actionsAccount from "../../../store/actions/account/account";
 
 const Order = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const id_service = useSelector((state) => state.auth.user.id_service);
-  const location = useLocation();
-  const order = location.state.order;
-  const [orderDetail, setOrderDetail] = useState({
-    incidents: false,
-    team: false,
-    materials: false,
-    work_time: false,
-  });
-  let timeRounded = 0.0;
-  const { id_order, id_account, number, date, order_type, with_hours } = order;
-  const dateFormat = formatDate(date);
+  const order = useSelector((state) => state.cargo.order);
+  const orderDetail = useSelector((state) => state.cargo.order_detail);
 
-
+  const dateFormat = formatDate(order?.date);
   useEffect(() => {
-    getOrderDetail(id_service, id_order)
-      .then(setOrderDetail)
-      .catch((err) => console.log(err));
-      dispatch(actions.getAccountData(id_service, id_account))
-  }, [id_service, id_order, id_account, dispatch]);
-
-
+    dispatch(actionsAccount.getAccountData(id_service, order?.id_account));
+  }, [id_service, dispatch, order]);
 
   return (
     <>
       {orderDetail ? (
         <div className={styles.wrapper}>
-          <Title title={order_type} subtitle={`#${number} - ${dateFormat}`} />
+          <Title title={order?.order_type} subtitle={`#${order?.number} - ${dateFormat}`} />
           <div className={styles.container}>
             <div className={styles.content}>
-              <Materials materials={orderDetail.materials} />
+              <Materials />
             </div>
 
             <div className={styles.container_lg}>
               <div className={styles.content}>
-                <WorkTime workTime={orderDetail.work_time} totalTime={with_hours} hourPrice={50}/>
+                <WorkTime hour_price={50} />
               </div>
               <div className={styles.content}>
-                <Concept totalTime={with_hours} />
+                <Concept />
               </div>
             </div>
           </div>
@@ -66,7 +50,7 @@ const Order = () => {
                 <Team task={orderDetail} />
               </div>
               <div className={styles.content}>
-                <Info title={`Cuenta #${id_account}`} />
+                <Info title={`Cuenta #${order?.id_account ? order?.id_account : ""}`} />
               </div>
             </div>
             <div className={styles.content}>

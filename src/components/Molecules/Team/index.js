@@ -16,7 +16,7 @@ const Team = ({ task }) => {
           </h4>
         </div>
         <div className={styles.cardContent}>
-          {task?.team.length > 0 ? (
+          {task?.team?.length > 0 ? (
             <TeamItems team={task.team} />
           ) : (
             <div className={styles.contentCentered}>

@@ -78,12 +78,6 @@ const TechnicalData = ({ edit = false }) => {
       break
     case 2:
       // TELEFONIA TECHNICAL DATA //
-      /* item1 = account?.technical[0]?.cadastre && (
-        <p>
-          <span className={styles.boldText}>Catastro: </span>
-          {account.technical[0].cadastre}
-        </p>
-      ) */
       item2 = account?.technical[0]?.nro_box && (
         <p>
           <span className={styles.boldText}>Nro de Caja: </span>
@@ -108,12 +102,6 @@ const TechnicalData = ({ edit = false }) => {
           {account.technical[0].pair_cable}
         </p>
       )
-      /*       item6 = account?.technical[0]?.par_status && (
-        <p>
-          <span className={styles.boldText}>Estado de Par: </span>
-          {account.technical[0].par_status}
-        </p>
-      ) */
       item7 = account?.technical[0]?.par_secondary && (
         <p>
           <span className={styles.boldText}>Par secundario: </span>
@@ -138,12 +126,6 @@ const TechnicalData = ({ edit = false }) => {
           {account.technical[0].location}
         </p>
       )
-      /* item11 = account?.technical[0]?.associed_account && (
-        <p>
-          <span className={styles.boldText}>Subcuenta internet: </span>
-          {account.technical[0].associed_account}
-        </p>
-      ) */
       break
     case 3:
       // GAS TECHNICAL DATA //
