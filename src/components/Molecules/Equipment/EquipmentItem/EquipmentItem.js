@@ -50,7 +50,7 @@ const EquipmentItem = ({ item, edit = false }) => {
             <span className={styles.boldText}>Modo: </span>
             {item.mode}
           </p>
-          {renderCharacteristics()}
+          {item?.equipment_details && renderCharacteristics()}
         </div>
       </div>
     </li>
