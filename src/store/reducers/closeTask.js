@@ -5,6 +5,8 @@ const initialState = {
   fo: false,
   dslam: false,
   description: "",
+  time_start: false,
+  time_finish: false,
   equipment_updated: [],
   equipment_recovered: [],
   availableMaterials: false,
@@ -152,6 +154,13 @@ const closeTaskReducer = (state = initialState, action) => {
         ...state,
         signature: action.payload,
       };
+
+      case actionTypes.SET_TASK_TIME_WORKED:
+        return {
+          ...state,
+          time_start: action.payload.start,
+          time_finish: action.payload.finish
+        };
 
     default:
       return state;
