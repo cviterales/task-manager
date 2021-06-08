@@ -2,32 +2,46 @@ import * as actionTypes from "../actions/cargo/actionTypes";
 
 const initialState = {
   materials: [],
-  totalMaterialsPrices: 0.00,
-  hours: "",
-  totalHoursPrices: 0.00,
-  hourPrice: 0.00,
+  total_materials_prices: 0.0,
+  hours: null,
+  total_hours_prices: 0.0,
+  hour_price: 0.0,
+  order: null,
+  order_detail: null,
 };
 
 const cargoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_MATERIALS:
+    case actionTypes.SET_MATERIALS:
       const materials = action.payload.materials;
-      const totalMaterialsPrices = action.payload.totalMaterialsPrices;
+      const total_materials_prices = action.payload.total_materials_prices;
       return {
         ...state,
         materials,
-        totalMaterialsPrices,
+        total_materials_prices,
       };
-    case actionTypes.ADD_HOURS:
-      const hours = !state.hours.length ? action.payload.hours : 0;
-      const totalHoursPrices = state.totalHoursPrices === 0 ? action.payload.totalHoursPrices : 0;
-      const hourPrice = action.payload.hourPrice;
+    case actionTypes.SET_HOURS:
+/*       const hours = !state.hours ? action.payload.hours : 0; */
+/*       const total_hours_prices = state.total_hours_prices === 0 ? action.payload.total_hours_prices : 0; */
+      const hours = action.payload.hours;
+      const total_hours_prices = action.payload.total_hours_prices;
+      const hour_price = action.payload.hour_price;
       return {
         ...state,
         hours,
-        totalHoursPrices,
-        hourPrice,
+        total_hours_prices,
+        hour_price,
       };
+    case actionTypes.SET_ORDER:
+      const order = action.payload.order;
+      const order_detail = action.payload.order_detail;
+      return {
+        ...state,
+        order,
+        order_detail
+      };
+    case actionTypes.SET_RESET:
+      return initialState;
     default:
       return state;
   }

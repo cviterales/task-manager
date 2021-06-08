@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrders, getOrderType } from "../../api";
 import AnimatedListItem from "../../components/Animations/AnimatedListItem/AnimatedListItem";
 import Selector from "../../components/Selector/Selector";
 import Title from '../../components/Title';
 import OrderItem from "./OrderItem";
 import styles from "./styles.module.scss";
-
+import * as actions from '../../store/actions/cargo/index'
 
 const status = [
   { id: 0, name: "Sin Cargo" },
@@ -15,6 +15,7 @@ const status = [
 
 const Orders = () => {
   const id_service = useSelector((state) => state.auth.user.id_service);
+  const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
   const [types, setTypes] = useState([]);
 
@@ -25,6 +26,7 @@ const Orders = () => {
 
   useEffect(() => {
     getOrderType().then(setTypes)
+    dispatch(actions.setReset())
   },[])
 
   useEffect(() => {
