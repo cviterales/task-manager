@@ -22,7 +22,6 @@ const Order = () => {
   const location = useLocation();
   const order = location.state.order;
   const [orderDetail, setOrderDetail] = useState({
-    info: false,
     incidents: false,
     team: false,
     materials: false,
@@ -41,15 +40,10 @@ const Order = () => {
   }, [id_service, id_order, id_account, dispatch]);
 
 
-  if (with_hours) {
-    const time = with_hours.split(":");
-    const seconds = +time[0] * 3600 + +time[1] * 60 + +time[2];
-    const minutes = seconds / 60;
-    timeRounded = (minutes / 60).toFixed(1);
-  }
+
   return (
     <>
-      {orderDetail.info ? (
+      {orderDetail ? (
         <div className={styles.wrapper}>
           <Title title={order_type} subtitle={`#${number} - ${dateFormat}`} />
           <div className={styles.container}>
@@ -59,10 +53,10 @@ const Order = () => {
 
             <div className={styles.container_lg}>
               <div className={styles.content}>
-                <WorkTime work={orderDetail.work_time} totalTime={with_hours} totalTimeRounded={timeRounded} />
+                <WorkTime workTime={orderDetail.work_time} totalTime={with_hours} hourPrice={50}/>
               </div>
               <div className={styles.content}>
-                <Concept totalTime={timeRounded} />
+                <Concept totalTime={with_hours} />
               </div>
             </div>
           </div>
@@ -72,7 +66,7 @@ const Order = () => {
                 <Team task={orderDetail} />
               </div>
               <div className={styles.content}>
-                <Info title={`Cuenta #${orderDetail.info.id_account}`} />
+                <Info title={`Cuenta #${id_account}`} />
               </div>
             </div>
             <div className={styles.content}>

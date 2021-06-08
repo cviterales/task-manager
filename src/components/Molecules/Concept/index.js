@@ -6,9 +6,12 @@ import { faFileInvoiceDollar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Button";
 import { useSelector } from "react-redux";
 
-const Concept = ({ priceHours, totalTime }) => {
+const Concept = () => {
   const totalMaterials = useSelector((state) => state.cargo.totalMaterialsPrices);
-
+  const totalHoursPrices = useSelector((state) => state.cargo.totalHoursPrices)
+  const totalHours = useSelector((state) => state.cargo.hours);
+  const hourPrice = useSelector((state) => state.cargo.hourPrice);
+  const totalCargo = totalMaterials + totalHoursPrices;
   return (
     <div className={styles.card_wrapper}>
       <Card>
@@ -23,8 +26,8 @@ const Concept = ({ priceHours, totalTime }) => {
             <ul className={styles.list}>
               <li className={styles.list_item}>
                 <p>Total horas:</p>
-                <p>$ 50 x {totalTime + "hs"}</p>
-                <p>$ {(50 * totalTime).toFixed(2)}</p>
+                <p>$ {hourPrice} x {totalHours} hs</p>
+                <p>$ {(totalHoursPrices.toFixed(2))}</p>
               </li>
               <li className={styles.list_item}>
                 <p>Total Materiales:</p>
@@ -40,7 +43,7 @@ const Concept = ({ priceHours, totalTime }) => {
               >
                 Crear Cargo
               </Button>
-              <span className={styles.total}>Total: $ {totalMaterials.toFixed(2)}</span>
+              <span className={styles.total}>Total: $ {totalCargo.toFixed(2)}</span>
             </div>
           </div>
         </div>
