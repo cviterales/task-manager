@@ -118,6 +118,14 @@ export const setDescription = (description) => {
   }
 }
 
+export const setTimeWorked = (start, finish) => {
+  return {
+    type: actionTypes.SET_TASK_TIME_WORKED,
+    payload: {start, finish},
+  }
+}
+
+
 export const setMaterials = (material) => {
   return {
     type: actionTypes.SET_TASK_MATERIALS,
