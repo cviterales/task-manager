@@ -24,7 +24,7 @@ const Materials = ({ materials }) => {
     total = exists ? total - material.price * material.quantity : total + material.price * material.quantity;
     total = parseFloat(total.toFixed(2));
     setMaterialsSelected({ materials, total });
-    dispatch(actions.add_materials(materials, total));
+    dispatch(actions.setMaterials(materials, total));
   };
 
   const renderMaterials = () => {
