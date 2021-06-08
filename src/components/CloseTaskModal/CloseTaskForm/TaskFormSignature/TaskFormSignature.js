@@ -2,6 +2,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { closeTask } from "../../../../api"
 import { updateStep } from "../../../../store/actions/closeTask/closeTask"
+import { setMessage } from "../../../../store/actions/message/action"
 import Button from "../../../Button"
 import Signature from "../../../Signature/Signature"
 import styles from "./style.module.scss"
@@ -29,6 +30,7 @@ const TaskFormSignature = ({ onClose }) => {
       closeTaskData.technical_data,
       closeTaskData.signature
     ).then((res) => {
+      dispatch(setMessage(res.message, res.error))
       onClose()
     })
   }

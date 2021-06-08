@@ -159,7 +159,7 @@ const Reclamo = (props) => {
 
           <div className={style.card_content_main}>
             <div className={style.card_content_aside}>
-              <Info title={`Cuenta: #${account.info[0].id_account}`} />
+              <Info title={`Cuenta: #${account?.info[0]?.id_account}`} />
             </div>
 
             {isBrowser && (

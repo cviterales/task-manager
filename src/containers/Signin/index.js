@@ -1,64 +1,65 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import styles from "./signin.module.scss";
-import Button from "../../components/Button/index";
-import Input from "../../components/InputText/index";
-import Spinner from "../../components/Spinner/index";
+import styles from "./signin.module.scss"
+import Button from "../../components/Button/index"
+import Input from "../../components/InputText/index"
+import Spinner from "../../components/Spinner/index"
 
-import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { getLoginUser } from "../../api/index";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
+import { getLoginUser } from "../../api/index"
 
-import * as actions from "../../store/actions/auth";
-import { useDispatch } from "react-redux";
-import { connectSocket } from "../../webSocket/webSocket";
+import * as actions from "../../store/actions/auth"
+import { useDispatch } from "react-redux"
+import { connectSocket } from "../../webSocket/webSocket"
+import ButtonPWA from "../../components/ButtonPWA/ButtonPWA"
 
 const Signin = () => {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [user, setUser] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const userHandler = (newUser) => {
-    const nickname = newUser;
-    setUser(nickname);
+    const nickname = newUser
+    setUser(nickname)
     if (error) {
-      setError(false);
+      setError(false)
     }
-  };
+  }
 
   const passwordHandler = (newPassword) => {
-    const pass = newPassword;
-    setPassword(pass);
+    const pass = newPassword
+    setPassword(pass)
     if (error) {
-      setError(false);
+      setError(false)
     }
-  };
+  }
 
   const sumbitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!error && user.length > 4 && password.length > 2) {
-      setLoading(true);
+      setLoading(true)
       getLoginUser(user, password)
         .then((response) => {
-          setLoading(false);
+          setLoading(false)
           if (response.error) {
-            setError(true);
-            setLoading(false);
+            setError(true)
+            setLoading(false)
           } else {
-            dispatch(actions.authLogged(response));
-            connectSocket(response.id);
+            dispatch(actions.authLogged(response))
+            connectSocket(response.id)
           }
         })
         .catch(() => {
-          setError(true);
-          setLoading(false);
-        });
+          setError(true)
+          setLoading(false)
+        })
     } else {
-      setError(true);
+      setError(true)
     }
-  };
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -99,7 +100,7 @@ const Signin = () => {
               icon={faUser}
               iconColor="#4299e1"
               onChange={(e) => {
-                userHandler(e.target.value);
+                userHandler(e.target.value)
               }}
             />
           </div>
@@ -110,7 +111,7 @@ const Signin = () => {
               icon={faLock}
               iconColor="#4299e1"
               onChange={(e) => {
-                passwordHandler(e.target.value);
+                passwordHandler(e.target.value)
               }}
             />
           </div>
@@ -124,9 +125,10 @@ const Signin = () => {
           </div>
           {error && <p style={{ color: "red" }}>Usuario y/o contraseña incorrecto.</p>}
         </form>
+        <ButtonPWA />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signin;
+export default Signin
