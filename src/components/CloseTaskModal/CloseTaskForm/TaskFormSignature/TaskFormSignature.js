@@ -27,6 +27,8 @@ const TaskFormSignature = ({ onClose }) => {
       closeTaskData.equipment_recovered,
       closeTaskData.materials,
       closeTaskData.technical_data,
+      closeTaskData.time_start,
+      closeTaskData.time_finish,
       closeTaskData.signature
     ).then((res) => {
       onClose()
