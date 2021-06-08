@@ -21,8 +21,6 @@ const cargoReducer = (state = initialState, action) => {
         total_materials_prices,
       };
     case actionTypes.SET_HOURS:
-/*       const hours = !state.hours ? action.payload.hours : 0; */
-/*       const total_hours_prices = state.total_hours_prices === 0 ? action.payload.total_hours_prices : 0; */
       const hours = action.payload.hours;
       const total_hours_prices = action.payload.total_hours_prices;
       const hour_price = action.payload.hour_price;

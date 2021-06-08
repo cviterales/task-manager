@@ -10,12 +10,10 @@ export const setHours = (hours, total_hours_prices, hour_price) => {
 }
 
 export const setOrder = (order) => {
-  console.log(order)
   const {id_service, id_order, with_cargo} = order;
   return dispatch => {
     getOrderDetail(id_service, id_order, with_cargo)
     .then(res => {
-      console.log(res)
       const {with_cargo, with_hours} = order;
 
       if (with_cargo) {

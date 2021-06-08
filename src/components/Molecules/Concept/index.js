@@ -42,8 +42,6 @@ const Concept = () => {
         dispatch(actionsMessage.setMessage("Ocurrio un error!", err));
       });
   };
-
-  console.log(total_hours_prices);
   return (
     <div className={styles.card_wrapper}>
       <Card>

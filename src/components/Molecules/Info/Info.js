@@ -38,12 +38,7 @@ const Info = ({ title }) => {
                 {e.phone_number}
               </p>
             ))
-          )/*  : (
-            <p>
-              <span className={styles.boldText}>Contacto 1: </span>
-              {account?.phones?.phone_number}
-            </p>
-          ) */}
+          )}
         </div>
       </Card>
     </div>

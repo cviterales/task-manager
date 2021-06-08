@@ -27,7 +27,7 @@ const Orders = () => {
   useEffect(() => {
     getOrderType().then(setTypes)
     dispatch(actions.setReset())
-  },[])
+  },[dispatch])
 
   useEffect(() => {
     getOrders(

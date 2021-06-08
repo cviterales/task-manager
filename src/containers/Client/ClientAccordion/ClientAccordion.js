@@ -119,12 +119,6 @@ const ClientAccordion = ({ client, history }) => {
                               <div className={style.content_right}>
                                 <FontAwesomeIcon icon={faCalendarTimes} size="1x" color="#4299e1" />
                                 <p>{dateInactive}</p>
-                                {/*                          <Status
-                              name={item.inactive ? "disabled" : "enabled"}
-                              description={
-                                item.inactive ? "Inactivo" : "Activo"
-                              } 
-                            />*/}
                               </div>
                             ) : null}
                             {item.description_inactive ? (
