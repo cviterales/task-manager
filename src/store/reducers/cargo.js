@@ -3,8 +3,9 @@ import * as actionTypes from "../actions/cargo/actionTypes";
 const initialState = {
   materials: [],
   totalMaterialsPrices: 0.00,
-  hours: null,
+  hours: "",
   totalHoursPrices: 0.00,
+  hourPrice: 0.00,
 };
 
 const cargoReducer = (state = initialState, action) => {
@@ -18,12 +19,14 @@ const cargoReducer = (state = initialState, action) => {
         totalMaterialsPrices,
       };
     case actionTypes.ADD_HOURS:
-      const hours = action.payload.hours;
-      const totalHoursPrices = action.payload.totalHoursPrices;
+      const hours = !state.hours.length ? action.payload.hours : 0;
+      const totalHoursPrices = state.totalHoursPrices === 0 ? action.payload.totalHoursPrices : 0;
+      const hourPrice = action.payload.hourPrice;
       return {
         ...state,
         hours,
         totalHoursPrices,
+        hourPrice,
       };
     default:
       return state;
