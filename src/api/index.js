@@ -7,9 +7,9 @@ export async function updateTechnical(id_service, id_account, dslam, id_node, te
     dslam,
     id_node,
     technical_data,
-  }
-  let result = await instance.post(`/account/update/technical`, JSON.stringify(json_data))
-  return result.data
+  };
+  let result = await instance.post(`/account/update/technical`, JSON.stringify(json_data));
+  return result.data;
 }
 
 export async function updateEquipment(id_sub_cta_equipment, id_mode, wifi, ip, characteristics) {
@@ -19,9 +19,9 @@ export async function updateEquipment(id_sub_cta_equipment, id_mode, wifi, ip, c
     wifi,
     ip,
     characteristics,
-  }
-  let result = await instance.post(`/equipment/update`, JSON.stringify(json_data))
-  return result.data
+  };
+  let result = await instance.post(`/equipment/update`, JSON.stringify(json_data));
+  return result.data;
 }
 
 export async function getPairs(id_cable, pair_number) {
@@ -89,12 +89,7 @@ export async function getServiceTypes(id_service) {
   return result.data;
 }
 
-export async function getProblems(
-  id_service,
-  id,
-  id_account_type_service,
-  search
-) {
+export async function getProblems(id_service, id, id_account_type_service, search) {
   let json_data = {
     id_service: id_service,
     id: id,
@@ -105,14 +100,7 @@ export async function getProblems(
   return result.data;
 }
 
-export async function createTask(
-  id_service,
-  id_account,
-  id_task_type,
-  id_problem,
-  description,
-  id_user
-) {
+export async function createTask(id_service, id_account, id_task_type, id_problem, description, id_user) {
   let json_data = {
     id_service,
     id_account,
@@ -159,33 +147,21 @@ export async function getTaskTypes() {
 
 export async function getSubAccountConnections(username, date_from, date_to) {
   const date = date_from || date_to !== "" ? `${date_from}/${date_to}` : "";
-  let result = await instance.get(
-    `/clients/sub_clients/connections/${username}/${date}`
-  );
+  let result = await instance.get(`/clients/sub_clients/connections/${username}/${date}`);
   return result.data;
 }
 
 export async function getSubAccountData(id_service, id_sub_account) {
-  let result = await instance.get(
-    `/clients/sub_client/${id_service}/${id_sub_account}`
-  );
+  let result = await instance.get(`/clients/sub_client/${id_service}/${id_sub_account}`);
   return result.data;
 }
 
 export async function getClientSubAccounts(id_service, id_account) {
-  let result = await instance.get(
-    `/clients/sub_clients/${id_service}/${id_account}`
-  );
+  let result = await instance.get(`/clients/sub_clients/${id_service}/${id_account}`);
   return result.data;
 }
 
-export async function getClients(
-  id_service,
-  account_name,
-  account_number,
-  doc_number,
-  phone_number
-) {
+export async function getClients(id_service, account_name, account_number, doc_number, phone_number) {
   const json_data = {
     id_service: id_service,
     account_name: account_name,
@@ -284,7 +260,7 @@ export async function closeTask(
   equipment_recovered,
   materials,
   technical_data,
-  time_start, 
+  time_start,
   time_finish,
   signature
 ) {
@@ -302,7 +278,7 @@ export async function closeTask(
     equipment_recovered,
     materials,
     technical_data,
-    time_start, 
+    time_start,
     time_finish,
     signature,
   };
@@ -321,13 +297,7 @@ export async function getTeams(id_service) {
   return data;
 }
 
-export async function createCalendar(
-  id_task,
-  date,
-  id_team,
-  priority,
-  id_user
-) {
+export async function createCalendar(id_task, date, id_team, priority, id_user) {
   const json_data = {
     id_task,
     date,
@@ -341,17 +311,13 @@ export async function createCalendar(
 }
 
 export async function getOperators(id_service, id_team) {
-  const res = await instance.get(
-    `/task/operators/availables/${id_service}/${id_team}`
-  );
+  const res = await instance.get(`/task/operators/availables/${id_service}/${id_team}`);
   const data = await res.data;
   return data;
 }
 
 export async function getVehicles(id_service, id_team) {
-  const res = await instance.get(
-    `/task/vehicles/availables/${id_service}/${id_team}`
-  );
+  const res = await instance.get(`/task/vehicles/availables/${id_service}/${id_team}`);
   const data = await res.data;
   return data;
 }
@@ -385,14 +351,7 @@ export async function closeTeam(id_service, id_team) {
   return data;
 }
 
-export async function updateCalendarTask(
-  id_calendar,
-  id_task,
-  date,
-  id_team,
-  priority,
-  id_user
-) {
+export async function updateCalendarTask(id_calendar, id_task, date, id_team, priority, id_user) {
   const json_data = {
     id_calendar: id_calendar,
     id_task: id_task,
@@ -406,12 +365,7 @@ export async function updateCalendarTask(
   return data;
 }
 
-export async function createObservation(
-  id_service,
-  id_account,
-  description,
-  is_important
-) {
+export async function createObservation(id_service, id_account, description, is_important) {
   let json_data = { id_service, id_account, description, is_important };
   let result = await instance.post("/observations", json_data);
   return result.data;
@@ -437,7 +391,21 @@ export async function getOrders(id_service, id_order_type, with_cargo) {
   return result.data;
 }
 
-export async function getOrderDetail(id_service, id_order) {
-  let result = await instance.get(`/order/${id_service}/${id_order}`);
+export async function getOrderDetail(id_service, id_order, with_cargo) {
+  let result = await instance.get(`/order/${id_service}/${id_order}/${with_cargo}`);
+  return result.data;
+}
+
+export async function createCargo(id_service, id_account, id_order, total_cargo, materials, time_price, hour_price) {
+  const json_data = {
+    id_service,
+    id_account,
+    id_order,
+    total_cargo,
+    materials,
+    time_price,
+    hour_price,
+  };
+  let result = await instance.post(`/cargo`, JSON.stringify(json_data));
   return result.data;
 }
