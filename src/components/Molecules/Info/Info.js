@@ -15,10 +15,9 @@ const Info = ({ title }) => {
             <FontAwesomeIcon icon={faUserCircle} color="#D7B644" style={{ marginRight: "0.5rem" }} /> {title}
             {account?.info?.id_sub_account}
           </h4>
-          {account?.balance && <h5 className={account?.balance === 0 ? styles.balance_false : styles.balance_true}>
+          <h5 className={account?.balance === 0 ? styles.balance_false : styles.balance_true}>
             {account?.balance ? "Deuda: " + account.balance : "Sin Deuda"}
-          </h5>}
-
+          </h5>
         </div>
         <div className={styles.cardContent}>
           <p>
