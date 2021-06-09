@@ -1,11 +1,12 @@
 .rows {
   width: 100%;
-  display: flex;
+/*   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   margin-bottom: 0.5rem;
   color: black;
   cursor: pointer;
+  list-style: none;
   & .content_card {
     display: flex;
     align-items: center;
@@ -37,6 +38,7 @@
   background-color: #2a4365;  
   color: #fff;
   padding: 0.5rem;
+  display: flex;
 }
 
 .error_message {

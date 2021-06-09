@@ -8,17 +8,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logon.png",
+      "src": "/images/logon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logon.png",
+      "src": "/images/logon.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "maskable_icon_x192.png",
+      "src": "/images/maskable_icon_x192.png",
       "sizes": "196x196",
       "type": "image/png",
       "purpose": "maskable"

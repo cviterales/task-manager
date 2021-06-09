@@ -27,14 +27,14 @@ const ListTeams = ({ data, sendData }) => {
   const createList = () => {
     const rows = data.map((team, key) => {
       return (
-        <AnimatedListItem index={key} key={key}>
-          <li
-            key={team.id_team + key}
-            className={style.rows}
-            onClick={() => {
-              sendData(team);
-            }}
-          >
+        <li
+          key={team.id_team + key}
+          className={style.rows}
+          onClick={() => {
+            sendData(team);
+          }}
+        >
+          <AnimatedListItem index={key} key={key}>
             <Card>
               <div className={style.content_card}>
                 <span className={style.first_col}>
@@ -62,8 +62,8 @@ const ListTeams = ({ data, sendData }) => {
                 </span>
               </div>
             </Card>
-          </li>
-        </AnimatedListItem>
+          </AnimatedListItem>
+        </li>
       );
     });
     return rows;

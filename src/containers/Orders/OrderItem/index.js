@@ -20,7 +20,7 @@ const OrderItem = ({ order }) => {
   };
 
   return (
-    <li
+    <div
       className={styles.card_wrapper}
       onClick={() => {
         handlerOrder(order);
@@ -68,7 +68,7 @@ const OrderItem = ({ order }) => {
           </div>
         </div>
       </Card>
-    </li>
+    </div>
   );
 };
 

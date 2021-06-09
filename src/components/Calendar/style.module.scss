@@ -6,7 +6,7 @@
 
 .header {
   width: 75px;
-  background: #2c5282;
+  background: var(--dark-blue);
   margin-right: 5px;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@
 }
 
 .calendar_header {
-  background-color: #4299e1;
+  background-color: var(--blue);
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -70,7 +70,7 @@
 
 .team {
   height: 100%;
-  background: rgb(44, 82, 130);
+  background: var(--dark-blue);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,6 +105,6 @@
 .day_now {
   border-radius: 20px;
   background-color: #fff;
-  color: #4299e1;
+  color: var(--dark-blue);
   width: 50px;
 }

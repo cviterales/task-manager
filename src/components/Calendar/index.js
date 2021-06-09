@@ -81,8 +81,8 @@ const Calendar = ({ calendar, week, teams, updateCalendar }) => {
               {day.dayNumber}
             </h2>
           </div>
-          <h4>{day.dayName}</h4>
-          <h6>{day.monthName}</h6>
+          <h3>{day.dayName}</h3>
+          <p>{day.monthName}</p>
         </div>
       );
     });

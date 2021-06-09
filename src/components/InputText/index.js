@@ -13,11 +13,12 @@ const InputText = ({
   ...rest
 }) => {
   return (
-    <label className={styles.label}>
+    <label htmlFor={name} className={styles.label}>
       {label}
       <div className={styles.content_input}>
         {icon && <FontAwesomeIcon className={styles.icon} icon={icon} size="lg" color={iconColor} />}
         <input
+          id={name}
           name={name}
           type={type}
           className={styles.input}

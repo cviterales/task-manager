@@ -39,7 +39,7 @@ const SidebarMenu = () => {
     <div className={style.container}>
       <BrowserView>
         <div className={style.logoContainer}>
-          <img className={style.logo} src="/images/logon.png" alt="G2 Logo" />
+          <img className={style.logo} src="/images/logon.png" alt="G2 Logo" width={25} height={30}/>
         </div>
         <ul className={style.ul}>{createNavItems()}</ul>
       </BrowserView>

@@ -7,9 +7,6 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "dotenv": "^8.2.0",
@@ -43,6 +40,11 @@
     "workbox-routing": "^6.1.5",
     "workbox-strategies": "^6.1.5",
     "workbox-streams": "^6.1.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.1.10"
   },
   "scripts": {
     "start": "react-scripts start",

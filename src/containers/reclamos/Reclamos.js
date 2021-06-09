@@ -114,9 +114,9 @@ const Reclamos = ({ history }) => {
       })
     } else {
       return (
-        <div className={styles.error_title}>
+        <li className={styles.error_title}>
           <h3>No hay resultados.</h3>
-        </div>
+        </li>
       )
     }
   }

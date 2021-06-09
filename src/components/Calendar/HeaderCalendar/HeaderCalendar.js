@@ -38,16 +38,16 @@ const HeaderCalendar = ({ month, year, dateHandler, nextWeek, prevWeek }) => {
             id="fecha"
             type={"month"}
             value={year + "-" + month}
-            name=""
+            name="fecha"
             onChange={(e) => {
               dateHandler(e);
             }}
           />
         </div>
-        <Button onClick={(e) => prevWeek(e)} variant="outline" type="">
+        <Button onClick={(e) => prevWeek(e)} variant="outline">
           <FontAwesomeIcon icon={faChevronLeft} size="1x" color="#4299e1" />
         </Button>
-        <Button onClick={(e) => nextWeek(e)} variant="outline" type="">
+        <Button onClick={(e) => nextWeek(e)} variant="outline">
           <FontAwesomeIcon icon={faChevronRight} size="1x" color="#4299e1" />
         </Button>
         <Button
@@ -56,7 +56,6 @@ const HeaderCalendar = ({ month, year, dateHandler, nextWeek, prevWeek }) => {
             setStatusInfo(!statusInfo);
           }}
           variant="outline"
-          type=""
         >
           <FontAwesomeIcon icon={faQuestionCircle} style={{ fontSize: "20px", color: "#2d3748" }} />
         </Button>

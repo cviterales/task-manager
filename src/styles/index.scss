@@ -15,12 +15,14 @@
   font-family: "Roboto";
   font-weight: 600;
   src: url("./fonts/RobotoRegular.ttf");
+  font-display: fallback;
 }
 
 @font-face {
   font-family: "Roboto Bold";
   font-weight: 900;
   src: url("./fonts/RobotoBold.ttf");
+  font-display: fallback;
 }
 
 .hidden {
@@ -31,7 +33,7 @@
   //--dark: rgba(45, 55, 72, 1);
   --dark: #051e34;
   --dark-blue: #2c5282;
-  --blue: #2b6cb0;
+  --blue: #2a66a7;
   --medium-blue: #4b4b4b;
   --light-blue: #4299e1;
   --disabled: #90cdf4;
@@ -44,7 +46,8 @@
   --success-light: #c7f9cc;
   --success-medium: #38a3a5;
   --sucess-dark: #22577a;
-  --gray-text: rgba(160, 174, 192, 1);
+  --gray-text: #585858;
+  //--gray-text: rgba(160, 174, 192, 1);
   --light-gray: rgb(243, 243, 243);
 }
 
@@ -59,7 +62,7 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.5;
 }
 
@@ -81,7 +84,7 @@ p {
     font-size: 28px;
   }
   h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
   h4 {
     font-size: 16px;
@@ -101,7 +104,7 @@ p {
     font-size: 26px;
   }
   h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
   h4 {
     font-size: 14px;
@@ -121,7 +124,7 @@ p {
     font-size: 24px;
   }
   h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
   h4 {
     font-size: 12px;
@@ -141,7 +144,7 @@ p {
     font-size: 20px;
   }
   h3 {
-    font-size: 16px;
+    font-size: 14px;
   }
   h4 {
     font-size: 12px;
