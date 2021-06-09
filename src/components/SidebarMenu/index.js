@@ -26,7 +26,7 @@ const SidebarMenu = () => {
       const isCurrent = window.location.pathname === item.path;
       return (
         <li className={style.li} key={index}>
-          <Link to={item.path}>
+          <Link to={item.path} aria-label={item.path}>
             <FontAwesomeIcon icon={item.icon} className={`${style.icon} ${isCurrent ? style.icon_active : ""}`} />
           </Link>
         </li>
